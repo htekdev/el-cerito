@@ -2,10 +2,12 @@
 title: "Tacos de Carne Asada"
 titleEn: "Grilled Steak Tacos"
 description: "Los tacos de siempre en el rancho — arrachera marinada al carbón, cebolla, cilantro y un buen chorro de limón. Sencillos y con todo el sabor de casa."
+descriptionEn: "The classic ranch tacos — charcoal-grilled marinated flank steak, onion, cilantro, and a good squeeze of lime. Simple, with all the flavor of home."
 coverImage: "/images/recipes/tacos-carne-asada.jpg"
 coverImageAlt: "Tacos de carne asada con cilantro, cebolla y limón sobre un plato de barro"
 servings: 4
 servingLabel: "porciones"
+servingLabelEn: "servings"
 prepTime: 25
 cookTime: 12
 difficulty: media
@@ -22,6 +24,7 @@ macros:
   fiber: 5
 ingredients:
   - name: "arrachera (flank steak)"
+    nameEn: "flank steak"
     amount: 600
     unit: g
     calories: 1188
@@ -29,7 +32,9 @@ ingredients:
     carbs: 0
     fat: 66
     note: "cortada delgada"
+    noteEn: "thinly sliced"
   - name: "tortillas de maíz"
+    nameEn: "corn tortillas"
     amount: 12
     unit: pieces
     calories: 780
@@ -38,6 +43,7 @@ ingredients:
     fat: 9
     fiber: 18
   - name: "cebolla blanca"
+    nameEn: "white onion"
     amount: 1
     unit: piece
     calories: 44
@@ -46,7 +52,9 @@ ingredients:
     fat: 0
     fiber: 2
     note: "picada finamente"
+    noteEn: "finely chopped"
   - name: "cilantro fresco"
+    nameEn: "fresh cilantro"
     amount: 30
     unit: g
     calories: 7
@@ -54,7 +62,9 @@ ingredients:
     carbs: 1
     fat: 0
     note: "picado"
+    noteEn: "chopped"
   - name: "limones"
+    nameEn: "limes"
     amount: 2
     unit: pieces
     calories: 20
@@ -62,6 +72,7 @@ ingredients:
     carbs: 7
     fat: 0
   - name: "aceite"
+    nameEn: "oil"
     amount: 15
     unit: ml
     calories: 124
@@ -69,6 +80,7 @@ ingredients:
     carbs: 0
     fat: 14
   - name: "ajo"
+    nameEn: "garlic"
     amount: 2
     unit: cloves
     calories: 9
@@ -76,12 +88,14 @@ ingredients:
     carbs: 2
     fat: 0
   - name: "sal y pimienta"
+    nameEn: "salt and pepper"
     amount: 1
     unit: "to taste"
     optional: true
 healthierAlternatives:
   - recipe: tacos-de-pollo-a-la-plancha
     label: "Versión más ligera: pollo a la plancha en vez de res (menos grasa, más proteína)"
+    labelEn: "Lighter version: grilled chicken instead of beef (less fat, more protein)"
 instructions:
   - "Marina la arrachera con el ajo machacado, el jugo de un limón, sal, pimienta y la mitad del aceite. Deja reposar 20 minutos."
   - "Calienta la parrilla o el comal a fuego alto con el resto del aceite."
@@ -89,6 +103,17 @@ instructions:
   - "Calienta las tortillas en el comal hasta que estén suaves y ligeramente doradas."
   - "Arma los tacos con la carne, cebolla y cilantro."
   - "Sirve con los limones partidos y tu salsa favorita."
+instructionsEn:
+  - "Marinate the flank steak with the crushed garlic, the juice of one lime, salt, pepper, and half the oil. Let it rest for 20 minutes."
+  - "Heat the grill or comal over high heat with the rest of the oil."
+  - "Grill the meat 3–4 minutes per side to your desired doneness. Let it rest 5 minutes, then slice into strips."
+  - "Warm the tortillas on the comal until soft and lightly toasted."
+  - "Build the tacos with the meat, onion, and cilantro."
+  - "Serve with lime wedges and your favorite salsa."
+storyEn: |
+  This is the recipe that never fails at ranch gatherings. The key is not to
+  overcook the flank steak and to warm the tortillas well on the comal. Adjust the
+  servings to however many show up to eat — the numbers above recalculate on their own.
 pubDate: 2026-07-28
 author: "Familia El Cerito"
 ---

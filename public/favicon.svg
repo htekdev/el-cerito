@@ -1,10 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F1E7D3"/>
+      <stop offset="100%" stop-color="#FBF6EC"/>
+    </linearGradient>
+  </defs>
   <rect width="64" height="64" rx="14" fill="#C56B4A"/>
-  <g fill="none" stroke="#FBF6EC" stroke-width="3" stroke-linecap="round">
-    <path d="M32 50 V26"/>
-    <path d="M32 30 q-8 -3 -11 -11 q8 1 11 8"/>
-    <path d="M32 30 q8 -3 11 -11 q-8 1 -11 8"/>
-    <path d="M32 40 q-8 -3 -11 -11 q8 1 11 8"/>
-    <path d="M32 40 q8 -3 11 -11 q-8 1 -11 8"/>
-  </g>
+  <!-- sun -->
+  <circle cx="45" cy="20" r="7" fill="#E0A458"/>
+  <!-- sage foothill -->
+  <path d="M6 52 Q20 38 34 52 Z" fill="#7C8B5E"/>
+  <!-- little mountain (the cerito) -->
+  <path d="M10 52 L30 22 L50 52 Z" fill="url(#mtn)"/>
+  <!-- cream cap notch -->
+  <path d="M30 22 L24 31 Q30 27.5 36 31 Z" fill="#C56B4A"/>
+  <!-- ground -->
+  <rect x="8" y="50" width="48" height="4" rx="2" fill="#A2502F"/>
 </svg>

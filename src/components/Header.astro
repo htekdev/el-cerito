@@ -1,39 +1,78 @@
 ---
+import Logo from './Logo.astro';
+import { useTranslations, routes, otherLang } from '../i18n/utils';
+import { langLabel, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+  /** Equivalent page in the other language (for the switcher). */
+  altLangUrl?: string;
+}
+const { lang = 'es', altLangUrl } = Astro.props;
+
+const t = useTranslations(lang);
+const r = routes(lang);
+
 const nav = [
-  { href: '/', label: 'Inicio' },
-  { href: '/recetas', label: 'Recetas' },
-  { href: '/recetas?health=saludables', label: 'Saludables' },
-  { href: '/nosotros', label: 'El Rancho' },
+  { href: r.home, label: t('nav.home'), match: 'home' },
+  { href: r.recipes, label: t('nav.recipes'), match: 'recipes' },
+  { href: r.healthy, label: t('nav.healthy'), match: 'healthy' },
+  { href: r.about, label: t('nav.ranch'), match: 'about' },
 ];
+
 const path = Astro.url.pathname;
+const isActive = (href: string, match: string) => {
+  const base = href.split('?')[0];
+  if (match === 'home') return path === base;
+  if (match === 'healthy') return false; // shares base with recipes; don't double-highlight
+  return path === base || path.startsWith(base + '/');
+};
+
+const other = otherLang(lang);
+// Prefer the exact counterpart page; otherwise send to the other-language home.
+const switchHref = altLangUrl ?? routes(other).home;
 ---
 <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur border-b border-clay">
   <nav class="mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between h-16">
-    <a href="/" class="flex items-center gap-2 group" aria-label="El Cerito — inicio">
-      <span class="grid place-items-center h-9 w-9 rounded-full bg-terracotta text-cream text-lg shadow-sm group-hover:bg-terracotta-dark transition-colors">🌾</span>
-      <span class="font-heading text-xl font-bold text-earth tracking-tight">El Cerito</span>
+    <a href={r.home} class="flex items-center gap-2 group" aria-label={t('nav.homeAria')}>
+      <Logo class="h-9 w-9 shadow-sm group-hover:scale-105 transition-transform" title="" />
+      <span class="font-heading text-xl font-bold text-earth tracking-tight">{t('nav.brand')}</span>
     </a>
 
-    <ul class="hidden md:flex items-center gap-1">
-      {nav.map((item) => {
-        const active = item.href === '/' ? path === '/' : path.startsWith(item.href.split('?')[0]) && item.href !== '/';
-        return (
-          <li>
-            <a
-              href={item.href}
-              class:list={[
-                'px-3 py-2 rounded-lg text-sm font-semibold transition-colors',
-                active ? 'text-terracotta-dark bg-terracotta-light/15' : 'text-earth-soft hover:text-terracotta-dark hover:bg-clay/50',
-              ]}
-            >{item.label}</a>
-          </li>
-        );
-      })}
-    </ul>
+    <div class="flex items-center gap-2">
+      <ul class="hidden md:flex items-center gap-1">
+        {nav.map((item) => {
+          const active = isActive(item.href, item.match);
+          return (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'px-3 py-2 rounded-lg text-sm font-semibold transition-colors',
+                  active ? 'text-terracotta-dark bg-terracotta-light/15' : 'text-earth-soft hover:text-terracotta-dark hover:bg-clay/50',
+                ]}
+              >{item.label}</a>
+            </li>
+          );
+        })}
+      </ul>
 
-    <button id="menu-toggle" class="md:hidden grid place-items-center h-10 w-10 rounded-lg text-earth hover:bg-clay/60" aria-label="Abrir menú" aria-expanded="false">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+      <!-- Language switcher -->
+      <a
+        href={switchHref}
+        hreflang={other}
+        class="hidden sm:inline-flex items-center gap-1.5 rounded-lg border border-clay bg-white/70 px-2.5 py-1.5 text-xs font-bold text-earth-soft hover:text-terracotta-dark hover:border-terracotta transition-colors"
+        aria-label={t('nav.switchLang')}
+        title={t('nav.switchLang')}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        {langLabel[other]}
+      </a>
+
+      <button id="menu-toggle" class="md:hidden grid place-items-center h-10 w-10 rounded-lg text-earth hover:bg-clay/60" aria-label={t('nav.openMenu')} aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
   </nav>
 
   <div id="mobile-menu" class="hidden md:hidden border-t border-clay bg-cream px-4 pb-4">
@@ -43,6 +82,11 @@ const path = Astro.url.pathname;
           <a href={item.href} class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-earth-soft hover:text-terracotta-dark hover:bg-clay/50">{item.label}</a>
         </li>
       ))}
+      <li class="pt-1 mt-1 border-t border-clay">
+        <a href={switchHref} hreflang={other} class="block px-3 py-2.5 rounded-lg text-sm font-semibold text-earth-soft hover:text-terracotta-dark hover:bg-clay/50">
+          🌐 {t('nav.switchLang')} · {langLabel[other]}
+        </a>
+      </li>
     </ul>
   </div>
 </header>

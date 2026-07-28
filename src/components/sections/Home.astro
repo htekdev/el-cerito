@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import RecipeCard from '../RecipeCard.astro';
+import { CATEGORIES, categoryLabel } from '../../lib/nutrition';
+import { useTranslations, routes, recipePath } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+const r = routes(lang);
+
+const all = (await getCollection('recipes', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const featured = all.filter((rec) => rec.data.featured).slice(0, 3);
+const showcase = featured.length > 0 ? featured : all.slice(0, 3);
+const totalRecipes = all.length;
+const healthyCount = all.filter((rec) => rec.data.healthLabels.length > 0).length;
+
+const usedCategories = [...new Set(all.flatMap((rec) => rec.data.categories))];
+---
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-cream via-cream-dark to-clay"></div>
+  <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-terracotta-light/20 blur-3xl"></div>
+  <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-sage-light/25 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28 text-center">
+    <span class="inline-flex items-center gap-2 rounded-full bg-white/70 border border-clay px-4 py-1.5 text-sm font-semibold text-terracotta-dark backdrop-blur">
+      🌾 {t('home.badge')}
+    </span>
+    <h1 class="mt-6 font-heading text-5xl sm:text-7xl font-black text-earth leading-[1.05]">
+      {t('home.titleTop')}<br />
+      <span class="text-terracotta">{t('home.titleBottom')}</span>
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-earth-soft max-w-2xl mx-auto leading-relaxed">
+      {t('home.subtitle')}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3 justify-center">
+      <a href={r.recipes} class="rounded-full bg-terracotta hover:bg-terracotta-dark text-cream font-semibold px-7 py-3.5 shadow-lg shadow-terracotta/20 transition-colors">
+        {t('home.ctaRecipes')}
+      </a>
+      <a href={r.healthy} class="rounded-full bg-white/80 hover:bg-white text-sage-dark border border-sage-light font-semibold px-7 py-3.5 backdrop-blur transition-colors">
+        🌱 {t('home.ctaHealthy')}
+      </a>
+    </div>
+
+    <div class="mt-12 flex items-center justify-center gap-8 text-earth-soft">
+      <div class="text-center">
+        <div class="font-heading text-3xl font-bold text-earth">{totalRecipes}</div>
+        <div class="text-sm">{t('home.statRecipes')}</div>
+      </div>
+      <div class="h-10 w-px bg-clay"></div>
+      <div class="text-center">
+        <div class="font-heading text-3xl font-bold text-sage-dark">{healthyCount}</div>
+        <div class="text-sm">{t('home.statHealthy')}</div>
+      </div>
+      <div class="h-10 w-px bg-clay"></div>
+      <div class="text-center">
+        <div class="font-heading text-3xl font-bold text-terracotta">∞</div>
+        <div class="text-sm">{t('home.statLove')}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="mx-auto max-w-6xl px-4 sm:px-6 py-12">
+  <div class="flex flex-wrap gap-3 justify-center">
+    {usedCategories.map((c) => CATEGORIES[c] && (
+      <a href={r.recipes} class="group rounded-2xl bg-white border border-clay px-5 py-4 text-center hover:border-terracotta hover:shadow-md transition-all min-w-[100px]">
+        <div class="text-2xl">{CATEGORIES[c].icon}</div>
+        <div class="mt-1 text-sm font-semibold text-earth group-hover:text-terracotta-dark">{categoryLabel(c, lang)}</div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<!-- Featured recipes -->
+<section class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <h2 class="font-heading text-3xl sm:text-4xl font-bold text-earth">{t('home.featuredTitle')}</h2>
+      <p class="mt-2 text-earth-soft">{t('home.featuredSubtitle')}</p>
+    </div>
+    <a href={r.recipes} class="hidden sm:inline-flex items-center gap-2 text-terracotta-dark font-semibold hover:gap-3 transition-all">{t('home.seeAll')} →</a>
+  </div>
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {showcase.map((rec) => <RecipeCard entry={rec} lang={lang} />)}
+  </div>
+</section>
+
+<!-- Healthy philosophy band -->
+<section class="mt-12 bg-sage-dark text-cream">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 py-16 text-center">
+    <span class="text-4xl">🌱</span>
+    <h2 class="mt-4 font-heading text-3xl sm:text-4xl font-bold text-cream">{t('home.healthyTitle')}</h2>
+    <p class="mt-4 text-lg text-cream/85 max-w-2xl mx-auto leading-relaxed">
+      {t('home.healthyBody')}
+    </p>
+    <a href={r.healthy} class="mt-8 inline-flex rounded-full bg-cream text-sage-dark font-semibold px-7 py-3.5 hover:bg-white transition-colors">
+      {t('home.healthyCta')}
+    </a>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+---
+/**
+ * El Cerito logo mark — "el cerito" = the little mountain/hill.
+ *
+ * A circular emblem: a warm sunrise sky over a small terracotta mountain with a
+ * cream cap, a sage foothill, and a honey sun. Fully self-contained SVG so it
+ * renders crisp at any size and works on both cream and dark-earth backgrounds.
+ */
+interface Props {
+  class?: string;
+  /** Accessible title; set to '' to render decorative (aria-hidden). */
+  title?: string;
+}
+const { class: className = 'h-9 w-9', title = 'El Cerito' } = Astro.props;
+const decorative = title === '';
+---
+<svg
+  viewBox="0 0 64 64"
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  role={decorative ? 'presentation' : 'img'}
+  aria-hidden={decorative ? 'true' : undefined}
+  aria-label={decorative ? undefined : title}
+>
+  {!decorative && <title>{title}</title>}
+  <defs>
+    <linearGradient id="ec-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBF6EC" />
+      <stop offset="100%" stop-color="#F1E7D3" />
+    </linearGradient>
+    <linearGradient id="ec-mtn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0906F" />
+      <stop offset="55%" stop-color="#C56B4A" />
+      <stop offset="100%" stop-color="#A2502F" />
+    </linearGradient>
+    <clipPath id="ec-clip"><circle cx="32" cy="32" r="31" /></clipPath>
+  </defs>
+
+  <g clip-path="url(#ec-clip)">
+    <!-- Sunrise sky -->
+    <rect x="0" y="0" width="64" height="64" fill="url(#ec-sky)" />
+    <!-- Sun -->
+    <circle cx="44" cy="23" r="8" fill="#E0A458" />
+    <!-- Sage foothill (back) -->
+    <path d="M-2 52 Q14 34 30 50 Q40 42 66 52 L66 66 L-2 66 Z" fill="#A7B588" />
+    <!-- Little mountain (the cerito) -->
+    <path d="M4 54 L26 22 L48 54 Z" fill="url(#ec-mtn)" />
+    <!-- Cream cap -->
+    <path d="M26 22 L19.5 31.5 Q26 27.5 32.5 31.5 Z" fill="#FBF6EC" />
+    <!-- Front sage rise -->
+    <path d="M30 54 Q46 38 68 54 L68 66 L30 66 Z" fill="#7C8B5E" />
+  </g>
+  <circle cx="32" cy="32" r="31" fill="none" stroke="#A2502F" stroke-opacity="0.28" stroke-width="2" />
+</svg>
