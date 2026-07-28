@@ -50,19 +50,19 @@ export function formatMinutes(mins: number): string {
   return m === 0 ? `${h} h` : `${h} h ${m} min`;
 }
 
-/** Health label display metadata (Spanish labels, palette-aware colors). */
-export const HEALTH_LABELS: Record<string, { es: string; icon: string; color: string }> = {
-  'low-calorie':  { es: 'Bajo en calorías', icon: '🔥', color: 'bg-sage-light/40 text-sage-dark' },
-  'low-carb':     { es: 'Bajo en carbohidratos', icon: '🌾', color: 'bg-honey/20 text-terracotta-dark' },
-  'low-fat':      { es: 'Bajo en grasa', icon: '🥑', color: 'bg-sage-light/40 text-sage-dark' },
-  'high-protein': { es: 'Alto en proteína', icon: '💪', color: 'bg-terracotta-light/25 text-terracotta-dark' },
-  'high-fiber':   { es: 'Alto en fibra', icon: '🌿', color: 'bg-sage-light/40 text-sage-dark' },
-  'gluten-free':  { es: 'Sin gluten', icon: '🚫🌾', color: 'bg-clay text-earth' },
-  'vegetarian':   { es: 'Vegetariano', icon: '🥗', color: 'bg-sage-light/40 text-sage-dark' },
-  'vegan':        { es: 'Vegano', icon: '🌱', color: 'bg-sage-light/40 text-sage-dark' },
+/** Health label display metadata (bilingual labels, palette-aware colors). */
+export const HEALTH_LABELS: Record<string, { es: string; en: string; icon: string; color: string }> = {
+  'low-calorie':  { es: 'Bajo en calorías', en: 'Low calorie', icon: '🔥', color: 'bg-sage-light/40 text-sage-dark' },
+  'low-carb':     { es: 'Bajo en carbohidratos', en: 'Low carb', icon: '🌾', color: 'bg-honey/20 text-terracotta-dark' },
+  'low-fat':      { es: 'Bajo en grasa', en: 'Low fat', icon: '🥑', color: 'bg-sage-light/40 text-sage-dark' },
+  'high-protein': { es: 'Alto en proteína', en: 'High protein', icon: '💪', color: 'bg-terracotta-light/25 text-terracotta-dark' },
+  'high-fiber':   { es: 'Alto en fibra', en: 'High fiber', icon: '🌿', color: 'bg-sage-light/40 text-sage-dark' },
+  'gluten-free':  { es: 'Sin gluten', en: 'Gluten free', icon: '🚫🌾', color: 'bg-clay text-earth' },
+  'vegetarian':   { es: 'Vegetariano', en: 'Vegetarian', icon: '🥗', color: 'bg-sage-light/40 text-sage-dark' },
+  'vegan':        { es: 'Vegano', en: 'Vegan', icon: '🌱', color: 'bg-sage-light/40 text-sage-dark' },
 };
 
-/** Category display metadata (Spanish primary). */
+/** Category display metadata (bilingual). */
 export const CATEGORIES: Record<string, { es: string; en: string; icon: string }> = {
   desayuno:   { es: 'Desayuno', en: 'Breakfast', icon: '🌅' },
   comida:     { es: 'Comida', en: 'Lunch', icon: '🍽️' },
@@ -74,8 +74,28 @@ export const CATEGORIES: Record<string, { es: string; en: string; icon: string }
   salsa:      { es: 'Salsa', en: 'Sauce', icon: '🌶️' },
 };
 
-export const DIFFICULTY: Record<string, { es: string; icon: string }> = {
-  facil:  { es: 'Fácil', icon: '●○○' },
-  media:  { es: 'Media', icon: '●●○' },
-  dificil:{ es: 'Difícil', icon: '●●●' },
+export const DIFFICULTY: Record<string, { es: string; en: string; icon: string }> = {
+  facil:  { es: 'Fácil', en: 'Easy', icon: '●○○' },
+  media:  { es: 'Media', en: 'Medium', icon: '●●○' },
+  dificil:{ es: 'Difícil', en: 'Hard', icon: '●●●' },
 };
+
+type Lang = 'es' | 'en';
+
+/** Localized category label. */
+export function categoryLabel(cat: string, lang: Lang): string {
+  const c = CATEGORIES[cat];
+  return c ? (lang === 'en' ? c.en : c.es) : cat;
+}
+
+/** Localized health label. */
+export function healthLabel(key: string, lang: Lang): string {
+  const h = HEALTH_LABELS[key];
+  return h ? (lang === 'en' ? h.en : h.es) : key;
+}
+
+/** Localized difficulty label. */
+export function difficultyLabel(key: string, lang: Lang): string {
+  const d = DIFFICULTY[key];
+  return d ? (lang === 'en' ? d.en : d.es) : key;
+}

@@ -1,50 +1,42 @@
 ---
-import { CATEGORIES, HEALTH_LABELS, formatMinutes, totalTime } from '../lib/nutrition';
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES, HEALTH_LABELS, categoryLabel, healthLabel, formatMinutes, totalTime } from '../lib/nutrition';
+import { useTranslations, recipePath, rTitle, rDescription } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
 
 interface Props {
-  slug: string;
-  title: string;
-  description: string;
-  coverImage: string;
-  coverImageAlt?: string;
-  categories: string[];
-  healthLabels: string[];
-  prepTime: number;
-  cookTime: number;
-  totalTimeOverride?: number;
-  calories: number;
-  protein: number;
-  ranchOriginal?: boolean;
+  entry: CollectionEntry<'recipes'>;
+  lang?: Lang;
 }
+const { entry, lang = 'es' } = Astro.props;
+const d = entry.data;
+const t = useTranslations(lang);
 
-const {
-  slug, title, description, coverImage, coverImageAlt = '',
-  categories, healthLabels, prepTime, cookTime, totalTimeOverride,
-  calories, protein, ranchOriginal = false,
-} = Astro.props;
-
-const time = totalTime(prepTime, cookTime, totalTimeOverride);
-const primaryCat = categories[0];
+const title = rTitle(d, lang);
+const description = rDescription(d, lang);
+const href = recipePath(lang, entry.id);
+const time = totalTime(d.prepTime, d.cookTime, d.totalTime);
+const primaryCat = d.categories[0];
 ---
 <a
-  href={`/recetas/${slug}`}
+  href={href}
   class="group flex flex-col overflow-hidden rounded-2xl bg-white border border-clay shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
 >
   <div class="relative aspect-[4/3] overflow-hidden bg-clay">
     <img
-      src={coverImage}
-      alt={coverImageAlt || title}
+      src={d.coverImage}
+      alt={d.coverImageAlt || title}
       loading="lazy"
       class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
     />
-    {ranchOriginal && (
+    {d.ranchOriginal && (
       <span class="absolute top-3 left-3 rounded-full bg-earth/85 text-cream text-[11px] font-semibold px-2.5 py-1 backdrop-blur">
-        🌾 Del rancho
+        🌾 {t('card.fromRanch')}
       </span>
     )}
     {primaryCat && CATEGORIES[primaryCat] && (
       <span class="absolute top-3 right-3 rounded-full bg-cream/90 text-earth text-[11px] font-semibold px-2.5 py-1 backdrop-blur">
-        {CATEGORIES[primaryCat].icon} {CATEGORIES[primaryCat].es}
+        {CATEGORIES[primaryCat].icon} {categoryLabel(primaryCat, lang)}
       </span>
     )}
   </div>
@@ -55,11 +47,11 @@ const primaryCat = categories[0];
     </h3>
     <p class="mt-1.5 text-sm text-earth-soft line-clamp-2 flex-1">{description}</p>
 
-    {healthLabels.length > 0 && (
+    {d.healthLabels.length > 0 && (
       <div class="mt-3 flex flex-wrap gap-1.5">
-        {healthLabels.slice(0, 3).map((label) => HEALTH_LABELS[label] && (
+        {d.healthLabels.slice(0, 3).map((label) => HEALTH_LABELS[label] && (
           <span class:list={['rounded-full px-2 py-0.5 text-[11px] font-semibold', HEALTH_LABELS[label].color]}>
-            {HEALTH_LABELS[label].es}
+            {healthLabel(label, lang)}
           </span>
         ))}
       </div>
@@ -67,8 +59,8 @@ const primaryCat = categories[0];
 
     <div class="mt-4 flex items-center justify-between text-xs text-earth-soft border-t border-clay/70 pt-3">
       <span class="inline-flex items-center gap-1">⏱️ {formatMinutes(time)}</span>
-      <span class="inline-flex items-center gap-1">🔥 {calories} kcal</span>
-      <span class="inline-flex items-center gap-1">💪 {protein} g</span>
+      <span class="inline-flex items-center gap-1">🔥 {d.macros.calories} kcal</span>
+      <span class="inline-flex items-center gap-1">💪 {d.macros.protein} g</span>
     </div>
   </div>
 </a>

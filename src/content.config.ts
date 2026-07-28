@@ -21,8 +21,10 @@ const unitEnum = z.enum([
 ]);
 
 const ingredientSchema = z.object({
-  /** Display name, e.g. "chicken breast" */
+  /** Display name (Spanish primary), e.g. "pechuga de pollo" */
   name: z.string(),
+  /** Optional English name for bilingual display, e.g. "chicken breast" */
+  nameEn: z.string().optional(),
   /** Numeric quantity for the DEFAULT serving count. Scales linearly. */
   amount: z.number(),
   /** Measurement unit */
@@ -33,8 +35,10 @@ const ingredientSchema = z.object({
   carbs: z.number().optional(),
   fat: z.number().optional(),
   fiber: z.number().optional(),
-  /** Optional note, e.g. "diced", "room temperature" */
+  /** Optional note (Spanish primary), e.g. "picada", "a temperatura ambiente" */
   note: z.string().optional(),
+  /** Optional English note for bilingual display */
+  noteEn: z.string().optional(),
   /** Mark true for optional / garnish ingredients */
   optional: z.boolean().default(false),
 });
@@ -78,8 +82,10 @@ const recipes = defineCollection({
     title: z.string(),
     /** Optional English title for bilingual display */
     titleEn: z.string().optional(),
-    /** Short description / story */
+    /** Short description / story (Spanish primary) */
     description: z.string(),
+    /** Optional English description for bilingual display */
+    descriptionEn: z.string().optional(),
 
     /** Cover image path (public/) */
     coverImage: z.string(),
@@ -94,6 +100,8 @@ const recipes = defineCollection({
     servings: z.number().int().positive().default(4),
     /** Human label for a serving, e.g. "tacos", "porciones", "vasos" */
     servingLabel: z.string().default('porciones'),
+    /** Optional English serving label, e.g. "tacos", "servings", "glasses" */
+    servingLabelEn: z.string().optional(),
 
     /** Ingredients with per-ingredient macros (scale with servings) */
     ingredients: z.array(ingredientSchema),
@@ -101,8 +109,12 @@ const recipes = defineCollection({
     /** Per-serving macro summary */
     macros: macrosSchema,
 
-    /** Step-by-step instructions */
+    /** Step-by-step instructions (Spanish primary) */
     instructions: z.array(z.string()),
+    /** Optional English step-by-step instructions for bilingual display */
+    instructionsEn: z.array(z.string()).optional(),
+    /** Optional English story paragraph (mirrors the Spanish markdown body) */
+    storyEn: z.string().optional(),
 
     /** Times in minutes */
     prepTime: z.number().int().nonnegative(),
@@ -121,8 +133,10 @@ const recipes = defineCollection({
     healthierAlternatives: z.array(z.object({
       /** slug of the sibling recipe in this collection */
       recipe: reference('recipes'),
-      /** Short label, e.g. "Versión sin azúcar", "Al horno en vez de frito" */
+      /** Short label (Spanish), e.g. "Versión sin azúcar", "Al horno en vez de frito" */
       label: z.string(),
+      /** Optional English label for bilingual display */
+      labelEn: z.string().optional(),
     })).default([]),
 
     /** Recipe difficulty */

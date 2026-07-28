@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import RecipeDetail from '../../components/sections/RecipeDetail.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RecipeDetail from '../../../components/sections/RecipeDetail.astro';
+import { rTitle, rDescription } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const recipes = await getCollection('recipes', ({ data }) => !data.draft);
@@ -15,12 +16,12 @@ const { recipe } = Astro.props;
 const d = recipe.data;
 ---
 <BaseLayout
-  title={d.title}
-  description={d.description}
+  title={rTitle(d, 'en')}
+  description={rDescription(d, 'en')}
   ogImage={d.coverImage}
   ogType="article"
-  lang="es"
-  altLangUrl={`/en/recipes/${recipe.id}`}
+  lang="en"
+  altLangUrl={`/recetas/${recipe.id}`}
 >
-  <RecipeDetail entry={recipe} lang="es" />
+  <RecipeDetail entry={recipe} lang="en" />
 </BaseLayout>

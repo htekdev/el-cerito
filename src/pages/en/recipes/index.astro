@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RecipeIndex from '../../../components/sections/RecipeIndex.astro';
+import { useTranslations } from '../../../i18n/utils';
+const t = useTranslations('en');
+---
+<BaseLayout title={t('recipes.title')} description={t('recipes.metaDescription')} lang="en" altLangUrl="/recetas">
+  <RecipeIndex lang="en" />
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import { useTranslations, routes } from '../../i18n/utils';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+const r = routes(lang);
+---
+<section class="bg-cream-dark border-b border-clay">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 py-16 text-center">
+    <img src="/images/brand/logo-full.png" alt="El Cerito" width="220" height="220" class="mx-auto h-40 w-40 sm:h-48 sm:w-48 object-contain" />
+    <h1 class="mt-4 font-heading text-4xl sm:text-5xl font-bold text-earth">{t('about.heading')}</h1>
+    <p class="mt-3 text-lg text-earth-soft">{t('about.location')}</p>
+  </div>
+</section>
+
+<article class="mx-auto max-w-3xl px-4 sm:px-6 py-12 space-y-6 text-earth-soft leading-relaxed text-lg">
+  <p>
+    <strong class="text-earth">{t('about.p1intro')}</strong>{t('about.p1')}
+  </p>
+  <p>{t('about.p2')}</p>
+  <p>
+    {t('about.p3a')}<strong class="text-terracotta-dark">{t('about.p3strong')}</strong>{t('about.p3b')}
+  </p>
+  <p>{t('about.p4')}</p>
+
+  <div class="pt-6">
+    <a href={r.recipes} class="inline-flex rounded-full bg-terracotta hover:bg-terracotta-dark text-cream font-semibold px-7 py-3.5 transition-colors">
+      {t('about.cta')}
+    </a>
+  </div>
+</article>
