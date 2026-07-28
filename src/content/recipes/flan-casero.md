@@ -64,7 +64,7 @@ ingredients:
     optional: true
 healthierAlternatives:
   - recipe: flan-ligero
-    label: "Versión más ligera: flan de yogurt griego y stevia (mucha menos azúcar y grasa, más proteína)"
+    label: "Versión ligera: sin leche condensada, con Splenda y leche evaporada sin grasa (~90 cal por rebanada)"
 instructions:
   - "Precalienta el horno a 200 °C (400 °F)."
   - "En una cacerola pon el azúcar con un poco de agua."
