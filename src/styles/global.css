@@ -1,0 +1,73 @@
+/* Self-hosted fonts (no render-blocking CDN requests) */
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/700.css";
+@import "@fontsource/fraunces/900.css";
+@import "@fontsource/nunito-sans/400.css";
+@import "@fontsource/nunito-sans/500.css";
+@import "@fontsource/nunito-sans/600.css";
+@import "@fontsource/nunito-sans/700.css";
+
+@import "tailwindcss";
+
+/* ── El Cerito brand palette — warm, rustic family ranch ── */
+@theme {
+  /* Terracotta / clay — primary warm accent */
+  --color-terracotta: #C56B4A;
+  --color-terracotta-dark: #A2502F;
+  --color-terracotta-light: #E0906F;
+
+  /* Sage / olive — earthy green */
+  --color-sage: #7C8B5E;
+  --color-sage-dark: #5C6A44;
+  --color-sage-light: #A7B588;
+
+  /* Cream / warm neutrals */
+  --color-cream: #FBF6EC;
+  --color-cream-dark: #F1E7D3;
+  --color-clay: #E8D9C0;
+
+  /* Deep earth for text */
+  --color-earth: #3A2E23;
+  --color-earth-soft: #6B5D4D;
+
+  /* Golden honey accent */
+  --color-honey: #E0A458;
+
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--color-earth);
+    background-color: var(--color-cream);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Accessibility skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-terracotta);
+  color: white;
+  border-radius: 0 0 0.5rem 0;
+}
+.skip-link:focus {
+  left: 0;
+}

@@ -1,0 +1,41 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="mt-20 bg-earth text-cream/80">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12 grid gap-8 sm:grid-cols-3">
+    <div>
+      <div class="flex items-center gap-2 mb-3">
+        <span class="grid place-items-center h-9 w-9 rounded-full bg-terracotta text-cream text-lg">🌾</span>
+        <span class="font-heading text-xl font-bold text-cream">El Cerito</span>
+      </div>
+      <p class="text-sm leading-relaxed text-cream/70">
+        Recetas del rancho familiar en Ojo de Agua, México. Cocina casera con
+        cariño y alternativas saludables para toda la familia.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-heading text-cream text-base mb-3">Explorar</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="/recetas" class="hover:text-terracotta-light transition-colors">Todas las recetas</a></li>
+        <li><a href="/recetas?health=saludables" class="hover:text-terracotta-light transition-colors">Opciones saludables</a></li>
+        <li><a href="/nosotros" class="hover:text-terracotta-light transition-colors">Sobre el rancho</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-heading text-cream text-base mb-3">El Rancho</h3>
+      <p class="text-sm text-cream/70 leading-relaxed">
+        Ojo de Agua<br />México<br />
+        <span class="text-cream/50">Hecho con cariño por la familia.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-4 text-xs text-cream/50 flex flex-col sm:flex-row justify-between gap-2">
+      <p>© {year} El Cerito. Todas las recetas son de la familia.</p>
+      <p>Hecho con 🤎 desde el rancho.</p>
+    </div>
+  </div>
+</footer>

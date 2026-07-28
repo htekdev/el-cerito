@@ -1,0 +1,139 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { CATEGORIES, HEALTH_LABELS } from '../../lib/nutrition';
+
+const recipes = (await getCollection('recipes', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Unique categories present in the library
+const usedCategories = [...new Set(recipes.flatMap((r) => r.data.categories))];
+const usedHealth = [...new Set(recipes.flatMap((r) => r.data.healthLabels))];
+---
+<BaseLayout title="Recetas" description="Todas las recetas del rancho El Cerito — cocina casera mexicana y alternativas saludables con porciones y macros dinámicos.">
+  <section class="bg-cream-dark border-b border-clay">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12">
+      <h1 class="font-heading text-4xl sm:text-5xl font-bold text-earth">Recetas</h1>
+      <p class="mt-3 text-lg text-earth-soft max-w-2xl">
+        La cocina del rancho, receta por receta. Usa los filtros para encontrar
+        opciones saludables o por tipo de comida.
+      </p>
+    </div>
+  </section>
+
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-8">
+    <!-- Filters -->
+    <div class="flex flex-col gap-4 mb-8">
+      <div class="flex flex-wrap gap-2 items-center">
+        <span class="text-sm font-semibold text-earth-soft mr-1">Tipo:</span>
+        <button class="filter-cat rounded-full px-3.5 py-1.5 text-sm font-semibold bg-terracotta text-cream" data-cat="all" aria-pressed="true">Todas</button>
+        {usedCategories.map((c) => CATEGORIES[c] && (
+          <button class="filter-cat rounded-full px-3.5 py-1.5 text-sm font-semibold bg-white border border-clay text-earth-soft hover:border-terracotta" data-cat={c} aria-pressed="false">
+            {CATEGORIES[c].icon} {CATEGORIES[c].es}
+          </button>
+        ))}
+      </div>
+
+      {usedHealth.length > 0 && (
+        <div class="flex flex-wrap gap-2 items-center">
+          <span class="text-sm font-semibold text-earth-soft mr-1">Saludable:</span>
+          <button class="filter-health rounded-full px-3.5 py-1.5 text-sm font-semibold bg-sage text-cream" data-health="all" aria-pressed="true">Todas</button>
+          {usedHealth.map((h) => HEALTH_LABELS[h] && (
+            <button class="filter-health rounded-full px-3.5 py-1.5 text-sm font-semibold bg-white border border-clay text-earth-soft hover:border-sage" data-health={h} aria-pressed="false">
+              {HEALTH_LABELS[h].es}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Grid -->
+    <div id="recipe-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {recipes.map((r) => (
+        <div class="recipe-item" data-categories={r.data.categories.join(',')} data-health={r.data.healthLabels.join(',')}>
+          <RecipeCard
+            slug={r.id}
+            title={r.data.title}
+            description={r.data.description}
+            coverImage={r.data.coverImage}
+            coverImageAlt={r.data.coverImageAlt}
+            categories={r.data.categories}
+            healthLabels={r.data.healthLabels}
+            prepTime={r.data.prepTime}
+            cookTime={r.data.cookTime}
+            totalTimeOverride={r.data.totalTime}
+            calories={r.data.macros.calories}
+            protein={r.data.macros.protein}
+            ranchOriginal={r.data.ranchOriginal}
+          />
+        </div>
+      ))}
+    </div>
+
+    <p id="empty-state" class="hidden text-center text-earth-soft py-16">
+      No hay recetas con esos filtros todavía. ¡Pronto agregaremos más! 🌾
+    </p>
+  </div>
+
+  <script>
+    let activeCat = 'all';
+    let activeHealth = 'all';
+
+    // Support ?health=saludables deep link (any health label)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('health') === 'saludables') activeHealth = 'any';
+
+    const items = Array.from(document.querySelectorAll('.recipe-item')) as HTMLElement[];
+    const empty = document.getElementById('empty-state');
+
+    function apply() {
+      let visible = 0;
+      items.forEach((item) => {
+        const cats = (item.dataset.categories || '').split(',').filter(Boolean);
+        const health = (item.dataset.health || '').split(',').filter(Boolean);
+        const catOk = activeCat === 'all' || cats.includes(activeCat);
+        const healthOk =
+          activeHealth === 'all' ? true :
+          activeHealth === 'any' ? health.length > 0 :
+          health.includes(activeHealth);
+        const show = catOk && healthOk;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      empty?.classList.toggle('hidden', visible !== 0);
+    }
+
+    function styleButtons(sel: string, attr: string, active: string, activeClass: string) {
+      document.querySelectorAll(sel).forEach((btn) => {
+        const b = btn as HTMLElement;
+        const on = b.dataset[attr] === active;
+        b.setAttribute('aria-pressed', String(on));
+        if (on) {
+          b.className = b.className.replace('bg-white border border-clay text-earth-soft hover:border-terracotta', activeClass).replace('bg-white border border-clay text-earth-soft hover:border-sage', activeClass);
+          b.classList.add(...activeClass.split(' '));
+        } else {
+          b.classList.remove(...activeClass.split(' '));
+          b.classList.add('bg-white', 'border', 'border-clay', 'text-earth-soft');
+        }
+      });
+    }
+
+    document.querySelectorAll('.filter-cat').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeCat = (btn as HTMLElement).dataset.cat || 'all';
+        styleButtons('.filter-cat', 'cat', activeCat, 'bg-terracotta text-cream');
+        apply();
+      });
+    });
+    document.querySelectorAll('.filter-health').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        activeHealth = (btn as HTMLElement).dataset.health || 'all';
+        styleButtons('.filter-health', 'health', activeHealth, 'bg-sage text-cream');
+        apply();
+      });
+    });
+
+    apply();
+  </script>
+</BaseLayout>

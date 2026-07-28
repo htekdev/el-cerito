@@ -1,0 +1,74 @@
+---
+import { CATEGORIES, HEALTH_LABELS, formatMinutes, totalTime } from '../lib/nutrition';
+
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  coverImage: string;
+  coverImageAlt?: string;
+  categories: string[];
+  healthLabels: string[];
+  prepTime: number;
+  cookTime: number;
+  totalTimeOverride?: number;
+  calories: number;
+  protein: number;
+  ranchOriginal?: boolean;
+}
+
+const {
+  slug, title, description, coverImage, coverImageAlt = '',
+  categories, healthLabels, prepTime, cookTime, totalTimeOverride,
+  calories, protein, ranchOriginal = false,
+} = Astro.props;
+
+const time = totalTime(prepTime, cookTime, totalTimeOverride);
+const primaryCat = categories[0];
+---
+<a
+  href={`/recetas/${slug}`}
+  class="group flex flex-col overflow-hidden rounded-2xl bg-white border border-clay shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+>
+  <div class="relative aspect-[4/3] overflow-hidden bg-clay">
+    <img
+      src={coverImage}
+      alt={coverImageAlt || title}
+      loading="lazy"
+      class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+    />
+    {ranchOriginal && (
+      <span class="absolute top-3 left-3 rounded-full bg-earth/85 text-cream text-[11px] font-semibold px-2.5 py-1 backdrop-blur">
+        🌾 Del rancho
+      </span>
+    )}
+    {primaryCat && CATEGORIES[primaryCat] && (
+      <span class="absolute top-3 right-3 rounded-full bg-cream/90 text-earth text-[11px] font-semibold px-2.5 py-1 backdrop-blur">
+        {CATEGORIES[primaryCat].icon} {CATEGORIES[primaryCat].es}
+      </span>
+    )}
+  </div>
+
+  <div class="flex flex-col flex-1 p-5">
+    <h3 class="font-heading text-lg font-bold text-earth leading-snug group-hover:text-terracotta-dark transition-colors">
+      {title}
+    </h3>
+    <p class="mt-1.5 text-sm text-earth-soft line-clamp-2 flex-1">{description}</p>
+
+    {healthLabels.length > 0 && (
+      <div class="mt-3 flex flex-wrap gap-1.5">
+        {healthLabels.slice(0, 3).map((label) => HEALTH_LABELS[label] && (
+          <span class:list={['rounded-full px-2 py-0.5 text-[11px] font-semibold', HEALTH_LABELS[label].color]}>
+            {HEALTH_LABELS[label].es}
+          </span>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-4 flex items-center justify-between text-xs text-earth-soft border-t border-clay/70 pt-3">
+      <span class="inline-flex items-center gap-1">⏱️ {formatMinutes(time)}</span>
+      <span class="inline-flex items-center gap-1">🔥 {calories} kcal</span>
+      <span class="inline-flex items-center gap-1">💪 {protein} g</span>
+    </div>
+  </div>
+</a>
