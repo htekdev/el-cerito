@@ -3,7 +3,7 @@ title: "Huevos con Frijoles del Papá"
 titleEn: "Dad's Eggs with Beans"
 description: "Esto no es una receta — es lo que el papá de Héctor simplemente hace, y es la única manera en que come sus huevos. Dos huevos estrellados (volteados, over-easy) sobre frijoles negros machacados, un chorrito de mayonesa y ketchup, y panecitos tostados para cucharearlo todo. Ridículo, hermoso, y 100% papá."
 coverImage: "/images/recipes/huevos-con-frijoles-del-papa.jpg"
-coverImageAlt: "Plato de huevos estrellados sobre frijoles negros con mayonesa y ketchup, rodeado de triángulos de pan tostado"
+coverImageAlt: "Plato casero con dos huevos estrellados de yema líquida, junto a una porción de frijoles refritos, un chorrito de ketchup y otro de mayonesa a un lado"
 servings: 1
 servingLabel: "porción"
 prepTime: 5
