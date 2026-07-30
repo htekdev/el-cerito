@@ -193,6 +193,12 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
                 <svg class="h-4 w-4 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 10l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
               <span class="grocery-name text-earth peer-checked:text-earth-soft peer-checked:line-through transition-colors">
+                {item.amount !== null && (
+                  <span class="font-semibold text-terracotta-dark tabular-nums mr-1">
+                    <span class="grocery-amount" data-base={item.amount}>{formatAmount(item.amount, 1)}</span>
+                    {item.unit && <span class="text-earth-soft font-normal text-sm"> {item.unit}</span>}
+                  </span>
+                )}
                 {item.name}
                 {item.optional && <span class="text-xs text-sage-dark ml-1">{t('recipe.optional')}</span>}
               </span>
@@ -362,6 +368,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     const macroServEl = document.getElementById('macro-serv');
     const amounts = Array.from(document.querySelectorAll('.ing-amount'));
     const totals = Array.from(document.querySelectorAll('.macro-total'));
+    const groceryAmounts = Array.from(document.querySelectorAll('.grocery-amount'));
 
     const niceRound = (v: number) => (!isFinite(v) ? 0 : v >= 10 ? Math.round(v) : Math.round(v * 10) / 10);
     const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
@@ -382,6 +389,12 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
         const key = (node as HTMLElement).dataset.key as string;
         const perServing = data.macros[key] ?? 0;
         node.textContent = String(niceRound(perServing * servings));
+      });
+
+      groceryAmounts.forEach((node) => {
+        const base = Number((node as HTMLElement).dataset.base);
+        if (!isFinite(base)) return;
+        node.textContent = fmt(niceRound(base * factor));
       });
     }
 

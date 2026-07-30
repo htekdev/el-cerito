@@ -63,6 +63,46 @@ instructionsEn:
   - "Sweeten with stevia to taste while it is still warm."
   - "Add the other 750 ml of cold water and adjust."
   - "Serve very cold with ice."
+steps:
+  - title: "Enjuagar la jamaica"
+    titleEn: "Rinse the hibiscus"
+    text: "Enjuaga la flor de jamaica con agua fría en un colador."
+    textEn: "Rinse the hibiscus flowers with cold water in a strainer."
+    ingredients:
+      - 0
+  - title: "Hervir el concentrado"
+    titleEn: "Boil the concentrate"
+    text: "Hierve la mitad del agua (750 ml), agrega la jamaica y deja hervir 10 minutos."
+    textEn: "Boil half the water (750 ml), add the hibiscus, and let it boil for 10 minutes."
+    ingredients:
+      - ref: 1
+        amountLabel: "750 ml (la mitad)"
+        amountLabelEn: "750 ml (half)"
+  - title: "Reposar y colar"
+    titleEn: "Steep & strain"
+    text: "Deja reposar 20 minutos y cuela el concentrado a una jarra."
+    textEn: "Let it steep for 20 minutes and strain the concentrate into a pitcher."
+    ingredients: []
+  - title: "Endulzar"
+    titleEn: "Sweeten"
+    text: "Endulza con stevia al gusto mientras el concentrado está tibio."
+    textEn: "Sweeten with stevia to taste while the concentrate is still warm."
+    ingredients:
+      - 2
+  - title: "Diluir"
+    titleEn: "Dilute"
+    text: "Agrega el resto del agua fría (750 ml) y ajusta el dulzor."
+    textEn: "Add the rest of the cold water (750 ml) and adjust the sweetness."
+    ingredients:
+      - ref: 1
+        amountLabel: "750 ml (el resto)"
+        amountLabelEn: "750 ml (the rest)"
+  - title: "Servir"
+    titleEn: "Serve"
+    text: "Sirve muy frío con hielo."
+    textEn: "Serve very cold with ice."
+    ingredients:
+      - 3
 storyEn: |
   The healthy version of our hibiscus tea. By swapping the sugar for stevia we cut the
   calories to less than half without losing the flavor. Hibiscus naturally provides

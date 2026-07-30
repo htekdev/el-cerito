@@ -67,6 +67,29 @@ instructions:
   - "Agrega la mayonesa y el ketchup encima, al gusto (no lo pienses mucho, el papá tampoco)."
   - "Revuelve todo, picando los huevos dentro de la mezcla hasta que quede parejito."
   - "Toma un pedacito de pan tostado, úsalo como cucharita para levantar la mezcla, y a comer. Así, exactamente así, es como lo hace el papá."
+steps:
+  - title: "Freír los huevos"
+    text: "Fríe los huevos estrellados: échalos a la sartén a fuego medio y, cuando la clara cuaje, voltéalos con cuidado unos segundos. Over-easy, con la yema todavía blandita adentro."
+    ingredients:
+      - 0
+  - title: "Machacar los frijoles"
+    text: "Calienta los frijoles negros y machácalos con un tenedor hasta que queden bien refritos y espesos."
+    ingredients:
+      - 1
+  - title: "Tostar el pan"
+    text: "Tuesta las 4 rebanadas de pan y córtalas en cuatro (triángulos o cuadritos) para usarlas como cucharitas."
+    ingredients:
+      - 2
+  - title: "Armar el plato"
+    text: "Pon los huevos estrellados y los frijoles juntos en el plato. Agrega la mayonesa y el ketchup encima, al gusto (no lo pienses mucho, el papá tampoco)."
+    ingredients:
+      - label: "los huevos y los frijoles"
+      - 3
+      - 4
+  - title: "Revolver y comer"
+    text: "Revuelve todo, picando los huevos dentro de la mezcla hasta que quede parejito. Toma un pedacito de pan tostado como cucharita y a comer — así, exactamente así, como lo hace el papá."
+    ingredients:
+      - label: "el pan tostado"
 pubDate: 2026-07-29
 author: "Familia Rocha"
 ---

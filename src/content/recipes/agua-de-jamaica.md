@@ -69,6 +69,46 @@ instructionsEn:
   - "Strain the concentrate and dissolve the sugar while it is still warm."
   - "Add the other 750 ml of cold water and adjust the sweetness."
   - "Serve well chilled with plenty of ice."
+steps:
+  - title: "Enjuagar la jamaica"
+    titleEn: "Rinse the hibiscus"
+    text: "Enjuaga la flor de jamaica con agua fría en un colador para quitarle el polvo."
+    textEn: "Rinse the hibiscus flowers with cold water in a strainer to remove any dust."
+    ingredients:
+      - 0
+  - title: "Hervir el concentrado"
+    titleEn: "Boil the concentrate"
+    text: "Hierve la mitad del agua (750 ml) y agrega la jamaica. Deja hervir 10 minutos y apaga el fuego."
+    textEn: "Boil half the water (750 ml) and add the hibiscus. Let it boil for 10 minutes, then turn off the heat."
+    ingredients:
+      - ref: 1
+        amountLabel: "750 ml (la mitad)"
+        amountLabelEn: "750 ml (half)"
+  - title: "Reposar"
+    titleEn: "Steep"
+    text: "Deja reposar 20 minutos para que la jamaica suelte bien su color y sabor."
+    textEn: "Let it steep for 20 minutes so the hibiscus releases its full color and flavor."
+    ingredients: []
+  - title: "Colar y endulzar"
+    titleEn: "Strain & sweeten"
+    text: "Cuela el concentrado a una jarra y disuelve el azúcar mientras todavía está tibio."
+    textEn: "Strain the concentrate into a pitcher and dissolve the sugar while it is still warm."
+    ingredients:
+      - 2
+  - title: "Diluir"
+    titleEn: "Dilute"
+    text: "Agrega el resto del agua fría (750 ml) y ajusta el dulzor a tu gusto."
+    textEn: "Add the rest of the cold water (750 ml) and adjust the sweetness to taste."
+    ingredients:
+      - ref: 1
+        amountLabel: "750 ml (el resto)"
+        amountLabelEn: "750 ml (the rest)"
+  - title: "Servir"
+    titleEn: "Serve"
+    text: "Sirve bien frío con mucho hielo."
+    textEn: "Serve well chilled with plenty of ice."
+    ingredients:
+      - 3
 storyEn: |
   At the ranch there is always a pitcher of jamaica on the table. You can keep the
   concentrate in the fridge and dilute it whenever you like. If you are watching your

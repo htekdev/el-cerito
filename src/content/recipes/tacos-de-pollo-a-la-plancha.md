@@ -96,6 +96,55 @@ instructionsEn:
   - "Warm the tortillas on the comal."
   - "Build the tacos with the chicken, red onion, and cilantro."
   - "Serve with lime and a light green salsa."
+steps:
+  - title: "Marinar el pollo"
+    titleEn: "Marinate the chicken"
+    text: "Corta la pechuga en fajitas. Sazónala con comino, orégano, sal, el jugo de un limón y el aceite de oliva. Deja marinar 15 minutos."
+    textEn: "Cut the chicken breast into strips. Season it with cumin, oregano, salt, the juice of one lime, and the olive oil. Let it marinate for 15 minutes."
+    ingredients:
+      - 0
+      - 6
+      - ref: 4
+        amountLabel: "el jugo de 1"
+        amountLabelEn: "juice of 1"
+      - 5
+  - title: "Calentar la plancha"
+    titleEn: "Heat the griddle"
+    text: "Calienta la plancha o el sartén a fuego medio-alto."
+    textEn: "Heat the griddle or skillet over medium-high heat."
+    ingredients: []
+  - title: "Cocinar el pollo"
+    titleEn: "Cook the chicken"
+    text: "Cocina el pollo 5–6 minutos por lado hasta que esté dorado y bien cocido. Deja reposar 5 minutos y pícalo."
+    textEn: "Cook the chicken 5–6 minutes per side until golden and fully cooked. Let it rest 5 minutes, then chop it."
+    ingredients:
+      - label: "el pollo marinado"
+        labelEn: "the marinated chicken"
+  - title: "Picar la verdura y calentar las tortillas"
+    titleEn: "Chop the veg & warm the tortillas"
+    text: "Pica finamente la cebolla morada y el cilantro. Calienta las tortillas en el comal hasta que estén suaves."
+    textEn: "Finely chop the red onion and cilantro. Warm the tortillas on the comal until soft."
+    ingredients:
+      - 2
+      - 3
+      - 1
+  - title: "Armar los tacos"
+    titleEn: "Build the tacos"
+    text: "Arma los tacos con el pollo, la cebolla morada picada y el cilantro."
+    textEn: "Build the tacos with the chicken, the chopped red onion, and the cilantro."
+    ingredients:
+      - label: "el pollo a la plancha"
+        labelEn: "the grilled chicken"
+      - label: "la cebolla y el cilantro picados"
+        labelEn: "the chopped onion and cilantro"
+  - title: "Servir"
+    titleEn: "Serve"
+    text: "Sirve con los limones partidos y una salsa verde ligera."
+    textEn: "Serve with lime wedges and a light green salsa."
+    ingredients:
+      - ref: 4
+        amountLabel: "el resto"
+        amountLabelEn: "the rest"
 storyEn: |
   The healthy alternative to the grilled steak tacos. By using chicken breast we cut
   the fat to less than a third and raise the protein per serving. Perfect for everyday

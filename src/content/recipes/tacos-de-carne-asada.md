@@ -101,14 +101,14 @@ instructions:
   - "Calienta la parrilla o el comal a fuego alto con el resto del aceite."
   - "Asa la carne 3–4 minutos por lado hasta el término deseado. Deja reposar 5 minutos y pica en tiras."
   - "Calienta las tortillas en el comal hasta que estén suaves y ligeramente doradas."
-  - "Arma los tacos con la carne, cebolla y cilantro."
+  - "Pica finamente la cebolla y el cilantro. Arma los tacos con la carne, la cebolla y el cilantro."
   - "Sirve con los limones partidos y tu salsa favorita."
 instructionsEn:
   - "Marinate the flank steak with the crushed garlic, the juice of one lime, salt, pepper, and half the oil. Let it rest for 20 minutes."
   - "Heat the grill or comal over high heat with the rest of the oil."
   - "Grill the meat 3–4 minutes per side to your desired doneness. Let it rest 5 minutes, then slice into strips."
   - "Warm the tortillas on the comal until soft and lightly toasted."
-  - "Build the tacos with the meat, onion, and cilantro."
+  - "Finely chop the onion and cilantro. Build the tacos with the meat, onion, and cilantro."
   - "Serve with lime wedges and your favorite salsa."
 # Rich step-grouped instructions — each step carries its own ingredients + measurements.
 # Ingredient chips reference the `ingredients[]` array by 0-based index (they scale live
@@ -151,8 +151,8 @@ steps:
       - 1
   - title: "Armar los tacos"
     titleEn: "Build the tacos"
-    text: "Arma los tacos con la carne asada, la cebolla y el cilantro."
-    textEn: "Build the tacos with the grilled meat, onion, and cilantro."
+    text: "Pica finamente la cebolla y el cilantro. Arma los tacos con la carne asada, la cebolla y el cilantro."
+    textEn: "Finely chop the onion and cilantro. Build the tacos with the grilled meat, onion, and cilantro."
     ingredients:
       - label: "la carne asada"
         labelEn: "the grilled steak"

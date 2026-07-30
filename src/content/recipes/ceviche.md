@@ -105,6 +105,37 @@ instructions:
   - "Sirve con un cucharón con hoyos para escurrir el jugo."
   - "Acompaña con tostadas, galletas saladas, o chips de proteína Quest para una opción baja en carbohidratos."
   - "Si quieres, agrega un poco de cátsup para darle estilo coctel."
+steps:
+  - title: "Cortar la tilapia"
+    text: "Descongela la tilapia y córtala en cubos parejos dentro de un tazón grande de vidrio."
+    ingredients:
+      - 0
+  - title: "Cortar el camarón"
+    text: "Corta el camarón en cubos del mismo tamaño y agrégalo al tazón con la tilapia."
+    ingredients:
+      - 1
+  - title: "Curar en limón"
+    text: "Añade el jugo de limón y el jugo de la lata de chiles jalapeños en escabeche. Asegúrate de que el jugo cubra por completo la carne."
+    ingredients:
+      - 2
+      - 3
+  - title: "Refrigerar 6 horas"
+    text: "Tapa el tazón y refrigéralo por lo menos 6 horas, hasta que la carne se torne opaca y firme — el limón la 'cuece' sin fuego."
+    ingredients: []
+  - title: "Picar las verduras"
+    text: "Pica finamente la cebolla, el tomate y el cilantro, y agrégalos al tazón."
+    ingredients:
+      - 4
+      - 5
+      - 6
+  - title: "Agregar el aguacate"
+    text: "Pica el aguacate en cubos y añádelo con cuidado, revolviendo suave para que no se deshaga."
+    ingredients:
+      - 7
+  - title: "Servir"
+    text: "Sirve con un cucharón con hoyos para escurrir el jugo. Acompaña con tostadas, galletas saladas o chips de proteína Quest. Si gustas, agrega un poco de cátsup para estilo coctel."
+    ingredients:
+      - 8
 pubDate: 2026-07-29
 author: "Familia Rocha"
 ---

@@ -179,17 +179,27 @@ export function rSteps(
   }));
 }
 
-/** A deduplicated grocery-list item (no measurements — for shopping). */
-export type GroceryItem = { name: string; optional: boolean };
+/**
+ * A grocery-list item, oriented toward SHOPPING: item name + the quantity to
+ * buy. Amounts are the base quantity at default servings (they live-scale with
+ * the serving stepper). `amount`/`unit` are null for "to taste" ingredients.
+ */
+export type GroceryItem = {
+  name: string;
+  amount: number | null;
+  unit: string | null;
+  optional: boolean;
+};
 
 /**
- * Build a deduplicated grocery list (names only, no measurements) from the
- * ingredient list. Parenthetical translations are stripped for a clean shopping
- * list, and duplicate names are merged (an item is optional only if every
- * occurrence is optional).
+ * Build a shopping-oriented grocery list from the ingredient list. Unlike the
+ * ingredients reference, this is grouped for buying: parenthetical translations
+ * are stripped for clean shopping names, and duplicate items (same name + unit)
+ * are DEDUPLICATED with their quantities SUMMED. An item stays optional only if
+ * every occurrence is optional. "To taste" items show no quantity.
  */
 export function buildGroceryList(
-  ingredients: { name: string; nameEn?: string; optional?: boolean }[],
+  ingredients: { name: string; nameEn?: string; amount?: number; unit?: string; optional?: boolean }[],
   lang: Lang,
 ): GroceryItem[] {
   const out: GroceryItem[] = [];
@@ -197,15 +207,20 @@ export function buildGroceryList(
   for (const ing of ingredients) {
     const raw = lang === 'en' && ing.nameEn ? ing.nameEn : ing.name;
     const name = raw.replace(/\s*\([^)]*\)\s*$/, '').trim();
-    const key = name.toLowerCase();
+    const toTaste = ing.unit === 'to taste';
+    const unit = toTaste ? null : ing.unit ?? null;
+    const amount = toTaste ? null : typeof ing.amount === 'number' ? ing.amount : null;
     const optional = ing.optional === true;
+    // Dedupe by name + unit so summing quantities is always meaningful.
+    const key = `${name.toLowerCase()}|${unit ?? 'to-taste'}`;
     if (seen.has(key)) {
       const idx = seen.get(key)!;
+      if (amount !== null) out[idx].amount = (out[idx].amount ?? 0) + amount;
       // stays optional only if BOTH occurrences are optional
       out[idx].optional = out[idx].optional && optional;
     } else {
       seen.set(key, out.length);
-      out.push({ name, optional });
+      out.push({ name, amount, unit, optional });
     }
   }
   return out;
