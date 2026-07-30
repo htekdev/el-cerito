@@ -43,6 +43,57 @@ const ingredientSchema = z.object({
   optional: z.boolean().default(false),
 });
 
+/**
+ * A single ingredient reference attached to an instruction step.
+ *
+ * Authoring is flexible:
+ *  - A bare number (`- 0`) is shorthand for `{ ref: 0 }` — a reference to the
+ *    ingredient at that index in `ingredients[]`. The step then shows that
+ *    ingredient's name + LIVE-scaled amount/unit, so it stays in sync with the
+ *    serving stepper and never drifts from the master list.
+ *  - An object with `ref` may add a step-specific `note`/`amountLabel` override
+ *    (e.g. "la mitad" / "half", "el jugo de 1" / "juice of 1").
+ *  - An object with only `label` (no `ref`) is a free-text chip for
+ *    intermediate products that aren't raw ingredients — e.g.
+ *    "la carne marinada" / "the marinated steak".
+ */
+const stepIngredientSchema = z.preprocess(
+  (v) => (typeof v === 'number' ? { ref: v } : v),
+  z.object({
+    /** Index into the recipe `ingredients[]` array (0-based). Enables live scaling. */
+    ref: z.number().int().nonnegative().optional(),
+    /** Free-text chip label (Spanish) — used when there is no `ref`. */
+    label: z.string().optional(),
+    /** Optional English label for bilingual display. */
+    labelEn: z.string().optional(),
+    /** Override the shown amount with free text (e.g. "la mitad", "1 chorro"). */
+    amountLabel: z.string().optional(),
+    amountLabelEn: z.string().optional(),
+    /** Step-specific note (Spanish), overrides the ingredient's own note here. */
+    note: z.string().optional(),
+    noteEn: z.string().optional(),
+  }).refine((v) => v.ref !== undefined || v.label !== undefined, {
+    message: 'A step ingredient needs either `ref` (an ingredient index) or `label` (free text).',
+  }),
+);
+
+/**
+ * A rich instruction step that maps the relevant ingredients to THIS step.
+ * Used by the step-grouped recipe layout so cooks never scroll back up to the
+ * ingredient list. Falls back gracefully: recipes may keep the flat
+ * `instructions` string array instead (see below).
+ */
+const stepSchema = z.object({
+  /** Optional short heading, e.g. "Marinar la carne" / "Marinate the steak". */
+  title: z.string().optional(),
+  titleEn: z.string().optional(),
+  /** The instruction text (Spanish primary). */
+  text: z.string(),
+  textEn: z.string().optional(),
+  /** Ingredients (with measurements) needed for this specific step. */
+  ingredients: z.array(stepIngredientSchema).default([]),
+});
+
 const macrosSchema = z.object({
   calories: z.number(),
   protein: z.number(),
@@ -113,6 +164,14 @@ const recipes = defineCollection({
     instructions: z.array(z.string()),
     /** Optional English step-by-step instructions for bilingual display */
     instructionsEn: z.array(z.string()).optional(),
+
+    /**
+     * Optional RICH step-grouped instructions. When present, the recipe page
+     * renders the step-by-step layout with per-step ingredients inline (so cooks
+     * never scroll back up). When absent, the page falls back to the flat
+     * `instructions` array above. Both stay valid — full backward compatibility.
+     */
+    steps: z.array(stepSchema).optional(),
     /** Optional English story paragraph (mirrors the Spanish markdown body) */
     storyEn: z.string().optional(),
 

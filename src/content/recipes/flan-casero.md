@@ -107,6 +107,57 @@ instructionsEn:
   - "Check the center: it should be almost set, with a slight jiggle."
   - "Let the flan cool and refrigerate until well chilled."
   - "Run a knife around the edges and flip it onto a serving platter."
+steps:
+  - title: "Precalentar el horno"
+    titleEn: "Preheat the oven"
+    text: "Precalienta el horno a 200 °C (400 °F)."
+    textEn: "Preheat the oven to 200 °C (400 °F)."
+    ingredients: []
+  - title: "Hacer el caramelo"
+    titleEn: "Make the caramel"
+    text: "En una cacerola pon el azúcar con el agua y cocina a fuego medio, sin revolver, hasta que se derrita y tome un color caramelo dorado."
+    textEn: "In a saucepan, combine the sugar and water and cook over medium heat, without stirring, until it melts and turns a golden caramel color."
+    ingredients:
+      - 0
+      - 1
+  - title: "Cubrir el molde"
+    titleEn: "Coat the mold"
+    text: "Con cuidado vierte el caramelo caliente en el fondo del molde para flan y ladéalo para cubrirlo parejo."
+    textEn: "Carefully pour the hot caramel into the bottom of the flan mold and tilt it to coat evenly."
+    ingredients:
+      - label: "el caramelo"
+        labelEn: "the caramel"
+  - title: "Licuar la mezcla"
+    titleEn: "Blend the custard"
+    text: "En la licuadora agrega los huevos, la leche condensada y la leche evaporada. Licúa hasta que quede suave y bien integrado."
+    textEn: "In the blender, add the eggs, the condensed milk, and the evaporated milk. Blend until smooth and well combined."
+    ingredients:
+      - 2
+      - 3
+      - 4
+  - title: "Verter en el molde"
+    titleEn: "Pour into the mold"
+    text: "Vierte la mezcla sobre el caramelo dentro del molde."
+    textEn: "Pour the mixture over the caramel in the mold."
+    ingredients:
+      - label: "la mezcla del flan"
+        labelEn: "the flan mixture"
+  - title: "Preparar el baño maría"
+    titleEn: "Set the water bath"
+    text: "Coloca el molde dentro de una charola más grande y vierte agua caliente en la charola hasta la mitad de las paredes del molde."
+    textEn: "Place the mold inside a larger tray and pour hot water into the tray, halfway up the sides of the mold."
+    ingredients:
+      - 5
+  - title: "Hornear"
+    titleEn: "Bake"
+    text: "Hornea a 200 °C (400 °F) durante aproximadamente 1 hora. Revisa el centro: debe estar casi cuajado, con un ligero temblorcito."
+    textEn: "Bake at 200 °C (400 °F) for about 1 hour. Check the center: it should be almost set, with a slight jiggle."
+    ingredients: []
+  - title: "Enfriar y desmoldar"
+    titleEn: "Chill & unmold"
+    text: "Deja enfriar el flan y refrigéralo hasta que esté bien frío. Pasa un cuchillo por las orillas y voltéalo sobre un platón para servir."
+    textEn: "Let the flan cool and refrigerate until well chilled. Run a knife around the edges and flip it onto a serving platter."
+    ingredients: []
 storyEn: |
   This is the flan that never misses a ranch gathering. The secret is blending
   everything very well and being patient with the caramel — over medium heat and

@@ -8,7 +8,7 @@ import {
 import {
   useTranslations, recipePath,
   rTitle, rDescription, rServingLabel, rIngredientName, rIngredientNote,
-  rInstructions, rStory, rAltLabel,
+  rInstructions, rStory, rAltLabel, rSteps, buildGroceryList,
 } from '../../i18n/utils';
 import type { Lang } from '../../i18n/ui';
 
@@ -25,6 +25,10 @@ const title = rTitle(d, lang);
 const description = rDescription(d, lang);
 const servingLabel = rServingLabel(d, lang);
 const instructions = rInstructions(d, lang);
+// Rich step-grouped instructions (null → fall back to flat `instructions`)
+const steps = rSteps(d, d.ingredients, lang);
+// Auto-generated grocery list (deduplicated names, no measurements)
+const grocery = buildGroceryList(d.ingredients, lang);
 const story = rStory(d, lang);
 const time = totalTime(d.prepTime, d.cookTime, d.totalTime);
 
@@ -45,6 +49,7 @@ const alternatives = await Promise.all(
 
 // Data payload for client-side scaling
 const recipeData = {
+  slug: entry.id,
   defaultServings: d.servings,
   macros: d.macros,
   ingredients: d.ingredients.map((i) => ({ amount: i.amount, unit: i.unit })),
@@ -169,6 +174,41 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     )}
   </div>
 
+  <!-- Grocery list — what to BUY (deduplicated, no measurements) -->
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 mt-10">
+    <div class="rounded-2xl border border-honey/50 bg-honey/10 overflow-hidden">
+      <div class="flex items-start gap-3 px-5 pt-5">
+        <span class="text-2xl leading-none">🛒</span>
+        <div class="min-w-0">
+          <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.groceryList')}</h2>
+          <p class="text-sm text-earth-soft">{t('recipe.grocerySubtitle')} · {t('recipe.groceryHint')}</p>
+        </div>
+      </div>
+      <ul id="grocery-list" class="mt-4 px-3 pb-4 grid sm:grid-cols-2 gap-1">
+        {grocery.map((item, idx) => (
+          <li>
+            <label class="grocery-item flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-white/60 cursor-pointer transition-colors" data-grocery={idx}>
+              <input type="checkbox" class="grocery-check peer sr-only" />
+              <span class="shrink-0 grid place-items-center h-6 w-6 rounded-md border-2 border-honey bg-white text-cream peer-checked:bg-sage peer-checked:border-sage transition-colors">
+                <svg class="h-4 w-4 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 10l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span class="grocery-name text-earth peer-checked:text-earth-soft peer-checked:line-through transition-colors">
+                {item.amount !== null && (
+                  <span class="font-semibold text-terracotta-dark tabular-nums mr-1">
+                    <span class="grocery-amount" data-base={item.amount}>{formatAmount(item.amount, 1)}</span>
+                    {item.unit && <span class="text-earth-soft font-normal text-sm"> {item.unit}</span>}
+                  </span>
+                )}
+                {item.name}
+                {item.optional && <span class="text-xs text-sage-dark ml-1">{t('recipe.optional')}</span>}
+              </span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
   <!-- Serving adjuster + ingredients + macros -->
   <div class="mx-auto max-w-4xl px-4 sm:px-6 mt-10 grid gap-8 lg:grid-cols-5">
     <!-- Left: ingredients -->
@@ -239,15 +279,60 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
 
   <!-- Instructions -->
   <div class="mx-auto max-w-4xl px-4 sm:px-6 mt-12">
-    <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.instructions')}</h2>
-    <ol class="mt-5 space-y-4">
-      {instructions.map((step, idx) => (
-        <li class="flex gap-4">
-          <span class="shrink-0 grid place-items-center h-9 w-9 rounded-full bg-terracotta text-cream font-heading font-bold">{idx + 1}</span>
-          <p class="text-earth leading-relaxed pt-1">{step}</p>
-        </li>
-      ))}
-    </ol>
+    <div class="flex items-baseline justify-between flex-wrap gap-x-4 gap-y-1">
+      <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.instructions')}</h2>
+      {steps && <p class="text-sm text-earth-soft max-w-md">{t('recipe.stepsHint')}</p>}
+    </div>
+
+    {steps ? (
+      <!-- Step-grouped layout: each step carries its own ingredients + measurements -->
+      <ol class="mt-6 space-y-5">
+        {steps.map((step, idx) => (
+          <li class="rounded-2xl bg-white border border-clay overflow-hidden">
+            <div class="flex gap-4 p-4 sm:p-5">
+              <span class="shrink-0 grid place-items-center h-9 w-9 rounded-full bg-terracotta text-cream font-heading font-bold">{idx + 1}</span>
+              <div class="min-w-0 flex-1">
+                {step.title && <h3 class="font-heading text-lg font-bold text-earth leading-tight">{step.title}</h3>}
+                {step.ingredients.length > 0 && (
+                  <div class="mt-2 rounded-xl bg-cream/70 border border-clay/60 px-3 py-2.5">
+                    <div class="text-[0.7rem] font-semibold uppercase tracking-wide text-terracotta-dark flex items-center gap-1">
+                      <span>📋</span> {t('recipe.stepNeeds')}
+                    </div>
+                    <ul class="mt-1.5 flex flex-wrap gap-1.5">
+                      {step.ingredients.map((si) => (
+                        <li class="inline-flex items-baseline gap-1 rounded-full bg-white border border-clay px-2.5 py-1 text-sm">
+                          {si.amountLabel ? (
+                            <span class="font-semibold text-terracotta-dark tabular-nums">{si.amountLabel}</span>
+                          ) : si.amount !== null ? (
+                            <span class="font-semibold text-terracotta-dark tabular-nums">
+                              <span class="ing-amount" data-idx={si.refIdx}>{formatAmount(si.amount, 1)}</span>
+                              {si.unit && si.unit !== 'to taste' && <span class="text-earth-soft font-normal text-xs"> {si.unit}</span>}
+                            </span>
+                          ) : null}
+                          <span class="text-earth">{si.name}</span>
+                          {si.note && <span class="text-earth-soft text-xs">({si.note})</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <p class="text-earth leading-relaxed mt-2.5">{step.text}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    ) : (
+      <!-- Flat fallback: classic numbered instruction list -->
+      <ol class="mt-5 space-y-4">
+        {instructions.map((step, idx) => (
+          <li class="flex gap-4">
+            <span class="shrink-0 grid place-items-center h-9 w-9 rounded-full bg-terracotta text-cream font-heading font-bold">{idx + 1}</span>
+            <p class="text-earth leading-relaxed pt-1">{step}</p>
+          </li>
+        ))}
+      </ol>
+    )}
   </div>
 
   <!-- Story / body -->
@@ -283,6 +368,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     const macroServEl = document.getElementById('macro-serv');
     const amounts = Array.from(document.querySelectorAll('.ing-amount'));
     const totals = Array.from(document.querySelectorAll('.macro-total'));
+    const groceryAmounts = Array.from(document.querySelectorAll('.grocery-amount'));
 
     const niceRound = (v: number) => (!isFinite(v) ? 0 : v >= 10 ? Math.round(v) : Math.round(v * 10) / 10);
     const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
@@ -304,6 +390,12 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
         const perServing = data.macros[key] ?? 0;
         node.textContent = String(niceRound(perServing * servings));
       });
+
+      groceryAmounts.forEach((node) => {
+        const base = Number((node as HTMLElement).dataset.base);
+        if (!isFinite(base)) return;
+        node.textContent = fmt(niceRound(base * factor));
+      });
     }
 
     document.getElementById('serv-minus')?.addEventListener('click', () => {
@@ -314,5 +406,25 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     });
 
     render();
+
+    // ── Grocery checklist: persist checked items per recipe ──────────────
+    const groceryKey = `elcerito:grocery:${data.slug || location.pathname}`;
+    const groceryChecks = Array.from(
+      document.querySelectorAll<HTMLInputElement>('.grocery-check'),
+    );
+    if (groceryChecks.length) {
+      let checked: Record<string, boolean> = {};
+      try { checked = JSON.parse(localStorage.getItem(groceryKey) || '{}'); } catch {}
+      groceryChecks.forEach((input) => {
+        const item = input.closest('.grocery-item') as HTMLElement | null;
+        const id = item?.dataset.grocery;
+        if (id === undefined) return;
+        input.checked = checked[id] === true;
+        input.addEventListener('change', () => {
+          checked[id] = input.checked;
+          try { localStorage.setItem(groceryKey, JSON.stringify(checked)); } catch {}
+        });
+      });
+    }
   }
 </script>

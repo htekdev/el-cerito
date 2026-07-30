@@ -121,6 +121,60 @@ instructionsEn:
   - "Place the mold inside a larger tray and add hot water halfway up the sides of the mold (water bath)."
   - "Bake for 50 to 65 minutes, until the edges are set but the center still jiggles a little."
   - "Let it cool, refrigerate at least 4 hours, then run a knife around the edges and flip it onto a platter."
+steps:
+  - title: "Precalentar el horno"
+    titleEn: "Preheat the oven"
+    text: "Precalienta el horno a 180 °C (350 °F). A esta temperatura la mezcla ligera se cuaja más suave y queda más cremosa."
+    textEn: "Preheat the oven to 180 °C (350 °F). At this temperature the lighter mixture sets more gently and stays creamier."
+    ingredients: []
+  - title: "Hacer el caramelo"
+    titleEn: "Make the caramel"
+    text: "Cocina el azúcar con el agua a fuego medio, sin revolver, hasta que tome un color ámbar dorado."
+    textEn: "Cook the sugar with the water over medium heat, without stirring, until it turns a golden amber color."
+    ingredients:
+      - 0
+      - 1
+  - title: "Cubrir el molde"
+    titleEn: "Coat the mold"
+    text: "Vierte de inmediato el caramelo en el molde y ladéalo con cuidado para cubrir el fondo."
+    textEn: "Immediately pour the caramel into the mold and carefully tilt it to coat the bottom."
+    ingredients:
+      - label: "el caramelo"
+        labelEn: "the caramel"
+  - title: "Licuar la mezcla"
+    titleEn: "Blend the custard"
+    text: "En la licuadora agrega la leche evaporada, los huevos, las claras, la Splenda, la vainilla, la sal y la leche en polvo opcional. Licúa solo hasta integrar; no batas de más para que no se llene de espuma."
+    textEn: "In the blender, add the evaporated milk, the eggs, the egg whites, the Splenda, the vanilla, the salt, and the optional powdered milk. Blend just until combined; do not over-blend so it doesn't get foamy."
+    ingredients:
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+  - title: "Colar sobre el caramelo"
+    titleEn: "Strain over the caramel"
+    text: "Cuela la mezcla con un colador fino directamente sobre el molde con caramelo. Cubre el molde flojito con papel aluminio."
+    textEn: "Strain the mixture through a fine sieve directly over the mold with the caramel. Cover the mold loosely with aluminum foil."
+    ingredients:
+      - label: "la mezcla del flan"
+        labelEn: "the flan mixture"
+  - title: "Preparar el baño maría"
+    titleEn: "Set the water bath"
+    text: "Coloca el molde dentro de una charola más grande y agrega agua caliente hasta la mitad de las paredes del molde."
+    textEn: "Place the mold inside a larger tray and add hot water halfway up the sides of the mold."
+    ingredients: []
+  - title: "Hornear"
+    titleEn: "Bake"
+    text: "Hornea de 50 a 65 minutos, hasta que las orillas estén cuajadas pero el centro todavía tiemble un poquito."
+    textEn: "Bake for 50 to 65 minutes, until the edges are set but the center still jiggles a little."
+    ingredients: []
+  - title: "Enfriar y desmoldar"
+    titleEn: "Chill & unmold"
+    text: "Deja enfriar, refrigera al menos 4 horas, luego pasa un cuchillo por las orillas y voltéalo sobre un platón."
+    textEn: "Let it cool, refrigerate at least 4 hours, then run a knife around the edges and flip it onto a platter."
+    ingredients: []
 storyEn: |
   The healthy version of our ranch flan. We removed the two cans of condensed milk and
   swapped them for fat-free evaporated milk and Splenda, keeping real sugar only for the

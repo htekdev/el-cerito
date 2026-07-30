@@ -75,6 +75,43 @@ instructionsEn:
   - "Arrange the Quest protein chips on a plate as your nacho base."
   - "Layer the steak and veggies over the chips, then sprinkle the H-E-B fat-free mozzarella on top."
   - "Microwave for 20–30 seconds (or use the oven) until the cheese melts. Serve immediately."
+# Rich step-grouped instructions — ingredient chips reference ingredients[] by 0-based index.
+steps:
+  - title: "Calentar el bistec"
+    titleEn: "Heat the steak"
+    text: "Calienta el bistec de fajita en un sartén a fuego medio, 2–3 minutos, hasta que esté bien caliente."
+    textEn: "Heat the steak fajitas in a skillet over medium heat, 2–3 minutes, until hot."
+    ingredients:
+      - 0
+  - title: "Saltear con las verduras"
+    titleEn: "Sauté with the veggies"
+    text: "Agrega las verduras para fajita al sartén y saltéalas junto con el bistec 1–2 minutos."
+    textEn: "Add the fajita vegetables to the skillet and sauté with the steak for 1–2 minutes."
+    ingredients:
+      - 3
+      - label: "el bistec caliente"
+        labelEn: "the hot steak"
+  - title: "Poner la base de totopos"
+    titleEn: "Lay the chip base"
+    text: "Acomoda los totopos de proteína en un plato como base de los nachos."
+    textEn: "Arrange the protein chips on a plate as your nacho base."
+    ingredients:
+      - 2
+  - title: "Armar los nachos"
+    titleEn: "Build the nachos"
+    text: "Coloca el bistec y las verduras encima de los totopos, y espolvorea el queso mozzarella por encima."
+    textEn: "Layer the steak and veggies over the chips, then sprinkle the mozzarella on top."
+    ingredients:
+      - label: "el bistec y las verduras"
+        labelEn: "the steak and veggies"
+      - 1
+  - title: "Gratinar y servir"
+    titleEn: "Melt and serve"
+    text: "Mete el plato al microondas 20–30 segundos (o al horno) hasta que el queso se derrita. Sirve de inmediato."
+    textEn: "Microwave for 20–30 seconds (or use the oven) until the cheese melts. Serve immediately."
+    ingredients:
+      - label: "los nachos armados"
+        labelEn: "the assembled nachos"
 storyEn: |
   Hector and Paula came up with these steak nachos at home when they wanted something
   crunchy and satisfying that still hit their protein goals. Swapping tortilla chips for
