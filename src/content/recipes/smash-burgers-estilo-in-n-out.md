@@ -209,6 +209,67 @@ instructionsEn:
   - "Mustard sear: cook 60–90 seconds. Spread a thin layer of yellow mustard on top, then flip so the mustard side hits the pan. Cook 45–75 seconds more. Add the cheese and let it melt."
   - "Toast the buns: remove the patties and lightly toast the buns cut-side down in the same pan for 1–2 minutes."
   - "Build the burgers: bottom bun, 1 Tbsp sauce, lettuce/tomato/pickles if using, patty (single or double), caramelized onions, another Tbsp of sauce, and the top bun."
+steps:
+  - title: "Preparar la salsa especial"
+    titleEn: "Make the special sauce"
+    text: "Mezcla la mayonesa light, la cátsup sin azúcar, el yogur griego y la leche. Agrega los pepinillos picados, la cebolla blanca picada, la mostaza y las especias (paprika ahumada, ajo en polvo, cebolla en polvo y sal). Endulza con Splenda al gusto y bate hasta que quede suave. Refrigérala mientras cocinas."
+    textEn: "Stir together the light mayo, sugar-free ketchup, Greek yogurt, and milk. Add the diced pickles, diced white onion, mustard, and spices (smoked paprika, garlic powder, onion powder, and salt). Sweeten with Splenda to taste and whisk until smooth. Chill while you cook."
+    ingredients:
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+  - title: "Caramelizar la cebolla"
+    titleEn: "Caramelize the onion"
+    text: "Pica la cebolla blanca en cubitos. En un sartén a fuego medio, cocínala con una pizca de sal hasta que esté suave. Baja a fuego medio-bajo y sigue cocinando 10–15 minutos, agregando 1–2 cucharadas de agua cuando haga falta, hasta que quede dorada y melosa."
+    textEn: "Dice the white onion. In a skillet over medium heat, cook it with a pinch of salt until soft. Lower to medium-low and keep cooking 10–15 minutes, adding 1–2 Tbsp of water as needed, until golden and jammy."
+    ingredients:
+      - 3
+  - title: "Formar la carne"
+    titleEn: "Shape the beef"
+    text: "Divide la carne molida en porciones de 2 oz (~57 g) y compáctalas en bolitas apretadas o discos gruesos."
+    textEn: "Divide the ground beef into 2 oz (~57 g) portions and pack them into tight balls or thick pucks."
+    ingredients:
+      - 0
+  - title: "Aplastar las carnes (smash)"
+    titleEn: "Smash the patties"
+    text: "Calienta un sartén o plancha a fuego medio-alto o alto con un poco de aceite en spray. Coloca las bolitas de carne, espera 10–15 segundos y aplástalas firme y recto hacia abajo hasta dejarlas de ~0.5 cm (1/4 de pulgada). Sazona con sal, pimienta y un poco de ajo en polvo."
+    textEn: "Heat a skillet or griddle over medium-high to high with a little oil spray. Place the beef balls, wait 10–15 seconds, then smash them firmly straight down to about 1/4 inch thick. Season with salt, pepper, and a little garlic powder."
+    ingredients:
+      - label: "las bolitas de carne"
+        labelEn: "the beef balls"
+      - 6
+      - 7
+  - title: "Sellado de mostaza y queso"
+    titleEn: "Mustard sear & cheese"
+    text: "Cocina 60–90 segundos. Unta una capa delgada de mostaza amarilla encima de cada carne y voltéala para que el lado de la mostaza toque el sartén. Cocina 45–75 segundos más, agrega una rebanada de queso a cada carne y deja que se derrita."
+    textEn: "Cook 60–90 seconds. Spread a thin layer of yellow mustard on top of each patty and flip so the mustard side hits the pan. Cook 45–75 seconds more, add a slice of cheese to each patty, and let it melt."
+    ingredients:
+      - 5
+      - 2
+  - title: "Tostar los panes"
+    titleEn: "Toast the buns"
+    text: "Retira las carnes y tuesta ligeramente los panes keto con el lado cortado hacia abajo en el mismo sartén, 1–2 minutos."
+    textEn: "Remove the patties and lightly toast the keto buns cut-side down in the same pan for 1–2 minutes."
+    ingredients:
+      - 1
+  - title: "Armar las hamburguesas"
+    titleEn: "Build the burgers"
+    text: "Corta la lechuga en tiras y rebana el jitomate y los pepinillos si los usas. Arma cada hamburguesa: pan de abajo, 1 cucharada de salsa especial, lechuga/jitomate/pepinillos, la carne con queso (sencilla o doble), la cebolla caramelizada, otra cucharada de salsa y el pan de arriba."
+    textEn: "Shred the lettuce and slice the tomato and pickles if using. Build each burger: bottom bun, 1 Tbsp special sauce, lettuce/tomato/pickles, the cheesy patty (single or double), the caramelized onions, another Tbsp of sauce, and the top bun."
+    ingredients:
+      - 4
+      - label: "la carne con queso"
+        labelEn: "the cheesy patty"
+      - label: "la cebolla caramelizada"
+        labelEn: "the caramelized onion"
+      - label: "la salsa especial"
+        labelEn: "the special sauce"
 storyEn: |
   Hector came up with these smash burgers to scratch the In-N-Out itch without blowing his
   protein goals. Lean 90/10 beef smashed thin for crispy edges, the classic mustard sear,
