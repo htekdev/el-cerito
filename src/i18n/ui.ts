@@ -114,6 +114,12 @@ export const ui = {
     'recipe.mFiber': 'Fibra',
     'recipe.instructions': 'Preparación',
     'recipe.backToAll': 'Ver todas las recetas',
+    // Step-grouped layout
+    'recipe.groceryList': 'Lista de compras',
+    'recipe.grocerySubtitle': 'Lo que necesitas comprar',
+    'recipe.groceryHint': 'Marca lo que ya tienes. Sin medidas — eso va en los ingredientes.',
+    'recipe.stepNeeds': 'Necesitas',
+    'recipe.stepsHint': 'Cada paso trae sus ingredientes y medidas — ya no tienes que regresar a buscarlos.',
 
     // Footer
     'footer.explore': 'Explorar',
@@ -225,6 +231,12 @@ export const ui = {
     'recipe.mFiber': 'Fiber',
     'recipe.instructions': 'Instructions',
     'recipe.backToAll': 'See all recipes',
+    // Step-grouped layout
+    'recipe.groceryList': 'Grocery list',
+    'recipe.grocerySubtitle': 'What to buy',
+    'recipe.groceryHint': 'Check off what you already have. No measurements here — those live in the ingredients.',
+    'recipe.stepNeeds': "You'll need",
+    'recipe.stepsHint': 'Every step carries its own ingredients and measurements — no more scrolling back up.',
 
     // Footer
     'footer.explore': 'Explore',

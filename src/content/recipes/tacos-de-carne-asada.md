@@ -110,6 +110,62 @@ instructionsEn:
   - "Warm the tortillas on the comal until soft and lightly toasted."
   - "Build the tacos with the meat, onion, and cilantro."
   - "Serve with lime wedges and your favorite salsa."
+# Rich step-grouped instructions — each step carries its own ingredients + measurements.
+# Ingredient chips reference the `ingredients[]` array by 0-based index (they scale live
+# with the serving stepper). Use `label` for intermediate products (e.g. the marinated meat).
+steps:
+  - title: "Marinar la carne"
+    titleEn: "Marinate the steak"
+    text: "Marina la arrachera con el ajo machacado, el jugo de un limón, sal, pimienta y la mitad del aceite. Deja reposar 20 minutos."
+    textEn: "Marinate the flank steak with the crushed garlic, the juice of one lime, salt, pepper, and half the oil. Let it rest for 20 minutes."
+    ingredients:
+      - 0
+      - 6
+      - ref: 4
+        amountLabel: "el jugo de 1"
+        amountLabelEn: "juice of 1"
+      - 7
+      - ref: 5
+        amountLabel: "la mitad"
+        amountLabelEn: "half"
+  - title: "Calentar la parrilla"
+    titleEn: "Heat the grill"
+    text: "Calienta la parrilla o el comal a fuego alto con el resto del aceite."
+    textEn: "Heat the grill or comal over high heat with the rest of the oil."
+    ingredients:
+      - ref: 5
+        amountLabel: "el resto"
+        amountLabelEn: "the rest"
+  - title: "Asar la carne"
+    titleEn: "Grill the steak"
+    text: "Asa la carne 3–4 minutos por lado hasta el término deseado. Deja reposar 5 minutos y pica en tiras."
+    textEn: "Grill the meat 3–4 minutes per side to your desired doneness. Let it rest 5 minutes, then slice into strips."
+    ingredients:
+      - label: "la arrachera marinada"
+        labelEn: "the marinated steak"
+  - title: "Calentar las tortillas"
+    titleEn: "Warm the tortillas"
+    text: "Calienta las tortillas en el comal hasta que estén suaves y ligeramente doradas."
+    textEn: "Warm the tortillas on the comal until soft and lightly toasted."
+    ingredients:
+      - 1
+  - title: "Armar los tacos"
+    titleEn: "Build the tacos"
+    text: "Arma los tacos con la carne asada, la cebolla y el cilantro."
+    textEn: "Build the tacos with the grilled meat, onion, and cilantro."
+    ingredients:
+      - label: "la carne asada"
+        labelEn: "the grilled steak"
+      - 2
+      - 3
+  - title: "Servir"
+    titleEn: "Serve"
+    text: "Sirve con los limones partidos y tu salsa favorita."
+    textEn: "Serve with lime wedges and your favorite salsa."
+    ingredients:
+      - ref: 4
+        amountLabel: "el resto"
+        amountLabelEn: "the rest"
 storyEn: |
   This is the recipe that never fails at ranch gatherings. The key is not to
   overcook the flank steak and to warm the tortillas well on the comal. Adjust the
