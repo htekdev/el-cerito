@@ -17,22 +17,22 @@ categories: ["comida", "cena"]
 tags: ["hamburguesa", "smash burger", "keto", "salsa especial", "in-n-out", "alto-en-proteina"]
 healthLabels: ["high-protein", "low-carb"]
 macros:
-  calories: 591
-  protein: 45
+  calories: 709
+  protein: 41
   carbs: 25
-  fat: 34
+  fat: 50
   fiber: 7
   sugar: 5
-  sodium: 720
+  sodium: 780
 ingredients:
-  - name: "carne molida de res (90/10)"
-    nameEn: "ground beef (90/10)"
+  - name: "carne molida de res (80/20)"
+    nameEn: "ground beef (80/20)"
     amount: 454
     unit: g
-    calories: 800
-    protein: 91
+    calories: 1150
+    protein: 78
     carbs: 0
-    fat: 45
+    fat: 91
     fiber: 0
     note: "1 lb, dividida en bolitas de 2 oz (~57 g)"
     noteEn: "1 lb, divided into 2 oz (~57 g) balls"
@@ -69,15 +69,15 @@ ingredients:
     noteEn: "diced, to caramelize"
   - name: "lechuga, jitomate y pepinillos"
     nameEn: "lettuce, tomato, and pickles"
-    amount: 1
-    unit: "to taste"
+    amount: 100
+    unit: g
     calories: 25
     protein: 1
     carbs: 5
     fat: 0
     fiber: 1
-    note: "opcional, al gusto"
-    noteEn: "optional, to taste"
+    note: "unas hojas de lechuga, 3 rodajas de jitomate y unos pepinillos por hamburguesa"
+    noteEn: "a few lettuce leaves, 3 tomato slices, and some pickles per burger"
     optional: true
   - name: "mostaza amarilla (para el sellado)"
     nameEn: "yellow mustard (for the sear)"
@@ -90,7 +90,7 @@ ingredients:
   - name: "aceite en spray"
     nameEn: "oil spray"
     amount: 1
-    unit: "to taste"
+    unit: tsp
     calories: 20
     protein: 0
     carbs: 0
@@ -98,12 +98,22 @@ ingredients:
     note: "o un poquito de aceite para el sartén"
     noteEn: "or a tiny bit of oil for the pan"
     optional: true
-  - name: "sal, pimienta y ajo en polvo"
-    nameEn: "salt, pepper, and garlic powder"
-    amount: 1
-    unit: "to taste"
+  - name: "sal (para la carne)"
+    nameEn: "salt (for the patties)"
+    amount: 0.5
+    unit: tsp
     calories: 0
-    optional: true
+  - name: "pimienta negra (para la carne)"
+    nameEn: "black pepper (for the patties)"
+    amount: 0.25
+    unit: tsp
+    calories: 1
+  - name: "ajo en polvo (para la carne)"
+    nameEn: "garlic powder (for the patties)"
+    amount: 0.5
+    unit: tsp
+    calories: 4
+    carbs: 1
   - name: "mayonesa light (para la salsa)"
     nameEn: "light mayo (for the sauce)"
     amount: 120
@@ -175,29 +185,42 @@ ingredients:
     fat: 1
     note: "2 cucharadas"
     noteEn: "2 Tbsp"
-  - name: "especias para la salsa"
-    nameEn: "sauce spices"
-    amount: 1
-    unit: "to taste"
-    calories: 10
-    protein: 0
-    carbs: 2
-    fat: 0
-    note: "1/2 cdta paprika ahumada, 1/2 cdta ajo en polvo, 1/2 cdta cebolla en polvo, 1/4 cdta sal"
-    noteEn: "1/2 tsp smoked paprika, 1/2 tsp garlic powder, 1/2 tsp onion powder, 1/4 tsp salt"
+  - name: "paprika ahumada"
+    nameEn: "smoked paprika"
+    amount: 0.5
+    unit: tsp
+    calories: 3
+    carbs: 1
+  - name: "ajo en polvo (para la salsa)"
+    nameEn: "garlic powder (for the sauce)"
+    amount: 0.5
+    unit: tsp
+    calories: 3
+    carbs: 1
+  - name: "cebolla en polvo (para la salsa)"
+    nameEn: "onion powder (for the sauce)"
+    amount: 0.5
+    unit: tsp
+    calories: 3
+    carbs: 1
+  - name: "sal (para la salsa)"
+    nameEn: "salt (for the sauce)"
+    amount: 0.25
+    unit: tsp
+    calories: 0
   - name: "Splenda"
     nameEn: "Splenda"
     amount: 2
     unit: tsp
     calories: 0
-    note: "1–2 cdtas, al gusto"
-    noteEn: "1–2 tsp, to taste"
+    note: "2 cdtas"
+    noteEn: "2 tsp"
     optional: true
 instructions:
   - "Prepara la salsa: mezcla la mayonesa light, la cátsup sin azúcar, el yogur griego, la leche, los pepinillos, la cebolla picada, la mostaza, la paprika ahumada, el ajo en polvo, la cebolla en polvo, la sal y la Splenda hasta que quede suave. Refrigérala mientras cocinas."
   - "Cocina la cebolla: en un sartén a fuego medio, cocina la cebolla picada con una pizca de sal hasta que esté suave. Baja a fuego medio-bajo y sigue cocinando 10–15 minutos, agregando 1–2 cucharadas de agua cuando haga falta, hasta que quede dorada y melosa."
   - "Forma la carne: compacta las porciones de 2 oz en bolitas apretadas o discos gruesos."
-  - "Aplasta las carnes (smash): calienta un sartén o plancha a fuego medio-alto o alto. Coloca la carne en el sartén caliente, espera 10–15 segundos y aplástala firme hacia abajo hasta dejarla de ~0.5 cm (1/4 de pulgada). Sazona con sal, pimienta y un poco de ajo en polvo si quieres."
+  - "Aplasta las carnes (smash): calienta un sartén o plancha a fuego medio-alto o alto. Coloca la carne en el sartén caliente, espera 10–15 segundos y aplástala firme hacia abajo hasta dejarla de ~0.5 cm (1/4 de pulgada). Sazona cada tanda con 1/2 cdta de sal, 1/4 cdta de pimienta y 1/2 cdta de ajo en polvo."
   - "Sellado de mostaza: cocina 60–90 segundos. Unta una capa delgada de mostaza amarilla encima y voltea para que el lado de la mostaza toque el sartén. Cocina 45–75 segundos más. Agrega el queso y deja que se derrita."
   - "Tuesta los panes: retira las carnes y tuesta ligeramente los panes con el lado cortado hacia abajo en el mismo sartén, 1–2 minutos."
   - "Arma las hamburguesas: pan de abajo, 1 cucharada de salsa, lechuga/jitomate/pepinillos si usas, la carne (sencilla o doble), la cebolla caramelizada, otra cucharada de salsa y el pan de arriba."
@@ -205,18 +228,16 @@ instructionsEn:
   - "Make the sauce: stir together the light mayo, sugar-free ketchup, Greek yogurt, milk, pickles, diced onion, mustard, smoked paprika, garlic powder, onion powder, salt, and Splenda until smooth. Chill while you cook."
   - "Cook the onions: in a skillet over medium heat, cook the diced onion with a pinch of salt until soft. Lower to medium-low and keep cooking 10–15 minutes, adding 1–2 Tbsp water as needed, until golden and jammy."
   - "Shape the beef: pack the 2 oz portions into tight balls or thick pucks."
-  - "Smash the patties: heat a skillet or griddle over medium-high to high. Place the beef on the hot pan, wait 10–15 seconds, then smash firmly straight down to about 1/4 inch thick. Season with salt, pepper, and a little garlic powder if using."
+  - "Smash the patties: heat a skillet or griddle over medium-high to high. Place the beef on the hot pan, wait 10–15 seconds, then smash firmly straight down to about 1/4 inch thick. Season each batch with 1/2 tsp salt, 1/4 tsp pepper, and 1/2 tsp garlic powder."
   - "Mustard sear: cook 60–90 seconds. Spread a thin layer of yellow mustard on top, then flip so the mustard side hits the pan. Cook 45–75 seconds more. Add the cheese and let it melt."
   - "Toast the buns: remove the patties and lightly toast the buns cut-side down in the same pan for 1–2 minutes."
   - "Build the burgers: bottom bun, 1 Tbsp sauce, lettuce/tomato/pickles if using, patty (single or double), caramelized onions, another Tbsp of sauce, and the top bun."
 steps:
   - title: "Preparar la salsa especial"
     titleEn: "Make the special sauce"
-    text: "Mezcla la mayonesa light, la cátsup sin azúcar, el yogur griego y la leche. Agrega los pepinillos picados, la cebolla blanca picada, la mostaza y las especias (paprika ahumada, ajo en polvo, cebolla en polvo y sal). Endulza con Splenda al gusto y bate hasta que quede suave. Refrigérala mientras cocinas."
-    textEn: "Stir together the light mayo, sugar-free ketchup, Greek yogurt, and milk. Add the diced pickles, diced white onion, mustard, and spices (smoked paprika, garlic powder, onion powder, and salt). Sweeten with Splenda to taste and whisk until smooth. Chill while you cook."
+    text: "Mezcla la mayonesa light, la cátsup sin azúcar, el yogur griego y la leche. Agrega los pepinillos picados, la cebolla blanca picada, la mostaza y las especias (1/2 cdta de paprika ahumada, 1/2 cdta de ajo en polvo, 1/2 cdta de cebolla en polvo y 1/4 cdta de sal). Endulza con 2 cucharaditas de Splenda y bate hasta que quede suave. Refrigérala mientras cocinas."
+    textEn: "Stir together the light mayo, sugar-free ketchup, Greek yogurt, and milk. Add the diced pickles, diced white onion, mustard, and spices (1/2 tsp smoked paprika, 1/2 tsp garlic powder, 1/2 tsp onion powder, and 1/4 tsp salt). Sweeten with 2 tsp Splenda and whisk until smooth. Chill while you cook."
     ingredients:
-      - 8
-      - 9
       - 10
       - 11
       - 12
@@ -224,6 +245,11 @@ steps:
       - 14
       - 15
       - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
   - title: "Caramelizar la cebolla"
     titleEn: "Caramelize the onion"
     text: "Pica la cebolla blanca en cubitos. En un sartén a fuego medio, cocínala con una pizca de sal hasta que esté suave. Baja a fuego medio-bajo y sigue cocinando 10–15 minutos, agregando 1–2 cucharadas de agua cuando haga falta, hasta que quede dorada y melosa."
@@ -238,13 +264,15 @@ steps:
       - 0
   - title: "Aplastar las carnes (smash)"
     titleEn: "Smash the patties"
-    text: "Calienta un sartén o plancha a fuego medio-alto o alto con un poco de aceite en spray. Coloca las bolitas de carne, espera 10–15 segundos y aplástalas firme y recto hacia abajo hasta dejarlas de ~0.5 cm (1/4 de pulgada). Sazona con sal, pimienta y un poco de ajo en polvo."
-    textEn: "Heat a skillet or griddle over medium-high to high with a little oil spray. Place the beef balls, wait 10–15 seconds, then smash them firmly straight down to about 1/4 inch thick. Season with salt, pepper, and a little garlic powder."
+    text: "Calienta un sartén o plancha a fuego medio-alto o alto con un poco de aceite en spray. Coloca las bolitas de carne, espera 10–15 segundos y aplástalas firme y recto hacia abajo hasta dejarlas de ~0.5 cm (1/4 de pulgada). Sazona cada tanda con 1/2 cdta de sal, 1/4 cdta de pimienta y 1/2 cdta de ajo en polvo."
+    textEn: "Heat a skillet or griddle over medium-high to high with a little oil spray. Place the beef balls, wait 10–15 seconds, then smash them firmly straight down to about 1/4 inch thick. Season each batch with 1/2 tsp salt, 1/4 tsp pepper, and 1/2 tsp garlic powder."
     ingredients:
       - label: "las bolitas de carne"
         labelEn: "the beef balls"
       - 6
       - 7
+      - 8
+      - 9
   - title: "Sellado de mostaza y queso"
     titleEn: "Mustard sear & cheese"
     text: "Cocina 60–90 segundos. Unta una capa delgada de mostaza amarilla encima de cada carne y voltéala para que el lado de la mostaza toque el sartén. Cocina 45–75 segundos más, agrega una rebanada de queso a cada carne y deja que se derrita."
@@ -272,7 +300,7 @@ steps:
         labelEn: "the special sauce"
 storyEn: |
   Hector came up with these smash burgers to scratch the In-N-Out itch without blowing his
-  protein goals. Lean 90/10 beef smashed thin for crispy edges, the classic mustard sear,
+  protein goals. 80/20 beef smashed thin for crispy edges, the classic mustard sear,
   melted American cheese, and jammy caramelized onions — all on keto buns with a lighter
   special sauce built on Greek yogurt and sugar-free ketchup. For the most In-N-Out flavor,
   use American cheese and don't skip the mustard sear. Wrap the finished burger for a minute
@@ -282,7 +310,7 @@ author: "Hector Rocha"
 ---
 
 Hector se inventó estas smash burgers para darse el gusto de una In-N-Out sin salirse de
-sus metas de proteína. Carne magra 90/10 aplastada bien delgada para esas orillas crujientes,
+sus metas de proteína. Carne 80/20 aplastada bien delgada para esas orillas crujientes,
 el clásico sellado de mostaza, queso americano derretido y cebolla caramelizada melosa —
 todo sobre pan keto y con una salsa especial más ligera hecha con yogur griego y cátsup sin
 azúcar.
