@@ -53,6 +53,8 @@ ingredients:
     protein: 1
     carbs: 3
     fat: 0
+    note: "pelados"
+    noteEn: "peeled"
   - name: "orégano seco"
     nameEn: "dried oregano"
     amount: 1
