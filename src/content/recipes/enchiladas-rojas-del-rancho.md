@@ -127,6 +127,10 @@ ingredients:
     note: "peladas, enteras — se cuecen junto con las papas"
     noteEn: "peeled, whole — boiled alongside the potatoes"
     optional: true
+healthierAlternatives:
+  - recipe: enchiladas-rojas-saludables
+    label: "Versión saludable: horneadas con pollo y espinaca, sin freír, yogurt griego y camote (menos grasa, más proteína)"
+    labelEn: "Healthy version: baked with chicken and spinach, no frying, Greek yogurt and sweet potato (less fat, more protein)"
 instructions:
   - "Quítale el palo a los chiles guajillo y lávalos bien."
   - "Pon los chiles en agua caliente y déjalos remojar 15–20 minutos hasta que se pongan blanditos."
