@@ -1,0 +1,85 @@
+---
+/**
+ * /en/add-recipe — English mirror of /agregar-receta.
+ * Same client script; the intro message and page copy are English.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Add a recipe by voice';
+const description = 'Submit a family recipe by telling us how to make it. AI organises it and you can iterate by voice or text.';
+---
+
+<BaseLayout title={title} description={description} lang="en" altLangUrl="/agregar-receta" noindex={true}>
+  <section class="max-w-3xl mx-auto px-4 py-10 sm:py-16">
+    <header class="mb-8">
+      <p class="text-sage-dark uppercase tracking-widest text-xs font-semibold mb-3">New · beta</p>
+      <h1 class="text-4xl sm:text-5xl text-earth mb-4">Add a recipe by voice</h1>
+      <p class="text-earth-soft leading-relaxed">
+        Tell us the recipe the way you'd tell a grandkid. Add ingredients, change
+        amounts and adjust the steps as you go — all by voice.
+      </p>
+      <p class="text-earth-soft text-sm mt-3">
+        <span aria-hidden="true">🎤</span> Your audio goes to OpenAI Whisper for
+        transcription. We don't store the audio.
+      </p>
+    </header>
+
+    <div id="voice-studio"
+         data-locale="en"
+         data-api="/api/voice/recipe-chat"
+         data-intro-message="Hi — I'm your recipe assistant. Tell me the recipe: what's it called and what goes in it?"
+         class="bg-cream-dark/40 border border-clay rounded-2xl p-4 sm:p-6 shadow-sm">
+
+      <div id="vs-log" role="log" aria-live="polite"
+           class="space-y-3 min-h-[10rem] max-h-[24rem] overflow-y-auto mb-4 pr-1"></div>
+
+      <div class="flex items-center gap-3">
+        <button id="vs-mic" type="button" aria-label="Record recipe by voice"
+                class="w-14 h-14 rounded-full bg-terracotta text-cream text-2xl grid place-items-center shadow-md hover:bg-terracotta-dark focus:outline-none focus:ring-4 focus:ring-terracotta/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          <span id="vs-mic-icon" aria-hidden="true">🎤</span>
+        </button>
+
+        <form id="vs-text-form" class="flex-1 flex gap-2">
+          <input id="vs-text-input" type="text"
+                 placeholder="…or type a correction (e.g. change garlic to 3 cloves)"
+                 class="flex-1 px-4 py-3 rounded-full border border-clay bg-cream text-earth placeholder:text-earth-soft/60 focus:outline-none focus:ring-2 focus:ring-sage/50" />
+          <input type="text" name="website" tabindex="-1" autocomplete="off"
+                 style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true" />
+          <button type="submit"
+                  class="px-4 py-3 rounded-full bg-sage text-cream font-semibold hover:bg-sage-dark focus:outline-none focus:ring-4 focus:ring-sage/30">
+            Send
+          </button>
+        </form>
+      </div>
+
+      <p id="vs-status" class="text-sm text-earth-soft mt-3 min-h-[1.25rem]"></p>
+    </div>
+
+    <details id="vs-preview-wrap" class="mt-8 bg-cream border border-clay rounded-2xl p-4 sm:p-6" open>
+      <summary class="cursor-pointer text-earth font-heading text-xl">Recipe preview</summary>
+      <div id="vs-preview" class="mt-4 text-earth">
+        <p class="text-earth-soft italic">Nothing yet — start recording above.</p>
+      </div>
+    </details>
+
+    <div class="flex flex-wrap gap-3 mt-6">
+      <button id="vs-download" type="button"
+              class="px-5 py-3 rounded-full bg-terracotta text-cream font-semibold hover:bg-terracotta-dark disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>Download .md</button>
+      <button id="vs-copy-json" type="button"
+              class="px-5 py-3 rounded-full bg-honey text-earth font-semibold hover:brightness-95 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>Copy JSON</button>
+      <button id="vs-reset" type="button"
+              class="px-5 py-3 rounded-full border border-clay text-earth-soft hover:bg-cream-dark">Start over</button>
+    </div>
+
+    <p class="text-xs text-earth-soft mt-6">
+      Beta. When you're done, download the <code class="bg-cream-dark px-1 rounded">.md</code>
+      file and share it with the family so we can add it to the site.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  import '../../scripts/voice-studio.ts';
+</script>
