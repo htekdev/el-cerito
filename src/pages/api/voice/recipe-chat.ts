@@ -8,6 +8,7 @@
  *   4. GPT-4o-mini generates a warm 2-4 sentence reply asking the next question
  *
  * See: data/specs/el-cerito-voice-recipe-v1.md (§5.1)
+ * Requires OPENAI_API_KEY on Vercel (production + preview + development).
  */
 import type { APIRoute } from 'astro';
 import { getOpenAI, redactPii, extractAndMergeRecipe, generateReply } from '../../../lib/ai';
