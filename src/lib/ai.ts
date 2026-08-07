@@ -204,7 +204,6 @@ export async function extractRecipe(transcript: string): Promise<PartialRecipe> 
       },
     ],
     max_completion_tokens: 3000,
-    temperature: 0.1,
   });
   const raw = response.choices[0]?.message?.content ?? '{}';
   return safeJson<PartialRecipe>(raw);
@@ -231,7 +230,6 @@ export async function extractAndMergeRecipe(
       },
     ],
     max_completion_tokens: 3000,
-    temperature: 0.1,
   });
   const raw = response.choices[0]?.message?.content ?? '{}';
   const merged = safeJson<PartialRecipe>(raw);
@@ -323,7 +321,6 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
         },
       ],
       max_completion_tokens: 200,
-      temperature: 0.7,
     });
     const text = resp.choices[0]?.message?.content?.trim();
     if (text) return text;
