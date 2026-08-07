@@ -5,14 +5,17 @@
  * `src/app/api/voice/onboard-chat/route.ts`. See spec:
  * `data/specs/el-cerito-voice-recipe-v1.md`.
  *
- * Cost profile: `whisper-1` for STT ($0.006/min), `gpt-4.1` for
+ * Cost profile: `whisper-1` for STT ($0.006/min), `gpt-5.5` for
  * extraction + reply. Model can be overridden with EL_CERITO_OPENAI_MODEL.
  */
 import OpenAI from 'openai';
 
-// Best available reasoning model as of 2025. Family wants smart parsing over
-// cheap parsing. Override with EL_CERITO_OPENAI_MODEL if needed.
-export const OPENAI_MODEL = process.env.EL_CERITO_OPENAI_MODEL ?? 'gpt-4.1';
+// Best available reasoning model for structured extraction as of 2026.
+// Family wants smart parsing over cheap parsing. Overridable via
+// EL_CERITO_OPENAI_MODEL — e.g. `gpt-5.6-luna` for max throughput,
+// `gpt-5.5-pro` for hardest ambiguities. gpt-5.5 sits in the sweet spot
+// (10K RPM, strong structured output) for recipe parsing.
+export const OPENAI_MODEL = process.env.EL_CERITO_OPENAI_MODEL ?? 'gpt-5.5';
 
 // ─── OpenAI client (lazy) ─────────────────────────────────────────────────────
 
