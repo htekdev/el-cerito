@@ -33,6 +33,7 @@ export function routes(lang: Lang) {
     recipes: en ? '/en/recipes' : '/recetas',
     healthy: en ? '/en/recipes?health=saludables' : '/recetas?health=saludables',
     about: en ? '/en/about' : '/nosotros',
+    addRecipe: en ? '/en/add-recipe' : '/agregar-receta',
   };
 }
 
