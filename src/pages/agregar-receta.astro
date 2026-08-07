@@ -1,0 +1,117 @@
+---
+/**
+ * /agregar-receta — Voice-first recipe submission (Spanish primary).
+ *
+ * Cook presses the mic, tells the recipe like they'd tell family, then
+ * iterates by voice or by typing corrections. Backed by `/api/voice/recipe-chat`.
+ *
+ * See spec: data/specs/el-cerito-voice-recipe-v1.md
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Agregar receta con voz';
+const description = 'Sube una receta contándonos cómo se prepara. La IA la organiza y tú puedes ir corrigiendo por voz.';
+---
+
+<BaseLayout title={title} description={description} lang="es" altLangUrl="/en/add-recipe" noindex={true}>
+  <section class="max-w-3xl mx-auto px-4 py-10 sm:py-16">
+    <header class="mb-8">
+      <p class="text-sage-dark uppercase tracking-widest text-xs font-semibold mb-3">Nuevo · beta</p>
+      <h1 class="text-4xl sm:text-5xl text-earth mb-4">Agregar receta con voz</h1>
+      <p class="text-earth-soft leading-relaxed">
+        Cuéntanos la receta como se la contarías a tu nieto. Puedes ir agregando
+        ingredientes, cambiar cantidades y ajustar los pasos poco a poco — todo hablando.
+      </p>
+      <p class="text-earth-soft text-sm mt-3">
+        <span aria-hidden="true">🎤</span> Tu audio se envía a OpenAI Whisper para
+        transcribirlo. No guardamos el audio.
+      </p>
+    </header>
+
+    <div id="voice-studio"
+         data-locale="es"
+         data-api="/api/voice/recipe-chat"
+         data-intro-message="Hola, soy tu asistente del recetario. Cuéntame la receta: ¿cómo se llama y qué lleva?"
+         data-intro-message-es="Hola, soy tu asistente del recetario. Cuéntame la receta: ¿cómo se llama y qué lleva?"
+         data-intro-message-en="Hi — I'm your recipe assistant. Tell me the recipe: what's it called and what goes in it?"
+         class="bg-cream-dark/40 border border-clay rounded-2xl p-4 sm:p-6 shadow-sm">
+
+      <!-- Chat log -->
+      <div id="vs-log"
+           role="log"
+           aria-live="polite"
+           class="space-y-3 min-h-[10rem] max-h-[24rem] overflow-y-auto mb-4 pr-1">
+      </div>
+
+      <!-- Mic + input row -->
+      <div class="flex items-center gap-3">
+        <button id="vs-mic"
+                type="button"
+                aria-label="Grabar receta con voz"
+                class="w-14 h-14 rounded-full bg-terracotta text-cream text-2xl grid place-items-center shadow-md hover:bg-terracotta-dark focus:outline-none focus:ring-4 focus:ring-terracotta/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          <span id="vs-mic-icon" aria-hidden="true">🎤</span>
+        </button>
+
+        <form id="vs-text-form" class="flex-1 flex gap-2">
+          <input id="vs-text-input"
+                 type="text"
+                 placeholder="…o escribe una corrección (ej: cambia el ajo a 3 dientes)"
+                 class="flex-1 px-4 py-3 rounded-full border border-clay bg-cream text-earth placeholder:text-earth-soft/60 focus:outline-none focus:ring-2 focus:ring-sage/50" />
+          <!-- Honeypot — must remain empty -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off"
+                 style="position:absolute;left:-9999px;top:-9999px" aria-hidden="true" />
+          <button type="submit"
+                  class="px-4 py-3 rounded-full bg-sage text-cream font-semibold hover:bg-sage-dark focus:outline-none focus:ring-4 focus:ring-sage/30">
+            Enviar
+          </button>
+        </form>
+      </div>
+
+      <p id="vs-status" class="text-sm text-earth-soft mt-3 min-h-[1.25rem]"></p>
+    </div>
+
+    <!-- Live recipe preview -->
+    <details id="vs-preview-wrap" class="mt-8 bg-cream border border-clay rounded-2xl p-4 sm:p-6" open>
+      <summary class="cursor-pointer text-earth font-heading text-xl">Vista previa de la receta</summary>
+      <div id="vs-preview" class="mt-4 text-earth">
+        <p class="text-earth-soft italic">Aún no hay nada — empieza grabando arriba.</p>
+      </div>
+    </details>
+
+    <!-- Actions -->
+    <div class="flex flex-wrap gap-3 mt-6">
+      <button id="vs-submit"
+              type="button"
+              class="px-5 py-3 rounded-full bg-sage text-cream font-semibold hover:bg-sage-dark focus:outline-none focus:ring-4 focus:ring-sage/30 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>
+        Enviar receta a la familia
+      </button>
+      <button id="vs-download"
+              type="button"
+              class="px-5 py-3 rounded-full bg-terracotta text-cream font-semibold hover:bg-terracotta-dark disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>
+        Descargar .md
+      </button>
+      <button id="vs-copy-json"
+              type="button"
+              class="px-5 py-3 rounded-full bg-honey text-earth font-semibold hover:brightness-95 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>
+        Copiar JSON
+      </button>
+      <button id="vs-reset"
+              type="button"
+              class="px-5 py-3 rounded-full border border-clay text-earth-soft hover:bg-cream-dark">
+        Empezar de nuevo
+      </button>
+    </div>
+
+    <p class="text-xs text-earth-soft mt-6">
+      Al enviar, la receta entra al recetario como una propuesta (issue en GitHub).
+      La familia la revisa y, si todo está bien, un agente la publica en la web automáticamente.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  import '../scripts/voice-studio.ts';
+</script>
