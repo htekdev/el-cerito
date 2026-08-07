@@ -32,6 +32,7 @@ interface ChatResponse {
   recipe: PartialRecipe;
   coverage: { score: number; isComplete: boolean; nextGaps: Array<{ label: string; question: string }> };
   message: string;
+  locale?: 'es' | 'en';
   isComplete: boolean;
 }
 
@@ -39,9 +40,13 @@ function init() {
   const root = document.getElementById('voice-studio');
   if (!root) return;
 
-  const locale = (root.dataset.locale ?? 'es') as 'es' | 'en';
+  const initialLocale = (root.dataset.locale ?? 'es') as 'es' | 'en';
   const api = root.dataset.api ?? '/api/voice/recipe-chat';
   const introMessage = root.dataset.introMessage ?? '';
+
+  // Active locale — starts as page locale but can be overridden by the
+  // server based on Whisper's language detection.
+  let locale: 'es' | 'en' = initialLocale;
 
   const log = document.getElementById('vs-log')!;
   const micBtn = document.getElementById('vs-mic') as HTMLButtonElement;
@@ -61,6 +66,7 @@ function init() {
   let isBusy = false;
   let mediaRecorder: MediaRecorder | null = null;
   let chunks: Blob[] = [];
+  let autoSubmitted = false;
 
   const t = (es: string, en: string) => (locale === 'en' ? en : es);
   const isSupported = typeof navigator !== 'undefined'
@@ -181,6 +187,10 @@ function init() {
   });
 
   function handleResponse(data: ChatResponse, skipUserBubble = false) {
+    // Server may have overridden locale via Whisper language detection.
+    if (data.locale && (data.locale === 'es' || data.locale === 'en')) {
+      locale = data.locale;
+    }
     if (!skipUserBubble && data.transcript) {
       addUser(data.transcript);
       history.push({ role: 'user', text: data.transcript });
@@ -196,9 +206,9 @@ function init() {
     const enableSave = !!recipe.title || (recipe.ingredients ?? []).length > 0;
     downloadBtn.disabled = !enableSave;
     copyJsonBtn.disabled = !enableSave;
+    const canSubmit = !!recipe.title && (recipe.ingredients ?? []).length > 0;
     if (submitBtn) {
       // Submitting to GitHub requires at least a title + one ingredient (server validates too)
-      const canSubmit = !!recipe.title && (recipe.ingredients ?? []).length > 0;
       submitBtn.disabled = !canSubmit;
     }
     if (data.coverage) {
@@ -210,6 +220,17 @@ function init() {
       );
     } else {
       setStatus('');
+    }
+    // Auto-submit once the recipe is complete. Guard with autoSubmitted so
+    // follow-up corrections after send don't re-fire.
+    if (data.isComplete && canSubmit && !autoSubmitted && submitBtn) {
+      autoSubmitted = true;
+      addAssistant(t(
+        'Se ve completa — la estoy enviando a la familia…',
+        'Looks complete — sending it to the family…',
+      ));
+      // Small delay so the user sees the "ready" state before the send fires.
+      setTimeout(() => { void doSubmit(); }, 900);
     }
   }
 
@@ -282,18 +303,24 @@ function init() {
     if (!confirm(t('¿Empezar de nuevo? Se perderá la receta actual.', 'Start over? Current recipe will be lost.'))) return;
     recipe = {};
     history = [];
+    autoSubmitted = false;
     log.innerHTML = '';
     preview.innerHTML = `<p class="text-earth-soft italic">${t('Aún no hay nada — empieza grabando arriba.', 'Nothing yet — start recording above.')}</p>`;
     downloadBtn.disabled = true;
     copyJsonBtn.disabled = true;
-    if (submitBtn) submitBtn.disabled = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      delete submitBtn.dataset.sent;
+      submitBtn.textContent = t('Enviar receta a la familia', 'Send recipe to the family');
+    }
     setStatus('');
     if (introMessage) addAssistant(introMessage);
   });
 
   // ── Submit → GitHub Issue ──────────────────────────────────────────────────
-  submitBtn?.addEventListener('click', async () => {
-    if (submitBtn.disabled) return;
+  async function doSubmit() {
+    if (!submitBtn) return;
+    if (submitBtn.dataset.sent === '1') return;
     submitBtn.disabled = true;
     const originalLabel = submitBtn.textContent;
     submitBtn.textContent = t('Enviando…', 'Sending…');
@@ -320,13 +347,17 @@ function init() {
          </div>`,
       );
       submitBtn.textContent = t('Enviada ✓', 'Sent ✓');
+      submitBtn.dataset.sent = '1';
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       setStatus(t('No pude enviar: ', 'Couldn\'t send: ') + msg);
       submitBtn.textContent = originalLabel;
       submitBtn.disabled = false;
+      // Allow the auto-submit path to retry on a subsequent complete signal.
+      autoSubmitted = false;
     }
-  });
+  }
+  submitBtn?.addEventListener('click', () => { void doSubmit(); });
 
   // ── UI helpers ─────────────────────────────────────────────────────────────
   function addUser(text: string) {

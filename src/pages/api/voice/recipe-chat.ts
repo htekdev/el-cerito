@@ -48,7 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const localeRaw = (formData.get('locale') as string | null) ?? 'es';
-    const locale: 'es' | 'en' = localeRaw === 'en' ? 'en' : 'es';
+    let locale: 'es' | 'en' = localeRaw === 'en' ? 'en' : 'es';
 
     let existing: PartialRecipe | null = null;
     const recipeStr = formData.get('recipe') as string | null;
@@ -66,22 +66,38 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // If the caller sent typed text (correction path), skip Whisper.
-    // Otherwise transcribe the audio blob.
+    // Otherwise transcribe the audio blob and detect language.
     let rawTranscript: string;
+    let detectedLang: string | undefined;
     if (textInput) {
       rawTranscript = textInput;
+      // Heuristic language detection for typed text: check for common
+      // Spanish/English function words.
+      detectedLang = detectLanguageHeuristic(textInput);
     } else {
       const openai = getOpenAI();
       try {
-        rawTranscript = (await openai.audio.transcriptions.create({
+        // verbose_json returns { text, language, segments, ... }
+        const result = await openai.audio.transcriptions.create({
           file: audioFile!,
           model: 'whisper-1',
-          response_format: 'text',
-        })) as unknown as string;
+          response_format: 'verbose_json',
+        });
+        rawTranscript = (result as { text?: string }).text ?? '';
+        detectedLang = (result as { language?: string }).language;
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         return json({ error: `Whisper failed: ${msg}` }, 502);
       }
+    }
+
+    // Override locale from detected language. Whisper returns the full
+    // language name ("english", "spanish") — normalise to our two-letter code.
+    if (detectedLang) {
+      const d = detectedLang.toLowerCase();
+      if (d.startsWith('en') || d === 'english') locale = 'en';
+      else if (d.startsWith('es') || d === 'spanish' || d === 'castilian') locale = 'es';
+      // any other language → leave the client-supplied locale
     }
 
     const transcript = redactPii(rawTranscript).slice(0, MAX_TRANSCRIPT_CHARS).trim();
@@ -117,6 +133,7 @@ export const POST: APIRoute = async ({ request }) => {
       recipe,
       coverage,
       message,
+      locale,
       isComplete: coverage.isComplete,
     });
   } catch (err) {
@@ -125,6 +142,18 @@ export const POST: APIRoute = async ({ request }) => {
     return json({ error: message }, 500);
   }
 };
+
+/**
+ * Rough language heuristic for typed corrections (no Whisper in that path).
+ * Counts common function words in each language.
+ */
+function detectLanguageHeuristic(text: string): 'es' | 'en' | undefined {
+  const lower = text.toLowerCase();
+  const es = (lower.match(/\b(el|la|los|las|un|una|de|del|con|para|sin|pero|que|es|son|y|o|no|si|muy|más|cómo|cuánto|cuánta|cuchara|taza|gramos|litros)\b/g) ?? []).length;
+  const en = (lower.match(/\b(the|a|an|of|and|or|is|are|for|with|to|in|on|but|how|much|many|cup|tablespoon|teaspoon|grams|ounces)\b/g) ?? []).length;
+  if (es === 0 && en === 0) return undefined;
+  return en > es ? 'en' : 'es';
+}
 
 function json(data: unknown, status = 200): Response {
   return new Response(JSON.stringify(data), {

@@ -5,10 +5,14 @@
  * `src/app/api/voice/onboard-chat/route.ts`. See spec:
  * `data/specs/el-cerito-voice-recipe-v1.md`.
  *
- * Cost profile: `whisper-1` for STT ($0.006/min), `gpt-4o-mini` for
- * extraction + reply (~$0.0002/turn).
+ * Cost profile: `whisper-1` for STT ($0.006/min), `gpt-4.1` for
+ * extraction + reply. Model can be overridden with EL_CERITO_OPENAI_MODEL.
  */
 import OpenAI from 'openai';
+
+// Best available reasoning model as of 2025. Family wants smart parsing over
+// cheap parsing. Override with EL_CERITO_OPENAI_MODEL if needed.
+export const OPENAI_MODEL = process.env.EL_CERITO_OPENAI_MODEL ?? 'gpt-4.1';
 
 // ─── OpenAI client (lazy) ─────────────────────────────────────────────────────
 
@@ -143,7 +147,7 @@ Output schema (exact keys, all optional in the response — omit what you don't 
 export async function extractRecipe(transcript: string): Promise<PartialRecipe> {
   const openai = getOpenAI();
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: OPENAI_MODEL,
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: EXTRACTION_SYSTEM_PROMPT },
@@ -170,7 +174,7 @@ export async function extractAndMergeRecipe(
   const openai = getOpenAI();
   const existingJson = existing ? JSON.stringify(existing, null, 2) : '{}';
   const response = await openai.chat.completions.create({
-    model: 'gpt-4o-mini',
+    model: OPENAI_MODEL,
     response_format: { type: 'json_object' },
     messages: [
       { role: 'system', content: EXTRACTION_SYSTEM_PROMPT },
@@ -238,7 +242,7 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
 
   try {
     const resp = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: OPENAI_MODEL,
       messages: [
         { role: 'system', content: system },
         {
