@@ -92,6 +92,13 @@ export interface Recipe {
   healthLabels: HealthLabel[];
   difficulty: 'facil' | 'media' | 'dificil';
   ranchOriginal: boolean;
+  /**
+   * Model-flagged clarifying questions. Populated by the extractor when
+   * an ingredient, quantity, or preparation is ambiguous (e.g. "Jell-O"
+   * → powder mix vs pre-made cups). These MUST be resolved before the
+   * client will let the recipe submit.
+   */
+  ambiguities: Array<{ label: string; question: string }>;
 }
 
 export type PartialRecipe = Partial<Recipe>;
@@ -116,6 +123,40 @@ Rules:
 - \`healthLabels\` — only when clearly warranted (vegetarian, vegan, gluten-free, etc.).
 - \`difficulty\` — "facil" | "media" | "dificil". Default "facil".
 - \`prepTime\` / \`cookTime\` — integer minutes. 0 if unknown.
+
+CRITICAL — Clarifying questions (\`ambiguities\` field):
+You MUST populate \`ambiguities\` whenever an ingredient, quantity, or preparation is genuinely unclear. This is the ONLY way we can ask the cook for clarification before saving. Do NOT guess and move on — flag it. Empty array only when everything is unambiguous.
+
+Ambiguous ingredient examples that REQUIRE clarification:
+- "Jell-O" / "gelatina" → powder mix vs pre-made cups?
+- "cream" / "crema" → heavy cream, sour cream, cream cheese, media crema, crema mexicana?
+- "cheese" / "queso" → which kind (cheddar, mozzarella, Chihuahua, Oaxaca, panela, cotija, queso fresco)?
+- "milk" / "leche" → whole, 2%, skim, condensed, evaporated, plant-based?
+- "tortilla" → flour or corn?
+- "chile" / "chili" → which one (poblano, jalapeño, serrano, ancho, guajillo, chipotle)?
+- "onion" / "cebolla" → white, yellow, red, green?
+- "tomato" / "tomate" → red (jitomate) or tomatillo (green)?
+- "chicken" / "pollo" → breast, thigh, whole, ground? raw or pre-cooked?
+- "beef" / "carne de res" → ground, steak, roast, stew meat?
+- "beans" / "frijoles" → black, pinto, refried? dry or canned?
+- "rice" / "arroz" → white, brown, mexican-style?
+- "oil" / "aceite" → vegetable, olive, avocado?
+- "sugar" / "azúcar" → white, brown, powdered?
+- "flour" / "harina" → all-purpose, whole wheat, masa, self-rising?
+
+Also flag when:
+- An ingredient is mentioned with NO amount ("le pongo un poco de cebolla" — how much?).
+- A preparation state is unclear (raw vs cooked, fresh vs canned, whole vs chopped).
+- A step references a technique that could mean multiple things (does "hasta que dore" mean 2 min or 10 min?).
+
+For each ambiguity, output:
+{
+  "label": "short subject in the recipe locale (e.g. 'gelatina', 'crema', 'cantidad de cebolla')",
+  "question": "one warm, specific question in the SAME language the cook is speaking. Offer 2-4 concrete choices when possible. Do NOT ask multiple questions in one string."
+}
+
+Remove an entry from \`ambiguities\` once the cook has answered it (i.e. the answer is now reflected in the recipe fields).
+
 - Return ONLY valid JSON — no markdown fences, no prose.
 
 Output schema (exact keys, all optional in the response — omit what you don't have):
@@ -138,7 +179,10 @@ Output schema (exact keys, all optional in the response — omit what you don't 
   "categories": ["comida"],
   "healthLabels": [],
   "difficulty": "facil",
-  "ranchOriginal": false
+  "ranchOriginal": false,
+  "ambiguities": [
+    { "label": "gelatina", "question": "¿Es gelatina en polvo o vasitos ya hechos?" }
+  ]
 }`;
 
 /**
@@ -199,11 +243,17 @@ const REPLY_SYSTEM_PROMPT_ES = `Eres una asistente cálida y familiar de El Ceri
 
 Estás ayudando a alguien a subir una receta hablando. Después de cada mensaje del cocinero:
 1. Reconoce brevemente lo que entendiste (menciona UNA cosa específica: un ingrediente, la porción, o el tiempo — no la lista completa).
-2. Haz UNA sola pregunta, la más importante para completar la receta.
+2. Haz UNA sola pregunta.
+
+Prioridad de la pregunta (de mayor a menor):
+- Si hay AMBIGÜEDADES abiertas, pregunta por la PRIMERA — usa exactamente esa pregunta (o una versión igual de específica), ofreciendo las opciones concretas.
+- Si no hay ambigüedades pero faltan campos, pregunta por el hueco más importante.
+- Si ya no falta nada, di algo como "Creo que ya tengo todo. ¿Lo mando a la familia?" — NO hagas otra pregunta.
 
 Reglas:
 - 2-4 oraciones máximo, español cálido y cercano (tuteo).
-- Si la receta ya está completa, en vez de preguntar di algo como "Creo que ya tengo todo. ¿La guardamos?".
+- Cuando aclares una ambigüedad, ofrece 2-4 opciones concretas ("¿es queso Chihuahua, Oaxaca o panela?").
+- Nunca supongas — si dijo "gelatina", "crema", "queso", "leche", "tortilla", "chile", "cebolla", "tomate", pregunta cuál es antes de guardar.
 - Nada de "¡Perfecto!" ni "¡Genial!" — habla como tía cocinera, no como robot.
 - Devuelve SOLO el texto de la respuesta. Sin JSON, sin markdown.`;
 
@@ -211,18 +261,24 @@ const REPLY_SYSTEM_PROMPT_EN = `You are a warm, family-style assistant for El Ce
 
 You are helping someone submit a recipe by voice. After each user message:
 1. Briefly acknowledge one specific thing you understood (an ingredient, the servings, or a time — not the whole list).
-2. Ask exactly ONE targeted question — the highest-priority missing piece.
+2. Ask exactly ONE question.
+
+Question priority (highest to lowest):
+- If there are open AMBIGUITIES, ask about the FIRST one — use that exact question (or an equally specific rewording) and offer the concrete choices.
+- Otherwise, if there are missing fields, ask about the highest-priority gap.
+- If nothing is missing, say something like "I think I've got everything — shall I send it to the family?" — do NOT ask another question.
 
 Rules:
 - 2-4 sentences max, warm and personal.
-- If the recipe is complete, skip the question and say something like "I think I've got everything — shall we save it?".
+- When clarifying an ambiguity, offer 2-4 concrete choices ("Is that cheddar, mozzarella, or Chihuahua?").
+- Never assume — if they said "Jell-O", "cream", "cheese", "milk", "tortilla", "chile", "onion", "tomato", ask which kind before saving.
 - No "" or "" filler.
 - Return ONLY the reply text. No JSON, no markdown.`;
 
 export interface ReplyContext {
   transcript: string;
   recipe: PartialRecipe;
-  coverage: { score: number; isComplete: boolean; nextGaps: { label: string; question: string }[] };
+  coverage: { score: number; isComplete: boolean; nextGaps: { label: string; question: string }[]; ambiguities: { label: string; question: string }[] };
   history: { role: 'user' | 'assistant'; text: string }[];
   locale: 'es' | 'en';
 }
@@ -231,8 +287,14 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
   const openai = getOpenAI();
   const system = ctx.locale === 'en' ? REPLY_SYSTEM_PROMPT_EN : REPLY_SYSTEM_PROMPT_ES;
 
+  const ambiguitySummary = ctx.coverage.ambiguities.length > 0
+    ? `OPEN AMBIGUITIES — resolve the FIRST one before anything else:\n${ctx.coverage.ambiguities
+        .map((a, i) => `  ${i + 1}. ${a.label}: ${a.question}`)
+        .join('\n')}`
+    : 'No open ambiguities.';
+
   const gapSummary = ctx.coverage.nextGaps.length > 0
-    ? `Missing (ask about the FIRST one only): ${ctx.coverage.nextGaps.map((g) => g.label).join(', ')}`
+    ? `Missing fields (ask about the FIRST one only, and only if there are no ambiguities): ${ctx.coverage.nextGaps.map((g) => g.label).join(', ')}`
     : 'All required fields are filled.';
 
   const historyContext = ctx.history
@@ -252,6 +314,7 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
             `USER JUST SAID: "${ctx.transcript}"`,
             `CURRENT RECIPE SUMMARY: ${summariseRecipe(ctx.recipe)}`,
             `COVERAGE: ${ctx.coverage.score}/100 (${ctx.coverage.isComplete ? 'COMPLETE' : 'incomplete'})`,
+            ambiguitySummary,
             gapSummary,
           ].filter(Boolean).join('\n'),
         },
@@ -264,11 +327,15 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
   } catch {
     // fall through to fallback
   }
-  // Scripted fallback if GPT fails
+  // Scripted fallback if GPT fails.
+  // Priority: ambiguity > gap > completion.
+  if (ctx.coverage.ambiguities[0]) {
+    return ctx.coverage.ambiguities[0].question;
+  }
   if (ctx.coverage.isComplete) {
     return ctx.locale === 'en'
-      ? "I think I've got everything — shall we save it?"
-      : 'Creo que ya tengo todo. ¿La guardamos?';
+      ? "I think I've got everything — shall I send it to the family?"
+      : 'Creo que ya tengo todo. ¿Lo mando a la familia?';
   }
   return ctx.coverage.nextGaps[0]?.question ?? (ctx.locale === 'en'
     ? 'Tell me more about the recipe.'
@@ -301,6 +368,11 @@ function shallowMergeRecipe(a: PartialRecipe, b: PartialRecipe): PartialRecipe {
     categories: (b.categories?.length ? b.categories : a.categories) ?? [],
     healthLabels: (b.healthLabels?.length ? b.healthLabels : a.healthLabels) ?? [],
     macros: b.macros ?? a.macros,
+    // ambiguities are always the model's fresh list — it prunes resolved
+    // ones as the cook answers them. If the model omitted the key entirely
+    // (i.e. undefined, not an empty array), fall back to the previous list
+    // so we don't lose open questions on a bad turn.
+    ambiguities: b.ambiguities !== undefined ? b.ambiguities : a.ambiguities,
   };
 }
 

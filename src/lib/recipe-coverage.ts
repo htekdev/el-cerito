@@ -7,6 +7,13 @@
  */
 import type { PartialRecipe } from './ai';
 
+export interface Ambiguity {
+  /** What is unclear — e.g. "Jell-O (powder mix vs pre-made cups?)" */
+  label: string;
+  /** Ready-to-ask clarification question in the recipe's locale. */
+  question: string;
+}
+
 export interface Gap {
   key: string;
   label: string;
@@ -20,6 +27,8 @@ export interface CoverageResult {
   isComplete: boolean;
   filled: { key: string; label: string }[];
   nextGaps: Gap[];
+  /** Open clarifying questions the AI must ask before we can submit. */
+  ambiguities: Ambiguity[];
 }
 
 const FIELDS: Gap[] = [
@@ -59,11 +68,13 @@ export function evaluateCoverage(r: PartialRecipe | null | undefined): CoverageR
   }
 
   const score = Math.round((earned / total) * 100);
-  // "Complete enough to save" — see spec §6: title, description, ≥3 ingredients,
-  // ≥2 instructions, prep+cook, ≥1 category, servings.
-  const isComplete = gaps.length === 0;
+  const ambiguities = (recipe.ambiguities ?? []).filter(
+    (a): a is Ambiguity => !!a && typeof a.question === 'string' && a.question.trim().length > 0,
+  );
+  // "Complete enough to save" — all required fields AND no open clarifications.
+  const isComplete = gaps.length === 0 && ambiguities.length === 0;
 
-  return { score, isComplete, filled, nextGaps: gaps.slice(0, 3) };
+  return { score, isComplete, filled, nextGaps: gaps.slice(0, 3), ambiguities };
 }
 
 function isFilled(key: string, r: PartialRecipe): boolean {

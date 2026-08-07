@@ -26,11 +26,17 @@ interface PartialRecipe {
   healthLabels?: string[];
   difficulty?: string;
   ranchOriginal?: boolean;
+  ambiguities?: Array<{ label: string; question: string }>;
 }
 interface ChatResponse {
   transcript: string;
   recipe: PartialRecipe;
-  coverage: { score: number; isComplete: boolean; nextGaps: Array<{ label: string; question: string }> };
+  coverage: {
+    score: number;
+    isComplete: boolean;
+    nextGaps: Array<{ label: string; question: string }>;
+    ambiguities: Array<{ label: string; question: string }>;
+  };
   message: string;
   locale?: 'es' | 'en';
   isComplete: boolean;
@@ -67,6 +73,7 @@ function init() {
   let mediaRecorder: MediaRecorder | null = null;
   let chunks: Blob[] = [];
   let autoSubmitted = false;
+  let awaitingConfirm = false;
 
   const t = (es: string, en: string) => (locale === 'en' ? en : es);
   const isSupported = typeof navigator !== 'undefined'
@@ -197,7 +204,7 @@ function init() {
     }
     if (data.recipe) {
       recipe = data.recipe;
-      renderPreview();
+      renderPreview(data.coverage?.ambiguities ?? []);
     }
     if (data.message) {
       addAssistant(data.message);
@@ -207,35 +214,51 @@ function init() {
     downloadBtn.disabled = !enableSave;
     copyJsonBtn.disabled = !enableSave;
     const canSubmit = !!recipe.title && (recipe.ingredients ?? []).length > 0;
+    const hasOpenAmbiguities = (data.coverage?.ambiguities?.length ?? 0) > 0;
     if (submitBtn) {
-      // Submitting to GitHub requires at least a title + one ingredient (server validates too)
-      submitBtn.disabled = !canSubmit;
+      // Submit button is only usable once there are no open clarifying
+      // questions AND we have at least title + 1 ingredient.
+      submitBtn.disabled = !canSubmit || hasOpenAmbiguities || submitBtn.dataset.sent === '1';
     }
     if (data.coverage) {
+      const readyNote = data.isComplete
+        ? t(' · lista para revisar', ' · ready to review')
+        : hasOpenAmbiguities
+          ? t(' · quedan preguntas por aclarar', ' · clarifying questions remain')
+          : '';
       setStatus(
         t(
-          `Cobertura: ${data.coverage.score}/100${data.isComplete ? ' · ¡lista para guardar!' : ''}`,
-          `Coverage: ${data.coverage.score}/100${data.isComplete ? ' · ready to save!' : ''}`,
+          `Cobertura: ${data.coverage.score}/100${readyNote}`,
+          `Coverage: ${data.coverage.score}/100${readyNote}`,
         ),
       );
     } else {
       setStatus('');
     }
-    // Auto-submit once the recipe is complete. Guard with autoSubmitted so
-    // follow-up corrections after send don't re-fire.
-    if (data.isComplete && canSubmit && !autoSubmitted && submitBtn) {
-      autoSubmitted = true;
-      addAssistant(t(
-        'Se ve completa — la estoy enviando a la familia…',
-        'Looks complete — sending it to the family…',
-      ));
-      // Small delay so the user sees the "ready" state before the send fires.
-      setTimeout(() => { void doSubmit(); }, 900);
+    // When everything is complete AND no ambiguities remain, show a confirm
+    // banner and wait for the cook to click "Sí, envíala" — do NOT
+    // auto-submit silently. Family feedback: mis-parsed ingredients (e.g.
+    // "Jell-O") were going straight to GitHub. Confirmation is the last
+    // safety net.
+    if (data.isComplete && canSubmit && !hasOpenAmbiguities && !awaitingConfirm && !autoSubmitted) {
+      showConfirmBanner();
     }
   }
 
-  function renderPreview() {
+  function renderPreview(ambiguities: Array<{ label: string; question: string }> = []) {
     const parts: string[] = [];
+
+    // Open clarifying questions come first so the cook sees exactly what
+    // the assistant still needs to know before saving.
+    if (ambiguities.length > 0) {
+      parts.push(`<div class="mb-4 p-3 rounded-xl bg-amber-50 border border-amber-300 text-earth">
+        <p class="font-semibold mb-2">${t('Necesito aclarar antes de enviar:', 'Need to clarify before sending:')}</p>
+        <ul class="list-disc pl-5 space-y-1 text-sm">
+          ${ambiguities.map((a) => `<li><strong>${esc(a.label)}:</strong> ${esc(a.question)}</li>`).join('')}
+        </ul>
+      </div>`);
+    }
+
     if (recipe.title) parts.push(`<h3 class="text-2xl font-heading text-earth mb-1">${esc(recipe.title)}</h3>`);
     if (recipe.description) parts.push(`<p class="text-earth-soft italic mb-3">${esc(recipe.description)}</p>`);
     const meta: string[] = [];
@@ -304,6 +327,7 @@ function init() {
     recipe = {};
     history = [];
     autoSubmitted = false;
+    awaitingConfirm = false;
     log.innerHTML = '';
     preview.innerHTML = `<p class="text-earth-soft italic">${t('Aún no hay nada — empieza grabando arriba.', 'Nothing yet — start recording above.')}</p>`;
     downloadBtn.disabled = true;
@@ -316,6 +340,53 @@ function init() {
     setStatus('');
     if (introMessage) addAssistant(introMessage);
   });
+
+  // ── Confirm before submit ──────────────────────────────────────────────────
+  function showConfirmBanner() {
+    if (awaitingConfirm) return;
+    awaitingConfirm = true;
+    // Assistant nudges the cook in chat.
+    addAssistant(t(
+      'Ya tengo todo. Revisa el resumen a la derecha — ¿la mando a la familia así, o quieres cambiar algo?',
+      "I've got everything. Check the summary on the right — should I send it to the family as-is, or do you want to change anything?",
+    ));
+    // In-preview confirm banner with Yes / Edit-more actions.
+    const banner = document.createElement('div');
+    banner.id = 'vs-confirm-banner';
+    banner.className = 'mb-4 p-4 rounded-xl bg-sage/15 border-2 border-sage text-earth';
+    banner.innerHTML = `
+      <p class="font-semibold mb-3">${t('¿Se ve bien la receta?', 'Does this look right?')}</p>
+      <div class="flex flex-wrap gap-2">
+        <button type="button" id="vs-confirm-yes"
+          class="px-4 py-2 rounded-full bg-terracotta text-cream font-semibold hover:bg-terracotta/90">
+          ${t('Sí, envíala a la familia', 'Yes, send it to the family')}
+        </button>
+        <button type="button" id="vs-confirm-edit"
+          class="px-4 py-2 rounded-full bg-cream border border-clay text-earth hover:bg-clay/20">
+          ${t('Quiero cambiar algo', 'I want to change something')}
+        </button>
+      </div>
+    `;
+    preview.insertAdjacentElement('afterbegin', banner);
+    document.getElementById('vs-confirm-yes')?.addEventListener('click', () => {
+      dismissConfirmBanner();
+      autoSubmitted = true;
+      void doSubmit();
+    });
+    document.getElementById('vs-confirm-edit')?.addEventListener('click', () => {
+      dismissConfirmBanner();
+      addAssistant(t(
+        'Va, dime qué cambiamos: ingredientes, cantidades o pasos.',
+        'Sure — tell me what to change: ingredients, amounts, or steps.',
+      ));
+      // Focus the text input so the cook can type a correction immediately.
+      textInput?.focus();
+    });
+  }
+  function dismissConfirmBanner() {
+    awaitingConfirm = false;
+    document.getElementById('vs-confirm-banner')?.remove();
+  }
 
   // ── Submit → GitHub Issue ──────────────────────────────────────────────────
   async function doSubmit() {
