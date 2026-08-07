@@ -63,6 +63,9 @@ const description = 'Submit a family recipe by telling us how to make it. AI org
     </details>
 
     <div class="flex flex-wrap gap-3 mt-6">
+      <button id="vs-submit" type="button"
+              class="px-5 py-3 rounded-full bg-sage text-cream font-semibold hover:bg-sage-dark focus:outline-none focus:ring-4 focus:ring-sage/30 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>Send recipe to the family</button>
       <button id="vs-download" type="button"
               class="px-5 py-3 rounded-full bg-terracotta text-cream font-semibold hover:bg-terracotta-dark disabled:opacity-40 disabled:cursor-not-allowed"
               disabled>Download .md</button>
@@ -74,8 +77,8 @@ const description = 'Submit a family recipe by telling us how to make it. AI org
     </div>
 
     <p class="text-xs text-earth-soft mt-6">
-      Beta. When you're done, download the <code class="bg-cream-dark px-1 rounded">.md</code>
-      file and share it with the family so we can add it to the site.
+      When you send, the recipe becomes a GitHub issue for the family to review.
+      Once approved, an agent publishes it to the site automatically.
     </p>
   </section>
 </BaseLayout>

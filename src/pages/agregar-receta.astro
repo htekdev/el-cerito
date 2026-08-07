@@ -78,6 +78,12 @@ const description = 'Sube una receta contándonos cómo se prepara. La IA la org
 
     <!-- Actions -->
     <div class="flex flex-wrap gap-3 mt-6">
+      <button id="vs-submit"
+              type="button"
+              class="px-5 py-3 rounded-full bg-sage text-cream font-semibold hover:bg-sage-dark focus:outline-none focus:ring-4 focus:ring-sage/30 disabled:opacity-40 disabled:cursor-not-allowed"
+              disabled>
+        Enviar receta a la familia
+      </button>
       <button id="vs-download"
               type="button"
               class="px-5 py-3 rounded-full bg-terracotta text-cream font-semibold hover:bg-terracotta-dark disabled:opacity-40 disabled:cursor-not-allowed"
@@ -98,8 +104,8 @@ const description = 'Sube una receta contándonos cómo se prepara. La IA la org
     </div>
 
     <p class="text-xs text-earth-soft mt-6">
-      Esta es una versión beta. Cuando termines, descarga el archivo <code class="bg-cream-dark px-1 rounded">.md</code>
-      y compártelo con la familia para agregarlo al recetario.
+      Al enviar, la receta entra al recetario como una propuesta (issue en GitHub).
+      La familia la revisa y, si todo está bien, un agente la publica en la web automáticamente.
     </p>
   </section>
 </BaseLayout>

@@ -52,6 +52,7 @@ function init() {
   const preview = document.getElementById('vs-preview')!;
   const downloadBtn = document.getElementById('vs-download') as HTMLButtonElement;
   const copyJsonBtn = document.getElementById('vs-copy-json') as HTMLButtonElement;
+  const submitBtn = document.getElementById('vs-submit') as HTMLButtonElement | null;
   const resetBtn = document.getElementById('vs-reset') as HTMLButtonElement;
 
   let recipe: PartialRecipe = {};
@@ -195,6 +196,11 @@ function init() {
     const enableSave = !!recipe.title || (recipe.ingredients ?? []).length > 0;
     downloadBtn.disabled = !enableSave;
     copyJsonBtn.disabled = !enableSave;
+    if (submitBtn) {
+      // Submitting to GitHub requires at least a title + one ingredient (server validates too)
+      const canSubmit = !!recipe.title && (recipe.ingredients ?? []).length > 0;
+      submitBtn.disabled = !canSubmit;
+    }
     if (data.coverage) {
       setStatus(
         t(
@@ -280,8 +286,46 @@ function init() {
     preview.innerHTML = `<p class="text-earth-soft italic">${t('Aún no hay nada — empieza grabando arriba.', 'Nothing yet — start recording above.')}</p>`;
     downloadBtn.disabled = true;
     copyJsonBtn.disabled = true;
+    if (submitBtn) submitBtn.disabled = true;
     setStatus('');
     if (introMessage) addAssistant(introMessage);
+  });
+
+  // ── Submit → GitHub Issue ──────────────────────────────────────────────────
+  submitBtn?.addEventListener('click', async () => {
+    if (submitBtn.disabled) return;
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = t('Enviando…', 'Sending…');
+    setStatus(t('Abriendo issue en GitHub…', 'Opening GitHub issue…'));
+    try {
+      const transcript = history.filter((h) => h.role === 'user').map((h) => h.text).join('\n\n');
+      const res = await fetch('/api/recipe/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ recipe, transcript, locale }),
+      });
+      const data = await res.json().catch(() => ({} as any));
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error ?? `HTTP ${res.status}`);
+      }
+      const url = data.issue?.url ?? '#';
+      const num = data.issue?.number;
+      addAssistant(data.message ?? t('Receta enviada.', 'Recipe sent.'));
+      setStatus('');
+      preview.insertAdjacentHTML(
+        'afterbegin',
+        `<div class="mb-4 p-3 rounded-xl bg-sage/10 border border-sage/30 text-earth">
+           ${t('✅ Receta enviada como', '✅ Recipe sent as')} <a class="underline font-semibold" href="${url}" target="_blank" rel="noopener">issue #${num}</a>.
+         </div>`,
+      );
+      submitBtn.textContent = t('Enviada ✓', 'Sent ✓');
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setStatus(t('No pude enviar: ', 'Couldn\'t send: ') + msg);
+      submitBtn.textContent = originalLabel;
+      submitBtn.disabled = false;
+    }
   });
 
   // ── UI helpers ─────────────────────────────────────────────────────────────
