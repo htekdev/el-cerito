@@ -1,8 +1,8 @@
 ---
 title: "Cereal de Yogur con Jell-O"
 titleEn: "Jell-O Yogurt Cereal"
-description: "Un snack alto en proteína, súper rápido: yogur griego Oikos Triple Zero mezclado con Jell-O sin azúcar sabor limón-lima, endulzado con Splenda y coronado con cereal proteico Magic Spoon. Dulce, cremoso, crocante — y sin culpa."
-descriptionEn: "A high-protein, super-quick snack: Oikos Triple Zero Greek yogurt stirred with sugar-free lemon-lime Jell-O, sweetened with Splenda, and topped with Magic Spoon protein cereal. Sweet, creamy, crunchy — and guilt-free."
+description: "Un snack alto en proteína, súper rápido: yogur griego Oikos Triple Zero mezclado con un vasito de Jell-O sin azúcar sabor limón-lima ya preparado, endulzado con Splenda y coronado con cereal proteico Magic Spoon. Dulce, cremoso, crocante — y sin culpa."
+descriptionEn: "A high-protein, super-quick snack: Oikos Triple Zero Greek yogurt stirred with a pre-made sugar-free lemon-lime Jell-O snack cup, sweetened with Splenda, and topped with Magic Spoon protein cereal. Sweet, creamy, crunchy — and guilt-free."
 coverImage: "/images/recipes/cereal-de-yogur-con-jello.jpg"
 coverImageAlt: "Tazón de yogur griego con Jell-O y cereal proteico Magic Spoon"
 servings: 1
@@ -18,8 +18,8 @@ categories: ["snack", "postre"]
 tags: ["alto en proteina", "sin azucar", "rapido", "yogur griego", "magic spoon"]
 healthLabels: ["high-protein", "low-fat", "gluten-free", "vegetarian"]
 macros:
-  calories: 280
-  protein: 30
+  calories: 246
+  protein: 26
   carbs: 24
   fat: 4
   fiber: 3
@@ -47,14 +47,14 @@ ingredients:
     carbs: 4
     fat: 0
     fiber: 0
-  - name: "Jell-O sin azúcar sabor limón-lima"
-    nameEn: "sugar-free lemon-lime Jell-O"
+  - name: "vasito de Jell-O sin azúcar sabor limón-lima"
+    nameEn: "sugar-free lemon-lime Jell-O snack cup"
     amount: 1
     unit: piece
-    note: "1 sobre chico (8.5 g de polvo seco)"
-    noteEn: "1 small packet (8.5 g dry powder)"
-    calories: 40
-    protein: 4
+    note: "1 vasito preparado (~92 g / 3.25 oz), ya cuajado"
+    noteEn: "1 pre-made snack cup (~92 g / 3.25 oz), already set"
+    calories: 5
+    protein: 0
     carbs: 0
     fat: 0
     fiber: 0
@@ -72,12 +72,13 @@ ingredients:
 instructions:
   - "Vacía el yogur griego Oikos Triple Zero en un tazón."
   - "Agrega los 4 sobres de Splenda y mezcla bien hasta integrar."
-  - "Añade el polvo seco de Jell-O sin azúcar sabor limón-lima y revuelve hasta que se disuelva y tome un ligero color."
+  - "Corta o desmorona el vasito de Jell-O sin azúcar ya preparado sobre el yogur y revuelve suavemente para incorporar los trocitos."
   - "Corona con 30 g de cereal proteico Magic Spoon sabor frutal justo antes de comer, para que quede crocante."
 instructionsEn:
   - "Empty the Oikos Triple Zero Greek yogurt into a bowl."
   - "Add the 4 Splenda packets and stir until fully combined."
-  - "Sprinkle in the sugar-free lemon-lime Jell-O dry powder and stir until it dissolves and takes on a light color."
+  - "Cut or crumble the pre-made sugar-free Jell-O snack cup over the yogurt and gently stir to fold in the pieces."
+  - "Top with 30 g of Magic Spoon fruity protein cereal right before eating so it stays crunchy."
   - "Top with 30 g of Magic Spoon fruity protein cereal right before eating so it stays crunchy."
 steps:
   - title: "Servir el yogur"
@@ -92,10 +93,10 @@ steps:
     textEn: "Add the Splenda packets and stir well with a spoon until dissolved."
     ingredients:
       - 1
-  - title: "Sabor limón-lima"
-    titleEn: "Lemon-lime flavor"
-    text: "Espolvorea el polvo seco del Jell-O sin azúcar sobre el yogur y revuelve hasta que se integre y aparezca un ligero color verde limón. No se cuaja: se disuelve como saborizante."
-    textEn: "Sprinkle the sugar-free Jell-O dry powder over the yogurt and stir until it blends in and takes on a light lime-green color. It doesn't set — it dissolves as flavoring."
+  - title: "Trocitos de Jell-O"
+    titleEn: "Jell-O pieces"
+    text: "Corta o desmorona con la cuchara el vasito de Jell-O sin azúcar ya preparado directamente sobre el yogur, y revuelve suavemente para que queden trocitos gelatinosos por todo el tazón."
+    textEn: "Cut or spoon-crumble the pre-made sugar-free Jell-O snack cup directly over the yogurt, then gently stir so soft gelatin pieces are spread throughout the bowl."
     ingredients:
       - 2
   - title: "Coronar con el cereal"
@@ -106,17 +107,17 @@ steps:
       - 3
 storyEn: |
   A two-minute high-protein snack that feels like dessert. Oikos Triple Zero gives us
-  the creamy base with 15 g of protein and no added sugar. A packet of sugar-free
-  Jell-O turns it into a lemon-lime treat without adding calories, and Magic Spoon
-  cereal brings the crunch — plus another 11 g of protein — while keeping the whole
-  bowl gluten-free and low in sugar.
+  the creamy base with 15 g of protein and no added sugar. A pre-made sugar-free
+  Jell-O snack cup adds soft, jiggly lemon-lime pieces for almost no calories, and
+  Magic Spoon cereal brings the crunch — plus another 11 g of protein — while keeping
+  the whole bowl gluten-free and low in sugar.
 pubDate: 2026-08-07
 author: "Hector"
 ---
 
 Un snack de dos minutos con sabor a postre. El yogur griego Oikos Triple Zero
-aporta la base cremosa con 15 g de proteína y cero azúcar añadida. Un sobre de
-Jell-O sin azúcar lo convierte en un antojo con sabor a limón-lima sin subir
-las calorías, y el cereal Magic Spoon le pone lo crocante — más otros 11 g de
+aporta la base cremosa con 15 g de proteína y cero azúcar añadida. Un vasito de
+Jell-O sin azúcar ya preparado agrega trocitos gelatinosos de limón-lima casi
+sin calorías, y el cereal Magic Spoon le pone lo crocante — más otros 11 g de
 proteína — todo sin gluten y bajo en azúcar. Perfecto para las tardes cuando
 uno quiere algo dulce sin salirse del plan.
