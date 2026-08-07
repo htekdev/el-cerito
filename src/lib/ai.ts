@@ -203,7 +203,7 @@ export async function extractRecipe(transcript: string): Promise<PartialRecipe> 
         content: `EXISTING RECIPE:\n{}\n\nNEW TRANSCRIPT:\n<data>\n${transcript}\n</data>\n\nExtract the full recipe:`,
       },
     ],
-    max_tokens: 3000,
+    max_completion_tokens: 3000,
     temperature: 0.1,
   });
   const raw = response.choices[0]?.message?.content ?? '{}';
@@ -230,7 +230,7 @@ export async function extractAndMergeRecipe(
         content: `EXISTING RECIPE:\n${existingJson}\n\nNEW TRANSCRIPT:\n<data>\n${transcript}\n</data>\n\nReturn the FULL merged recipe (existing + new info):`,
       },
     ],
-    max_tokens: 3000,
+    max_completion_tokens: 3000,
     temperature: 0.1,
   });
   const raw = response.choices[0]?.message?.content ?? '{}';
@@ -322,7 +322,7 @@ export async function generateReply(ctx: ReplyContext): Promise<string> {
           ].filter(Boolean).join('\n'),
         },
       ],
-      max_tokens: 200,
+      max_completion_tokens: 200,
       temperature: 0.7,
     });
     const text = resp.choices[0]?.message?.content?.trim();

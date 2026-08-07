@@ -48,11 +48,27 @@ function init() {
 
   const initialLocale = (root.dataset.locale ?? 'es') as 'es' | 'en';
   const api = root.dataset.api ?? '/api/voice/recipe-chat';
-  const introMessage = root.dataset.introMessage ?? '';
+  const introMessageEs = root.dataset.introMessageEs
+    ?? (initialLocale === 'es' ? (root.dataset.introMessage ?? '') : '');
+  const introMessageEn = root.dataset.introMessageEn
+    ?? (initialLocale === 'en' ? (root.dataset.introMessage ?? '') : '');
 
-  // Active locale — starts as page locale but can be overridden by the
-  // server based on Whisper's language detection.
-  let locale: 'es' | 'en' = initialLocale;
+  // Detect browser language up front so the very first greeting matches
+  // the user (family feedback: EN speakers were getting a Spanish greet).
+  // Falls back to the page's own locale.
+  const browserLang = (typeof navigator !== 'undefined' ? navigator.language : '') || '';
+  const detectedInitial: 'es' | 'en' = browserLang.toLowerCase().startsWith('en')
+    ? 'en'
+    : browserLang.toLowerCase().startsWith('es')
+      ? 'es'
+      : initialLocale;
+
+  // Active locale — starts as detected locale but can be overridden by
+  // the server based on Whisper's language detection mid-conversation.
+  let locale: 'es' | 'en' = detectedInitial;
+  const introMessage = locale === 'en'
+    ? (introMessageEn || introMessageEs)
+    : (introMessageEs || introMessageEn);
 
   const log = document.getElementById('vs-log')!;
   const micBtn = document.getElementById('vs-mic') as HTMLButtonElement;
