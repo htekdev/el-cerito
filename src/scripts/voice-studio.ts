@@ -15,6 +15,7 @@ interface Turn { role: 'user' | 'assistant'; text: string; }
 interface PartialRecipe {
   title?: string;
   description?: string;
+  story?: string;
   servings?: number;
   servingLabel?: string;
   ingredients?: Array<{ name: string; amount: number; unit: string; note?: string; optional?: boolean }>;
@@ -301,6 +302,10 @@ function init() {
       parts.push('</ol>');
     }
 
+    if (recipe.story && recipe.story.trim()) {
+      parts.push(`<h4 class="font-semibold mt-4 mb-2 text-earth">${t('Historia', 'Story')}</h4><p class="text-earth-soft italic">${esc(recipe.story)}</p>`);
+    }
+
     if (recipe.macros && recipe.macros.calories > 0) {
       parts.push(`<p class="text-sm text-earth-soft mt-4">${t('Macros (por porción)', 'Macros (per serving)')}: ${recipe.macros.calories} kcal · P ${recipe.macros.protein}g · C ${recipe.macros.carbs}g · ${t('G', 'F')} ${recipe.macros.fat}g</p>`);
     }
@@ -482,6 +487,7 @@ function init() {
     const push = (k: string, v: unknown) => { if (v !== undefined) lines.push(`${k}: ${yamlScalar(v)}`); };
     push('title', title);
     push('description', r.description ?? '');
+    if (r.story) push('story', r.story);
     push('coverImage', `/images/recipes/${slug}.jpg`);
     push('coverImageAlt', title);
     push('servings', r.servings ?? 4);
@@ -515,7 +521,9 @@ function init() {
     push('author', 'El Cerito');
     push('featured', false);
     push('draft', true);
-    lines.push('---', '', r.description ?? '', '');
+    lines.push('---', '');
+    if (r.description) lines.push(r.description, '');
+    if (r.story) lines.push('## Historia', '', r.story, '');
     return lines.join('\n');
   }
   function yamlScalar(v: unknown): string {

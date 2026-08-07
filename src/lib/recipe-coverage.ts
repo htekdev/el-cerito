@@ -36,9 +36,9 @@ const FIELDS: Gap[] = [
     question: '¿Cómo se llama la receta?' },
   { key: 'description', label: 'descripción', weight: 5,
     question: '¿Podrías darme una descripción cortita, como quien cuenta de dónde viene la receta?' },
-  { key: 'ingredients', label: 'ingredientes', weight: 30,
+  { key: 'ingredients', label: 'ingredientes', weight: 25,
     question: '¿Qué ingredientes lleva y cuánto de cada uno?' },
-  { key: 'instructions', label: 'pasos', weight: 25,
+  { key: 'instructions', label: 'pasos', weight: 20,
     question: '¿Y cómo se prepara? Cuéntame los pasos.' },
   { key: 'prepTime', label: 'tiempo de preparación', weight: 5,
     question: '¿Cuánto tarda en la preparación, más o menos?' },
@@ -48,6 +48,11 @@ const FIELDS: Gap[] = [
     question: '¿Es para desayuno, comida, cena, o algo diferente?' },
   { key: 'servings', label: 'porciones', weight: 10,
     question: '¿Para cuántas porciones te sale?' },
+  // Backstory comes last so the assistant only asks after the essentials
+  // are in. Required for isComplete — a recipe without its story loses
+  // half its point on this family site.
+  { key: 'story', label: 'historia de la receta', weight: 10,
+    question: '¿Y cuál es la historia de esta receta? ¿Quién te la enseñó, o de dónde viene?' },
 ];
 
 export function evaluateCoverage(r: PartialRecipe | null | undefined): CoverageResult {
@@ -91,6 +96,7 @@ function isFilled(key: string, r: PartialRecipe): boolean {
                                 && (r.cookTime > 0 || (r.prepTime ?? 0) > 0);
     case 'categories':   return Array.isArray(r.categories) && r.categories.length >= 1;
     case 'servings':     return typeof r.servings === 'number' && r.servings > 0;
+    case 'story':        return typeof r.story === 'string' && r.story.trim().length >= 15;
     default: return false;
   }
 }

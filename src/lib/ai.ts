@@ -96,6 +96,13 @@ export interface Recipe {
   difficulty: 'facil' | 'media' | 'dificil';
   ranchOriginal: boolean;
   /**
+   * The backstory of the recipe — who taught it, where it comes from,
+   * why it exists, what memory or occasion is tied to it. Written in
+   * the SAME language the cook is speaking. NOT translated on the
+   * site — the downstream watcher agent handles ES↔EN.
+   */
+  story: string;
+  /**
    * Model-flagged clarifying questions. Populated by the extractor when
    * an ingredient, quantity, or preparation is ambiguous (e.g. "Jell-O"
    * → powder mix vs pre-made cups). These MUST be resolved before the
@@ -112,20 +119,29 @@ const EXTRACTION_SYSTEM_PROMPT = `You are the recipe extractor for El Cerito, a 
 
 Your job: from a voice transcript of someone describing a recipe, extract or UPDATE a structured Recipe JSON. You MERGE new info into the existing recipe rather than starting fresh.
 
+CRITICAL LANGUAGE RULE:
+- Fill every text field (title, description, story, ingredient names, notes, instructions, servingLabel) in the SAME language the cook is speaking. If they speak Spanish, everything stays Spanish. If they speak English, everything stays English.
+- DO NOT translate. The downstream agent handles ES↔EN. Never populate \`titleEn\`, \`descriptionEn\`, \`nameEn\`, \`noteEn\`, or \`storyEn\` — leave them undefined.
+- If the cook mixes languages mid-recipe, follow whichever language dominates the current turn.
+
 Rules:
-- Spanish is the PRIMARY language. Fill *En fields only if the cook explicitly used English.
 - If the cook corrects a previous value (e.g. "no, son 4 tomates"), replace the old value.
 - Do NOT invent facts. If something wasn't mentioned, omit it.
 - \`servings\` defaults to 4 if never stated. Use whatever the cook says otherwise.
-- \`servingLabel\` is a short Spanish noun ("porciones", "tacos", "vasos", "tazas"). Default "porciones".
-- \`ingredients[].amount\` is numeric only (no ranges). If the cook says "un chorrito" / "al gusto", set unit to "to taste" and amount to 1.
+- \`servingLabel\` is a short noun in the source language ("porciones", "tacos", "vasos" / "servings", "tacos", "glasses"). Default "porciones" (es) or "servings" (en).
+- \`ingredients[].amount\` is numeric only (no ranges). If the cook says "un chorrito" / "al gusto" / "a splash" / "to taste", set unit to "to taste" and amount to 1.
 - \`ingredients[].unit\` MUST be one of: g, kg, ml, l, tsp, tbsp, cup, cups, piece, pieces, clove, cloves, pinch, slice, slices, can, to taste.
 - \`macros\` (per serving) — fill only when confident from ingredients + amounts; use 0 for unknown fields.
-- \`categories\` — infer from context: "para el desayuno" → desayuno, "salsa" → salsa, "postre" → postre. At least 1.
-- \`instructions\` — short, imperative Spanish steps. Merge into the existing list (don't duplicate).
+- \`categories\` — infer from context: "para el desayuno" / "for breakfast" → desayuno, "salsa" / "sauce" → salsa, "postre" / "dessert" → postre. At least 1. (Use the Spanish enum values regardless of source language — these are internal codes.)
+- \`instructions\` — short imperative steps in the source language. Merge into the existing list (don't duplicate).
 - \`healthLabels\` — only when clearly warranted (vegetarian, vegan, gluten-free, etc.).
-- \`difficulty\` — "facil" | "media" | "dificil". Default "facil".
+- \`difficulty\` — "facil" | "media" | "dificil". Default "facil". (Enum codes, not translated.)
 - \`prepTime\` / \`cookTime\` — integer minutes. 0 if unknown.
+
+STORY (\`story\` field):
+- 2-4 warm sentences capturing WHERE the recipe comes from and WHY it matters to the cook.
+- Includes: who taught it (grandma, aunt, a friend, mom, the cook themselves), the origin (ranch, hometown, an event), and why they make it (comfort food, special occasion, weeknight staple).
+- Written in the source language. Leave empty until the cook tells you — do NOT invent a story.
 
 CRITICAL — Clarifying questions (\`ambiguities\` field):
 You MUST populate \`ambiguities\` whenever an ingredient, quantity, or preparation is genuinely unclear. This is the ONLY way we can ask the cook for clarification before saving. Do NOT guess and move on — flag it. Empty array only when everything is unambiguous.
@@ -164,19 +180,18 @@ Remove an entry from \`ambiguities\` once the cook has answered it (i.e. the ans
 
 Output schema (exact keys, all optional in the response — omit what you don't have):
 {
-  "title": "string",
-  "titleEn": "string",
-  "description": "string",
-  "descriptionEn": "string",
+  "title": "string (source language)",
+  "description": "string (source language)",
+  "story": "string (source language) — the backstory / who taught it / why it exists",
   "servings": 4,
   "servingLabel": "porciones",
   "ingredients": [
-    { "name": "string", "amount": 0, "unit": "g",
+    { "name": "string (source language)", "amount": 0, "unit": "g",
       "calories": 0, "protein": 0, "carbs": 0, "fat": 0, "fiber": 0,
-      "note": "string", "optional": false }
+      "note": "string (source language)", "optional": false }
   ],
   "macros": { "calories": 0, "protein": 0, "carbs": 0, "fat": 0, "fiber": 0 },
-  "instructions": ["string"],
+  "instructions": ["string (source language)"],
   "prepTime": 0,
   "cookTime": 0,
   "categories": ["comida"],
@@ -248,7 +263,7 @@ Estás ayudando a alguien a subir una receta hablando. Después de cada mensaje 
 
 Prioridad de la pregunta (de mayor a menor):
 - Si hay AMBIGÜEDADES abiertas, pregunta por la PRIMERA — usa exactamente esa pregunta (o una versión igual de específica), ofreciendo las opciones concretas.
-- Si no hay ambigüedades pero faltan campos, pregunta por el hueco más importante.
+- Si no hay ambigüedades pero faltan campos, pregunta por el hueco más importante. Cuando lo que falte sea la HISTORIA de la receta, pregúntala con calidez: "¿Y cuál es la historia de esta receta? ¿Quién te la enseñó, o de dónde viene?" — algo así.
 - Si ya no falta nada, di algo como "Creo que ya tengo todo. ¿Lo mando a la familia?" — NO hagas otra pregunta.
 
 Reglas:
@@ -266,7 +281,7 @@ You are helping someone submit a recipe by voice. After each user message:
 
 Question priority (highest to lowest):
 - If there are open AMBIGUITIES, ask about the FIRST one — use that exact question (or an equally specific rewording) and offer the concrete choices.
-- Otherwise, if there are missing fields, ask about the highest-priority gap.
+- Otherwise, if there are missing fields, ask about the highest-priority gap. When the missing field is the recipe's STORY, ask warmly — something like "What's the story behind this recipe? Who taught it to you, or where does it come from?"
 - If nothing is missing, say something like "I think I've got everything — shall I send it to the family?" — do NOT ask another question.
 
 Rules:
@@ -368,6 +383,8 @@ function shallowMergeRecipe(a: PartialRecipe, b: PartialRecipe): PartialRecipe {
     categories: (b.categories?.length ? b.categories : a.categories) ?? [],
     healthLabels: (b.healthLabels?.length ? b.healthLabels : a.healthLabels) ?? [],
     macros: b.macros ?? a.macros,
+    // Preserve story if the model forgot to echo it back.
+    story: b.story?.trim() ? b.story : a.story,
     // ambiguities are always the model's fresh list — it prunes resolved
     // ones as the cook answers them. If the model omitted the key entirely
     // (i.e. undefined, not an empty array), fall back to the previous list

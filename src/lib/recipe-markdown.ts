@@ -26,6 +26,7 @@ export function buildRecipeMarkdown(recipe: PartialRecipe, opts?: { author?: str
     ...(recipe.titleEn && { titleEn: recipe.titleEn }),
     description: recipe.description ?? '',
     ...(recipe.descriptionEn && { descriptionEn: recipe.descriptionEn }),
+    ...(recipe.story && { story: recipe.story }),
     coverImage: `/images/recipes/${slug}.jpg`,
     coverImageAlt: title,
     servings: recipe.servings ?? 4,
@@ -46,7 +47,14 @@ export function buildRecipeMarkdown(recipe: PartialRecipe, opts?: { author?: str
   };
 
   const yaml = toYaml(frontmatter);
-  const body = recipe.description ? `\n${recipe.description}\n` : '\n';
+  // Body: prefer description; append the story as a "## Historia" block
+  // so it renders as prose in the article body too.
+  const bodyParts: string[] = [];
+  if (recipe.description) bodyParts.push(recipe.description);
+  if (recipe.story) {
+    bodyParts.push('', '## Historia', recipe.story);
+  }
+  const body = bodyParts.length > 0 ? `\n${bodyParts.join('\n')}\n` : '\n';
   return `---\n${yaml}---\n${body}`;
 }
 

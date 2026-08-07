@@ -151,6 +151,7 @@ function renderIssueBody(args: {
     ? '> Recipe submitted via **/en/add-recipe** (voice pipeline).'
     : '> Receta enviada por **/agregar-receta** (pipeline de voz).');
   parts.push('');
+  parts.push(`**Source language:** \`${locale}\` — content below is in this language ONLY. The watcher agent is responsible for producing the bilingual ES + EN recipe file. Do NOT assume any \`*En\` fields are present.`);
   parts.push(`**Slug (proposed):** \`${slug}.md\``);
   parts.push(`**Coverage:** ${coverage.score}/100 · ${coverage.isComplete ? '✅' : '⚠️ incomplete'}`);
   parts.push('');
@@ -209,6 +210,10 @@ function renderHumanSummary(r: PartialRecipe, locale: 'es' | 'en'): string {
   if ((r.instructions ?? []).length > 0) {
     lines.push('', locale === 'en' ? '**Steps**' : '**Preparación**');
     r.instructions!.forEach((s, idx) => lines.push(`${idx + 1}. ${s}`));
+  }
+  if (r.story && r.story.trim()) {
+    lines.push('', locale === 'en' ? '**Story**' : '**Historia**');
+    lines.push(r.story.trim());
   }
   return lines.join('\n');
 }
