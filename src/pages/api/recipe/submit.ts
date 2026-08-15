@@ -30,9 +30,6 @@ export const config = { maxDuration: 30 };
 
 const REPO_OWNER = 'htekdev';
 const REPO_NAME = 'el-cerito';
-const MAX_TITLE_LEN = 120;
-const MAX_TRANSCRIPT_LEN = 8_000;
-
 // ─── In-memory rate limit (per-warm-instance best effort) ────────────────────
 
 const RATE_LIMIT_MAX = 3;
@@ -80,9 +77,9 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     }
 
     const locale: 'es' | 'en' = body.locale === 'en' ? 'en' : 'es';
-    const title = recipe.title.trim().slice(0, MAX_TITLE_LEN);
+    const title = recipe.title.trim();
     const slug = slugify(title);
-    const transcript = (body.transcript ?? '').slice(0, MAX_TRANSCRIPT_LEN);
+    const transcript = body.transcript ?? '';
     const coverage = evaluateCoverage(recipe);
 
     const issueTitle = locale === 'en'

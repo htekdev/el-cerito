@@ -20,7 +20,6 @@ export const prerender = false;
 export const config = { maxDuration: 60 };
 
 const MAX_AUDIO_BYTES = 24 * 1024 * 1024; // 24 MB — Whisper cap is 25 MB
-const MAX_TRANSCRIPT_CHARS = 40_000;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -100,7 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
       // any other language → leave the client-supplied locale
     }
 
-    const transcript = redactPii(rawTranscript).slice(0, MAX_TRANSCRIPT_CHARS).trim();
+    const transcript = redactPii(rawTranscript).trim();
     if (!transcript) {
       return json(
         { error: locale === 'en'
