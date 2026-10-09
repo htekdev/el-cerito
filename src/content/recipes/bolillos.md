@@ -6,8 +6,8 @@ descriptionEn: "Homemade bolillos with a crackly crust and soft crumb — Mexico
 coverImage: "/images/recipes/bolillos.jpg"
 coverImageAlt: "Bolillos recién horneados con corteza dorada y ranura al centro sobre un plato de barro rústico"
 servings: 8
-servingLabel: "bolillos de 100 g"
-servingLabelEn: "100 g rolls"
+servingLabel: "bolillos (~106 g de masa)"
+servingLabelEn: "rolls (~106 g dough)"
 prepTime: 30
 cookTime: 15
 totalTime: 135
@@ -55,7 +55,7 @@ ingredients:
     fat: 0
     note: "aproximadamente un sobre"
     noteEn: "about one packet"
-  - name: "harina de trigo (all-purpose)"
+  - name: "harina de trigo (todo uso)"
     nameEn: "all-purpose flour"
     amount: 500
     unit: g
@@ -93,12 +93,12 @@ instructions:
   - "Combina los ingredientes húmedos con los secos — se formará una masa rústica y pegajosa."
   - "Amasa: en batidora de pedestal a velocidad 1 unos 2 minutos, luego sube a velocidad 2 y amasa 5 minutos más."
   - "Agrega los 9g de aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica: al estirarla debe hacer una ventanita sin romperse (windowpane test)."
-  - "Pon la masa en un tazón engrasado, tapa y deja levar en un lugar tibio (27–32°C) por 1 hora o hasta que doble su tamaño. Al picarla con el dedo, debe regresar lentamente."
-  - "Divide la masa en el número de porciones indicado arriba; para bolillos estándar, pesa aproximadamente 100g de masa por pieza. Bolea cada porción hasta formar una bola lisa."
+  - "Pon la masa en un tazón limpio, tapa y deja levar en un lugar tibio (27–32°C) por 1 hora o hasta que doble su tamaño. Al picarla con el dedo, debe regresar lentamente."
+  - "Divide la masa en el número de porciones indicado arriba; con las cantidades base, cada bolillo pesa aproximadamente 106g de masa cruda (cerca del formato estándar de 100g). Bolea cada porción hasta formar una bola lisa."
   - "En una charola con papel encerado, aplasta cada bola, enróllala tipo burrito y dobla las puntas para formar la clásica figura de balón de fútbol americano."
   - "Tapa y deja reposar otros 30 minutos para el segundo levado (misma prueba: no sobreleudar)."
   - "Con una cuchilla filosa o exacto, haz un corte poco profundo por el centro de cada bolillo — que no sea muy hondo o las tortas se te desbaratan después."
-  - "Con una brocha, pon un poquito de aceite dentro del corte para que abra bien al hornear."
+  - "Haz un solo corte poco profundo por el centro de cada bolillo para que abra al hornear."
   - "Precalienta el horno a 220°C (425°F) con una charola vacía en la parrilla de abajo. Aparte, pon a hervir agua."
   - "Mete los bolillos al horno y vierte el agua hirviendo en la charola de abajo para crear vapor (baño maría) — así se logra la costra crujiente."
   - "Hornea 15 minutos hasta que estén dorados."
@@ -110,12 +110,12 @@ instructionsEn:
   - "Combine wet and dry ingredients — a rough, shaggy dough will form."
   - "Knead: in a stand mixer on speed 1 for ~2 minutes, then increase to speed 2 and knead 5 more minutes."
   - "Add 9g avocado oil and keep kneading until fully incorporated. The dough should be slightly tacky but stretchy — it should pass the windowpane test (stretch a piece without tearing)."
-  - "Place the dough in a greased bowl, cover, and let rise in a warm spot (80–90°F / 27–32°C) for about 1 hour or until doubled. Poke test: it should slowly spring back."
-  - "Divide the dough into the number of portions shown above; for standard bolillos, weigh about 100g of dough per piece. Shape each portion into a smooth ball."
+  - "Place the dough in a clean bowl, cover, and let rise in a warm spot (80–90°F / 27–32°C) for about 1 hour or until doubled. Poke test: it should slowly spring back."
+  - "Divide the dough into the number of portions shown above; with the base quantities, each roll weighs about 106g of raw dough (close to the standard 100g format). Shape each portion into a smooth ball."
   - "On a parchment-lined baking sheet, flatten each ball, roll it up burrito-style, and fold in the ends to form the classic football/torpedo shape."
   - "Cover and let rest 30 more minutes for the second proof (same poke test — don't overproof)."
   - "With a sharp blade or exacto knife, score each roll with a single shallow cut down the center — not too deep, or tortas made from them will fall apart."
-  - "Brush a little oil into the scored seam so it opens nicely while baking."
+  - "Make one shallow score down the center of each roll so it opens as it bakes."
   - "Preheat the oven to 220°C (425°F) with an empty pan on the bottom rack. Separately, boil water."
   - "Place the rolls in the oven and pour the boiling water into the bottom pan to create steam (bain-marie) — this gives you the crispy crust."
   - "Bake 15 minutes until golden brown."
@@ -160,15 +160,15 @@ steps:
       - 5
   - title: "Primer levado (1 hora)"
     titleEn: "First proof (1 hour)"
-    text: "Pon la masa en un tazón ligeramente engrasado, tapa con plástico o un trapo húmedo y déjala levar en un lugar tibio (27–32°C / 80–90°F) por 1 hora o hasta que doble su tamaño. Prueba del dedo: pica la masa con el dedo — si regresa lento, ya está. Si regresa muy rápido, le falta; si el hoyo se queda, se pasó."
-    textEn: "Place the dough in a lightly greased bowl, cover with plastic or a damp cloth, and let it rise in a warm spot (80–90°F / 27–32°C) for about 1 hour or until doubled. Poke test: press a finger into the dough — if it slowly springs back, it's ready. Fast bounce = underproofed; dent stays = overproofed."
+    text: "Pon la masa en un tazón limpio, tapa con plástico o un trapo húmedo y déjala levar en un lugar tibio (27–32°C / 80–90°F) por 1 hora o hasta que doble su tamaño. Prueba del dedo: pica la masa con el dedo — si regresa lento, ya está. Si regresa muy rápido, le falta; si el hoyo se queda, se pasó."
+    textEn: "Place the dough in a clean bowl, cover with plastic or a damp cloth, and let it rise in a warm spot (80–90°F / 27–32°C) for about 1 hour or until doubled. Poke test: press a finger into the dough — if it slowly springs back, it's ready. Fast bounce = underproofed; dent stays = overproofed."
     ingredients:
       - label: "la masa amasada"
         labelEn: "the kneaded dough"
-  - title: "Dividir y bolear porciones de 100 g"
-    titleEn: "Divide and shape 100 g portions"
-    text: "Pasa la masa a la mesa y divídela en el número de bolillos indicado arriba. Para el tamaño estándar de esta receta, pesa aproximadamente 100g de masa por pieza. Bolea cada porción entre las palmas o con la mesa hasta que quede lisa y pareja."
-    textEn: "Turn the dough onto the counter and divide it into the number of rolls shown above. For this recipe's standard size, weigh about 100g of dough per piece. Roll each portion between your palms or on the counter until smooth and even."
+  - title: "Dividir y bolear porciones"
+    titleEn: "Divide and shape the portions"
+    text: "Pasa la masa a la mesa y divídela en el número de bolillos indicado arriba. Con las cantidades base, cada pieza pesa aproximadamente 106g de masa cruda (cerca del formato estándar de 100g). Bolea cada porción entre las palmas o con la mesa hasta que quede lisa y pareja."
+    textEn: "Turn the dough onto the counter and divide it into the number of rolls shown above. With the base quantities, each piece weighs about 106g of raw dough (close to the standard 100g format). Roll each portion between your palms or on the counter until smooth and even."
     ingredients:
       - label: "la masa leudada"
         labelEn: "the risen dough"
@@ -186,16 +186,13 @@ steps:
     ingredients:
       - label: "los bolillos formados"
         labelEn: "the shaped rolls"
-  - title: "Marcar y pincelar con aceite"
-    titleEn: "Score and brush with oil"
-    text: "Con una cuchilla filosa, navaja o exacto, haz un corte por el centro de cada bolillo, a lo largo — poco profundo. Si cortas muy hondo, después las tortas se te desbaratan por ese lado. Con una brocha, pincela un poquito de aceite dentro del corte para que abra bonito al hornear."
-    textEn: "With a sharp blade or exacto knife, score down the center of each roll lengthwise — shallow. Cut too deep and tortas made from them will fall apart along that seam. Brush a bit of oil into the scored line so it opens nicely in the oven."
+  - title: "Marcar los bolillos"
+    titleEn: "Score the rolls"
+    text: "Con una cuchilla filosa, navaja o exacto, haz un corte poco profundo por el centro de cada bolillo, a lo largo. Si cortas muy hondo, después las tortas se te desbaratan por ese lado."
+    textEn: "With a sharp blade or exacto knife, make one shallow lengthwise score down the center of each roll. Cut too deep and tortas made from them will fall apart along that seam."
     ingredients:
       - label: "los bolillos ya reposados"
         labelEn: "the rested rolls"
-      - ref: 5
-        note: "un poquito para pincelar el corte"
-        noteEn: "a little to brush the seam"
   - title: "Precalentar horno con charola de vapor"
     titleEn: "Preheat oven with steam pan"
     text: "Precalienta el horno a 220°C (425°F) con una charola vacía en la parrilla de abajo — así la charola ya está bien caliente cuando le eches el agua. Aparte, pon a hervir agua en una olla."
@@ -215,11 +212,11 @@ steps:
     ingredients:
       - label: "los bolillos horneados"
         labelEn: "the baked rolls"
-storyEn: "Bolillos are Mexico's everyday bread — the base for tortas, molletes, and a hundred other things. Hector worked this recipe out at home: 500g of flour, one packet of yeast, a little sugar and salt, a touch of avocado oil, and the panadería trick — a pan of boiling water at the bottom of the oven for steam. That's what gives you the crackly crust and the soft inside. Score them right down the middle (not too deep or your tortas fall apart), brush a little oil into the seam, and let the steam do the rest. Nothing beats a warm bolillo — but let it cool before you put it away, or the crust goes soft. This recipe and its serving control are calibrated for standard rolls made with about 100g of raw dough each. Other possible formats include 25g mini rolls, 50g small rolls, 150–160g large rolls, and 200g very large loaves, but those sizes are not selectable here; their per-piece nutrition and baking times have not been established."
+storyEn: "Bolillos are Mexico's everyday bread — the base for tortas, molletes, and a hundred other things. Hector worked this recipe out at home: 500g of flour, one packet of yeast, a little sugar and salt, a touch of avocado oil, and the panadería trick — a pan of boiling water at the bottom of the oven for steam. That's what gives you the crackly crust and the soft inside. Score them right down the middle (not too deep or your tortas fall apart) and let the steam do the rest. Nothing beats a warm bolillo — but let it cool before you put it away, or the crust goes soft. The base batch makes 8 rolls of about 106g raw dough each, close to the standard 100g format. Other possible formats include 25g mini rolls, 50g small rolls, 150–160g large rolls, and 200g very large loaves, but those sizes are not selectable here; their per-piece nutrition and baking times have not been established."
 pubDate: 2026-09-28
 author: "Hector Rocha"
 ---
 
-Los bolillos son el pan de todos los días — la base para tortas, molletes, y mil cosas más. Hector afinó esta receta en casa: 500g de harina, un sobre de levadura, tantita azúcar y sal, un poquito de aceite de aguacate, y el truco de panadería — una charola con agua hirviendo abajo del horno para hacer vapor. Eso es lo que da la costra crujiente por fuera y la miga suavecita por dentro. Marca el corte justo por el centro (no muy hondo, o las tortas se te desbaratan), pincela un poquito de aceite en la ranura, y deja que el vapor haga lo suyo. No hay nada como un bolillo tibio — pero déjalo enfriar antes de guardarlo, o la costra se ablanda.
+Los bolillos son el pan de todos los días — la base para tortas, molletes, y mil cosas más. Hector afinó esta receta en casa: 500g de harina, un sobre de levadura, tantita azúcar y sal, un poquito de aceite de aguacate, y el truco de panadería — una charola con agua hirviendo abajo del horno para hacer vapor. Eso es lo que da la costra crujiente por fuera y la miga suavecita por dentro. Marca el corte justo por el centro (no muy hondo, o las tortas se te desbaratan) y deja que el vapor haga lo suyo. No hay nada como un bolillo tibio — pero déjalo enfriar antes de guardarlo, o la costra se ablanda.
 
-Esta receta y su control de porciones están calibrados para bolillos estándar hechos con aproximadamente 100g de masa cruda cada uno. También existen formatos posibles de 25g (mini), 50g (chico), 150–160g (grande) y 200g (hogaza muy grande), pero no se pueden seleccionar aquí; aún no están definidos sus macros por pieza ni sus tiempos de horneado. El horneado indicado corresponde a los bolillos estándar de 100g.
+El lote base rinde 8 bolillos de aproximadamente 106g de masa cruda cada uno, cerca del formato estándar de 100g. También existen formatos posibles de 25g (mini), 50g (chico), 150–160g (grande) y 200g (hogaza muy grande), pero no se pueden seleccionar aquí; aún no están definidos sus macros por pieza ni sus tiempos de horneado. El horneado indicado corresponde al bolillo estándar de esta receta.
