@@ -86,6 +86,16 @@ ingredients:
     fat: 9
     note: "para el amasado final"
     noteEn: "for the final knead"
+  - name: "agua hirviendo para la charola metálica de vapor (no para la masa)"
+    nameEn: "boiling water for the metal steam pan (not for the dough)"
+    amount: 240
+    unit: ml
+    calories: 0
+    protein: 0
+    carbs: 0
+    fat: 0
+    note: "aproximadamente 1 taza; va en la charola caliente, no en la masa"
+    noteEn: "about 1 cup; goes in the hot pan, not into the dough"
 instructions:
   - "Combina 310g de agua tibia con 10g de azúcar y revuelve hasta que se disuelva."
   - "Agrega los 7g de levadura instantánea y deja reposar 5 minutos para que se active."
@@ -98,9 +108,8 @@ instructions:
   - "En una charola con papel encerado, aplasta cada bola, enróllala tipo burrito y dobla las puntas para formar la clásica figura de balón de fútbol americano."
   - "Tapa y deja reposar otros 30 minutos para el segundo levado (misma prueba: no sobreleudar)."
   - "Con una cuchilla filosa o exacto, haz un corte poco profundo por el centro de cada bolillo — que no sea muy hondo o las tortas se te desbaratan después."
-  - "Haz un solo corte poco profundo por el centro de cada bolillo para que abra al hornear."
-  - "Precalienta el horno a 220°C (425°F) con una charola vacía en la parrilla de abajo. Aparte, pon a hervir agua."
-  - "Mete los bolillos al horno y vierte el agua hirviendo en la charola de abajo para crear vapor (baño maría) — así se logra la costra crujiente."
+  - "Precalienta el horno a 220°C (425°F) con una charola metálica resistente dedicada para vapor en la parrilla inferior (no uses vidrio ni cerámica). Aparte, pon a hervir 240 ml de agua para la charola; no es agua para la masa."
+  - "Mete los bolillos al horno. Con guantes secos, vierte lentamente los 240 ml de agua hirviendo en la charola metálica caliente — nunca en el piso ni sobre un elemento del horno. Hazlo con la cara y las manos fuera del vapor, que puede quemar; cierra el horno con cuidado. El vapor ayuda a formar la costra crujiente."
   - "Hornea 15 minutos hasta que estén dorados."
   - "Sácalos y déjalos reposar 5 minutos. Enfría por completo a temperatura ambiente antes de guardar — nunca los guardes calientes, o el vapor atrapado ablandará la costra."
 instructionsEn:
@@ -115,9 +124,8 @@ instructionsEn:
   - "On a parchment-lined baking sheet, flatten each ball, roll it up burrito-style, and fold in the ends to form the classic football/torpedo shape."
   - "Cover and let rest 30 more minutes for the second proof (same poke test — don't overproof)."
   - "With a sharp blade or exacto knife, score each roll with a single shallow cut down the center — not too deep, or tortas made from them will fall apart."
-  - "Make one shallow score down the center of each roll so it opens as it bakes."
-  - "Preheat the oven to 220°C (425°F) with an empty pan on the bottom rack. Separately, boil water."
-  - "Place the rolls in the oven and pour the boiling water into the bottom pan to create steam (bain-marie) — this gives you the crispy crust."
+  - "Preheat the oven to 220°C (425°F) with a sturdy metal pan dedicated to steam on the bottom rack (do not use glass or ceramic). Separately, boil 240 ml of water for the pan; this is not dough water."
+  - "Place the rolls in the oven. Wearing dry oven mitts, slowly pour the 240 ml boiling water into the hot metal pan — never onto the oven floor or a heating element. Keep your face and hands out of the steam, which can burn, and close the oven carefully. The steam helps create a crisp crust."
   - "Bake 15 minutes until golden brown."
   - "Remove and let sit 5 minutes. Cool completely to room temperature before storing — never store warm, or trapped steam will soften the crust."
 steps:
@@ -195,16 +203,18 @@ steps:
         labelEn: "the rested rolls"
   - title: "Precalentar horno con charola de vapor"
     titleEn: "Preheat oven with steam pan"
-    text: "Precalienta el horno a 220°C (425°F) con una charola vacía en la parrilla de abajo — así la charola ya está bien caliente cuando le eches el agua. Aparte, pon a hervir agua en una olla."
-    textEn: "Preheat the oven to 220°C (425°F) with an empty pan on the bottom rack — this way the pan is scorching hot when the water hits it. Separately, boil water in a kettle or pot."
-    ingredients: []
+    text: "Precalienta el horno a 220°C (425°F) con una charola metálica resistente dedicada para vapor en la parrilla inferior (no uses vidrio ni cerámica), para que esté caliente al agregar el agua. Aparte, pon a hervir 240 ml de agua para la charola; no es agua para la masa."
+    textEn: "Preheat the oven to 220°C (425°F) with a sturdy metal pan dedicated to steam on the bottom rack (do not use glass or ceramic), so it is hot when you add the water. Separately, boil 240 ml of water for the pan; this is not dough water."
+    ingredients:
+      - ref: 6
   - title: "Hornear con baño maría"
     titleEn: "Bake with bain-marie"
-    text: "Cuando el horno esté listo, mete la charola de bolillos y de inmediato vierte el agua hirviendo en la charola de abajo — cuidado con el vapor. Ese vapor (baño maría) es lo que le da la costra crujiente estilo panadería. Hornea 15 minutos hasta que estén dorados."
-    textEn: "When the oven is ready, slide in the sheet of rolls and immediately pour the boiling water into the bottom pan — careful with the steam. That steam (bain-marie) is what gives them the panadería-style crispy crust. Bake 15 minutes until golden brown."
+    text: "Mete la charola de bolillos al horno. Con guantes secos, vierte lentamente los 240 ml de agua hirviendo en la charola metálica caliente — nunca en el piso ni sobre un elemento del horno. Mantén la cara y las manos fuera del vapor, que puede quemar, y cierra el horno con cuidado. El vapor ayuda a formar la costra crujiente estilo panadería. Hornea 15 minutos hasta que estén dorados."
+    textEn: "Place the sheet of rolls in the oven. Wearing dry oven mitts, slowly pour the 240 ml boiling water into the hot metal pan — never onto the oven floor or a heating element. Keep your face and hands out of the steam, which can burn, and close the oven carefully. Steam helps create the panadería-style crisp crust. Bake 15 minutes until golden brown."
     ingredients:
       - label: "los bolillos marcados"
         labelEn: "the scored rolls"
+      - ref: 6
   - title: "Enfriar completamente"
     titleEn: "Cool completely"
     text: "Sácalos del horno y déjalos 5 minutos en la charola. Luego pásalos a una rejilla y déjalos enfriar por completo a temperatura ambiente antes de guardar. NUNCA los guardes calientes — el vapor atrapado ablanda la costra y pierdes todo el trabajo."
