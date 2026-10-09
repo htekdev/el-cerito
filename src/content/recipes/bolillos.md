@@ -1,8 +1,8 @@
 ---
 title: "Bolillos"
 titleEn: "Mexican Bread Rolls (Bolillos)"
-description: "Bolillos caseros con costra crujiente y miga suave — el pan de todos los días. Hechos con un baño maría en el horno para lograr esa corteza dorada como de panadería mexicana."
-descriptionEn: "Homemade bolillos with a crackly crust and soft crumb — Mexico's everyday bread. Baked with a bain-marie in the oven for that golden panadería-style crust."
+description: "Bolillos caseros con costra crujiente y miga suave — el pan de todos los días. Se hornean con vapor generado en el horno con una charola de agua para lograr esa corteza dorada como de panadería mexicana."
+descriptionEn: "Homemade bolillos with a crackly crust and soft crumb — Mexico's everyday bread. Baked with oven steam from a pan of water for that golden panadería-style crust."
 coverImage: "/images/recipes/bolillos.jpg"
 coverImageAlt: "Bolillos recién horneados con corteza dorada y ranura al centro sobre un plato de barro rústico"
 servings: 8
@@ -25,16 +25,16 @@ macros:
   fiber: 2
   sodium: 488
 ingredients:
-  - name: "agua tibia (no fría)"
-    nameEn: "warm water (not cold)"
+  - name: "agua tibia"
+    nameEn: "warm water"
     amount: 310
     unit: g
     calories: 0
     protein: 0
     carbs: 0
     fat: 0
-    note: "tibia al tacto, para activar la levadura"
-    noteEn: "warm to the touch, to activate the yeast"
+    note: "tibia al tacto; el agua fría retrasa la activación y el agua muy caliente puede matar la levadura"
+    noteEn: "warm to the touch; cold water slows activation and very hot water can kill the yeast"
   - name: "azúcar"
     nameEn: "sugar"
     amount: 10
@@ -131,16 +131,16 @@ instructionsEn:
 steps:
   - title: "Activar la levadura"
     titleEn: "Activate the yeast"
-    text: "En un tazón, combina el agua tibia con el azúcar y revuelve hasta que se disuelva por completo. Agrega la levadura instantánea, revuelve y deja reposar 5 minutos — verás que empieza a burbujear. Ojo: agua tibia, no fría (mata la levadura al no activarla) ni caliente (la mata de plano)."
-    textEn: "In a bowl, combine the warm water with the sugar and stir until fully dissolved. Add the instant yeast, stir, and let sit 5 minutes — you'll see it start to foam. Note: warm water, not cold (won't activate) and not hot (kills the yeast)."
+    text: "En un tazón, combina el agua tibia con el azúcar y revuelve hasta que se disuelva por completo. Agrega la levadura instantánea, revuelve y deja reposar 5 minutos — verás que empieza a burbujear. Usa agua tibia: el agua fría retrasa la activación y el agua demasiado caliente puede matar la levadura."
+    textEn: "In a bowl, combine the warm water with the sugar and stir until fully dissolved. Add the instant yeast, stir, and let sit 5 minutes — you'll see it start to foam. Use warm water: cold water slows activation, and water that is too hot can kill the yeast."
     ingredients:
       - 0
       - 1
       - 2
   - title: "Cernir harina y sal"
     titleEn: "Sift flour and salt"
-    text: "Mientras la levadura se activa, en un tazón grande cierne la harina con la sal para que se integren perfectamente. Cernir asegura que la sal no quede concentrada en un solo punto (lo cual mataría la levadura al contacto)."
-    textEn: "While the yeast activates, sift the flour with the salt in a large mixing bowl to fully incorporate them. Sifting keeps the salt from concentrating in one spot (which would kill the yeast on contact)."
+    text: "Mientras la levadura se activa, en un tazón grande cierne la harina con la sal para distribuirlas de manera uniforme."
+    textEn: "While the yeast activates, sift the flour with the salt in a large mixing bowl to distribute them evenly."
     ingredients:
       - 3
       - 4
@@ -160,7 +160,7 @@ steps:
     ingredients:
       - label: "la masa rústica"
         labelEn: "the shaggy dough"
-  - title: "Agregar el aceite y hacer la prueba de la ventana"
+  - title: "Agregar el aceite y hacer la prueba de la membrana"
     titleEn: "Add oil and windowpane test"
     text: "Agrega el aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica. Para saber si el gluten ya se desarrolló: toma un pedacito y estíralo — debe formar una membrana delgada y traslúcida sin romperse (prueba de la membrana)."
     textEn: "Add the avocado oil and keep kneading until fully absorbed. The dough should be slightly tacky but stretchy. To check the gluten is fully developed: pinch a small piece and stretch it — it should form a thin, translucent windowpane without tearing."
@@ -207,8 +207,8 @@ steps:
     textEn: "Preheat the oven to 220°C (425°F) with a sturdy metal pan dedicated to steam on the bottom rack (do not use glass or ceramic), so it is hot when you add the water. Separately, boil 240 ml of water for the pan; this is not dough water."
     ingredients:
       - ref: 6
-  - title: "Hornear con baño maría"
-    titleEn: "Bake with bain-marie"
+  - title: "Hornear con vapor"
+    titleEn: "Bake with steam"
     text: "Mete la charola de bolillos al horno. Con guantes secos, vierte lentamente los 240 ml de agua hirviendo en la charola metálica caliente — nunca en el piso ni sobre un elemento del horno. Mantén la cara y las manos fuera del vapor, que puede quemar, y cierra el horno con cuidado. El vapor ayuda a formar la costra crujiente estilo panadería. Hornea 15 minutos hasta que estén dorados."
     textEn: "Place the sheet of rolls in the oven. Wearing dry oven mitts, slowly pour the 240 ml boiling water into the hot metal pan — never onto the oven floor or a heating element. Keep your face and hands out of the steam, which can burn, and close the oven carefully. Steam helps create the panadería-style crisp crust. Bake 15 minutes until golden brown."
     ingredients:
