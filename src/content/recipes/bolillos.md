@@ -102,7 +102,7 @@ instructions:
   - "Mientras tanto, cierne los 500g de harina con los 10g de sal en un tazón grande, para que se integren bien."
   - "Combina los ingredientes húmedos con los secos — se formará una masa rústica y pegajosa."
   - "Amasa: en batidora de pedestal a velocidad 1 unos 2 minutos, luego sube a velocidad 2 y amasa 5 minutos más."
-  - "Agrega los 9g de aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica: al estirarla debe hacer una ventanita sin romperse (windowpane test)."
+  - "Agrega los 9g de aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica: al estirarla debe formar una membrana delgada sin romperse (prueba de la membrana)."
   - "Pon la masa en un tazón limpio, tapa y deja levar en un lugar tibio (27–32°C) por 1 hora o hasta que doble su tamaño. Al picarla con el dedo, debe regresar lentamente."
   - "Divide la masa en el número de porciones indicado arriba; con las cantidades base, cada bolillo pesa aproximadamente 106g de masa cruda (cerca del formato estándar de 100g). Bolea cada porción hasta formar una bola lisa."
   - "En una charola con papel encerado, aplasta cada bola, enróllala tipo burrito y dobla las puntas para formar la clásica figura de balón de fútbol americano."
@@ -162,7 +162,7 @@ steps:
         labelEn: "the shaggy dough"
   - title: "Agregar el aceite y hacer la prueba de la ventana"
     titleEn: "Add oil and windowpane test"
-    text: "Agrega el aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica. Para saber si el gluten ya se desarrolló: toma un pedacito y estíralo — debe formar una ventanita traslúcida sin romperse (windowpane test)."
+    text: "Agrega el aceite de aguacate y sigue amasando hasta que se incorpore por completo. La masa debe quedar ligeramente pegajosa pero elástica. Para saber si el gluten ya se desarrolló: toma un pedacito y estíralo — debe formar una membrana delgada y traslúcida sin romperse (prueba de la membrana)."
     textEn: "Add the avocado oil and keep kneading until fully absorbed. The dough should be slightly tacky but stretchy. To check the gluten is fully developed: pinch a small piece and stretch it — it should form a thin, translucent windowpane without tearing."
     ingredients:
       - 5
