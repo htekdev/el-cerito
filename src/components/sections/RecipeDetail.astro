@@ -84,7 +84,9 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     prepTime: `PT${d.prepTime}M`,
     cookTime: `PT${d.cookTime}M`,
     totalTime: `PT${time}M`,
-    recipeIngredient: d.ingredients.map((i) => `${i.amount} ${i.unit} ${rIngredientName(i, lang)}`),
+    recipeIngredient: d.ingredients.map((i) => i.unit === 'to taste'
+      ? `${rIngredientName(i, lang)} (${t('recipe.toTaste')})`
+      : `${i.amount} ${i.unit} ${rIngredientName(i, lang)}`),
     recipeInstructions: instructions.map((step, idx) => ({
       '@type': 'HowToStep', position: idx + 1, text: step,
     })),
@@ -371,7 +373,14 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     const groceryAmounts = Array.from(document.querySelectorAll('.grocery-amount'));
 
     const niceRound = (v: number) => (!isFinite(v) ? 0 : v >= 10 ? Math.round(v) : Math.round(v * 10) / 10);
-    const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
+    const formatAmount = (amount: number, factor: number): string => {
+      const scaled = amount * factor;
+      if (scaled !== 0 && Math.abs(scaled) < 0.1) {
+        return String(Number(scaled.toPrecision(2)));
+      }
+      const rounded = niceRound(scaled);
+      return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+    };
 
     function render() {
       const factor = servings / def;
@@ -382,7 +391,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
         const idx = Number((node as HTMLElement).dataset.idx);
         const ing = data.ingredients[idx];
         if (!ing || ing.unit === 'to taste') return;
-        node.textContent = fmt(niceRound(ing.amount * factor));
+        node.textContent = formatAmount(ing.amount, factor);
       });
 
       totals.forEach((node) => {
@@ -394,7 +403,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
       groceryAmounts.forEach((node) => {
         const base = Number((node as HTMLElement).dataset.base);
         if (!isFinite(base)) return;
-        node.textContent = fmt(niceRound(base * factor));
+        node.textContent = formatAmount(base, factor);
       });
     }
 

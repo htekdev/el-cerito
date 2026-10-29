@@ -30,9 +30,12 @@ export function niceRound(value: number): number {
   return Math.round(value * 10) / 10;
 }
 
-/** Format a scaled ingredient amount for display. */
+/** Format ingredient amounts, retaining two significant digits below 0.1. */
 export function formatAmount(amount: number, factor: number): string {
   const scaled = amount * factor;
+  if (scaled !== 0 && Math.abs(scaled) < 0.1) {
+    return String(Number(scaled.toPrecision(2)));
+  }
   const rounded = niceRound(scaled);
   return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
 }
