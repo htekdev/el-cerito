@@ -1,17 +1,17 @@
 ---
 title: "Polvorones de tres colores"
 titleEn: "Three-Color Polvorones"
-description: "Polvorones suaves y quebradizos con franjas rosa, amarilla y de chocolate. El rosa es solo color; la cocoa lleva una estimación transparente, no un peso registrado."
-descriptionEn: "Tender, crumbly polvorones with pink, yellow, and chocolate stripes. Pink is only a color; the cocoa uses a transparent estimate, not a recorded weight."
-coverImage: "/images/recipes/polvorones-tres-colores.jpg"
-coverImageAlt: "Polvorones con franjas rosa, amarilla y de chocolate sobre un plato decorado / Pink, yellow, and chocolate striped polvorones on a decorated plate"
+description: "Polvorones triangulares suaves y quebradizos, con rosa, amarillo y chocolate visibles en cada galleta. El rosa es solo color; la cocoa lleva una estimación transparente, no un peso registrado."
+descriptionEn: "Tender, crumbly triangular polvorones with pink, yellow, and chocolate visible in every cookie. Pink is only a color; the cocoa uses a transparent estimate, not a recorded weight."
+coverImage: "/images/recipes/polvorones-tres-colores-triangulares.jpg"
+coverImageAlt: "Polvorones triangulares de tres colores: rosa, amarillo y chocolate visibles en cada galleta / Triangular three-color polvorones with pink, yellow, and chocolate visible in every cookie"
 gallery: []
 servings: 35
 servingLabel: "galletas de referencia (aproximadas)"
 servingLabelEn: "reference cookies (approximate)"
 prepTime: 30
 cookTime: 17
-totalTime: 47
+totalTime: 77
 difficulty: media
 ranchOriginal: false
 featured: false
@@ -175,26 +175,53 @@ steps:
       - 9
       - label: "masa preparada, dividida en tres porciones"
         labelEn: "prepared dough, divided into three portions"
-  - title: "Formar el rollo"
-    titleEn: "Assemble the log"
-    text: &step5 "Acomoda juntas las tres masas de colores y forma un rollo. Refrigera 15–20 minutos solo si hace falta que se afirme."
-    textEn: &step5En "Arrange the three colored doughs together and roll into a log. Chill for 15–20 minutes only if needed to firm up."
+  - title: "Formar tubos separados y segmentar"
+    titleEn: "Roll separate tubes and segment"
+    text: &step5 "Forma un tubo separado con cada tercio de color. Usa papel para hornear y una raspa de panadería para tensar y compactar cada tubo. Si son largos, córtalos ANTES de refrigerar en segmentos de igual longitud entre los tres colores que quepan en el refrigerador y las charolas. Ajusta la longitud total y el número de rollos a las porciones seleccionadas; no formes un solo rollo gigante."
+    textEn: &step5En "Roll each colored third into a separate tube. Use parchment and a bench scraper to tighten and compact each tube. If long, cut them BEFORE chilling into matching lengths across all three colors that fit your refrigerator and baking sheets. Adjust total length and log count to the selected servings; do not make one giant log."
     ingredients:
       - label: "masas rosa, amarilla y de chocolate"
         labelEn: "pink, yellow, and chocolate doughs"
-  - title: "Rebanar y hornear"
-    titleEn: "Slice and bake"
-    text: &step6 "Precalienta el horno a 177°C (350°F). Corta rebanadas de aproximadamente 45–60 g y colócalas en una charola. Hornea 13–17 minutos; empieza a revisar a los 10–12 minutos, especialmente las más delgadas. No voltees las galletas. Busca superficies firmes, centros cocidos y bases ligeramente doradas, no muy tostadas; continúa si aún hay masa cruda. La referencia interna opcional de la fuente, 195–200°F (aprox. 91–93°C), es una nota de textura, no una garantía de inocuidad ni sustituto de la cocción completa. No pruebes masa cruda."
-    textEn: &step6En "Preheat the oven to 177°C (350°F). Cut slices weighing approximately 45–60 g and place on a baking sheet. Bake for 13–17 minutes; begin checking at 10–12 minutes, especially for thinner cookies. Do not flip the cookies. Look for set tops, cooked centers, and lightly golden bottoms, not deep browning; continue baking if any raw dough remains. The source's optional internal reference of 195–200°F (about 91–93°C) is a texture note, not a safety guarantee or a substitute for complete baking. Do not taste raw dough."
+  - title: "Envolver por separado y refrigerar hasta firme"
+    titleEn: "Wrap separately and chill until firm"
+    text: &step6 "Envuelve cada segmento de color por separado en plástico apto para alimentos. Refrigera 20–30 minutos hasta que estén FIRMES; este enfriado es obligatorio, no opcional. Si siguen blandos, continúa refrigerando. El frío evita que la masa se aplaste y se deforme al armar y cortar."
+    textEn: &step6En "Wrap each colored segment separately in food-safe plastic wrap. Refrigerate for 20–30 minutes until FIRM; this chill is required, not optional. If still soft, keep chilling. Cold dough prevents crushing and deformation during assembly and slicing."
     ingredients:
-      - label: "rollo de masa de tres colores"
-        labelEn: "three-color dough log"
-instructions: [*step1, *step2, *step3, *step4, *step5, *step6]
-instructionsEn: [*step1En, *step2En, *step3En, *step4En, *step5En, *step6En]
+      - label: "segmentos separados de cada color"
+        labelEn: "separate segments of each color"
+  - title: "Armar rápidamente el perfil triangular"
+    titleEn: "Quickly assemble the triangular profile"
+    text: &step7 "Desenvuelve tres segmentos fríos de igual longitud, uno rosa, uno amarillo y uno de chocolate. Júntalos rápidamente, dos abajo y uno arriba. Aplana un lado, gira, aplana el siguiente, gira y aplana el tercero de manera uniforme para formar un perfil triangular, no redondo. Los tres colores deben quedar visibles en cada galleta. Repite con los segmentos correspondientes."
+    textEn: &step7En "Unwrap three matching cold segments, one pink, one yellow, and one chocolate. Quickly assemble them with two below and one above. Flatten one side, rotate, flatten the next, rotate, and flatten the third evenly to form a triangular profile, not a round one. All three colors must be visible in every cookie. Repeat with the matching segments."
+    ingredients:
+      - label: "segmentos firmes rosa, amarillo y chocolate"
+        labelEn: "firm pink, yellow, and chocolate segments"
+  - title: "Rebanar inmediatamente mientras esté firme"
+    titleEn: "Slice immediately while firm"
+    text: &step8 "Rebana inmediatamente mientras el rollo triangular esté firme. Si hay demora o se ablanda, vuelve a envolver el triángulo armado y refrigera hasta que esté firme antes de cortar. Usa aproximadamente 2 cm de grosor como estimación editorial de trabajo para la indicación «grueso como un pulgar», no como una medición del pulgar ni de la fuente. Conserva el triángulo y los tres colores en cada corte. Los aproximadamente 45–60 g por rebanada son una referencia de rendimiento, no un peso exacto exigido junto con ese grosor. Coloca en charolas con papel para hornear."
+    textEn: &step8En "Slice immediately while the triangular log is firm. If delayed or softened, rewrap the assembled triangle and refrigerate until firm before cutting. Use approximately 2 cm thickness as an editorial working estimate for the 'thumb-thick' cue, not a measured thumb or a source measurement. Preserve the triangle and all three colors in every slice. Approximately 45–60 g per slice is a yield reference, not an exact weight required alongside that thickness. Place on parchment-lined baking sheets."
+    ingredients:
+      - label: "rollos triangulares firmes de tres colores"
+        labelEn: "firm three-color triangular logs"
+  - title: "Hornear hasta cocer por completo"
+    titleEn: "Bake until fully cooked"
+    text: &step9 "Precalienta el horno a 177°C (350°F). El rango de 13–17 minutos es de la fuente, no está validado para el grosor elegido de aproximadamente 2 cm; las galletas más gruesas pueden necesitar más tiempo. Empieza a revisar a los 10–12 minutos las más delgadas. No voltees las galletas. Busca superficies firmes, centros cocidos y bases ligeramente doradas, no muy tostadas; continúa si aún hay masa cruda. La referencia interna opcional de la fuente, 195–200°F (aprox. 91–93°C), es una nota de textura, no una garantía de inocuidad ni sustituto de la cocción completa. No pruebes masa cruda. Al terminar el horneado, retira la charola del horno y deja enfriar las galletas COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas, para que la masa quebradiza se asiente."
+    textEn: &step9En "Preheat the oven to 177°C (350°F). The source's 13–17-minute range is not validated for the chosen approximately 2 cm thickness; thicker cookies may need longer. Begin checking thinner cookies at 10–12 minutes. Do not flip the cookies. Look for set tops, cooked centers, and lightly golden bottoms, not deep browning; continue baking if any raw dough remains. The source's optional internal reference of 195–200°F (about 91–93°C) is a texture note, not a safety guarantee or a substitute for complete baking. Do not taste raw dough. After baking, remove the baking tray from the oven and let the cookies cool COMPLETELY on the same baking tray before handling or serving, so the shortbread sets."
+    ingredients:
+      - label: "rebanadas triangulares de tres colores"
+        labelEn: "three-color triangular slices"
+instructions: [*step1, *step2, *step3, *step4, *step5, *step6, *step7, *step8, *step9]
+instructionsEn: [*step1En, *step2En, *step3En, *step4En, *step5En, *step6En, *step7En, *step8En, *step9En]
 storyEn: |
-  Three colors make these tender, crumbly polvorones a cheerful pan dulce: pink, yellow, and chocolate, with vanilla in the base dough. Pink is a color, not strawberry flavor. This recipe preserves the supplied infographic without inventing a family or ranch origin.
+  Three colors make these tender, crumbly triangular polvorones a cheerful pan dulce: pink, yellow, and chocolate, with vanilla in the base dough. Pink is a color, not strawberry flavor. The user's later authoritative method supersedes the infographic's shaping and optional chill; no family or ranch origin is invented.
 
-  The source suggests about 35 cookies of approximately 60 g, with slices of approximately 45–60 g. These are approximate yield references, not a guaranteed 60 g baked weight. Nutrition and the serving control use 1/35 of the whole batch. Preparation takes 25–30 minutes, plus an optional 15–20-minute chill. Bake for 13–17 minutes at 177°C (350°F), checking from 10–12 minutes for thinner cookies. The time card uses 30 + 17 = 47 minutes without chilling; extra batches take additional time.
+  The source suggests about 35 cookies of approximately 60 g, with slices of approximately 45–60 g. These are approximate yield references, not a guaranteed 60 g baked weight. Nutrition and the serving control use 1/35 of the whole batch. This historical base yield is independent of the later thickness estimate. Preparation takes 25–30 minutes plus 20–30 minutes of required chilling until firm and the source's 13–17-minute bake at 177°C (350°F): 58–77 minutes. The time card uses 30 + 30 + 17 = 77 minutes; final cooling, extra rechilling and batches are excluded. After baking, remove the baking tray from the oven and let the cookies cool COMPLETELY on the same baking tray before handling or serving, so the shortbread sets; no cooling duration is specified. Begin checking thinner cookies at 10–12 minutes; the source bake range is not validated for approximately 2 cm slices, which may need longer.
+
+  Roll each equal colored third separately using parchment and a bench scraper to tighten it. Cut long tubes into matching refrigerator-sized segments BEFORE chilling. Wrap each colored segment separately in food-safe plastic and refrigerate 20–30 minutes until FIRM, longer if still soft. Quickly unwrap and assemble three matching cold segments, one of each color, with two below and one above. Flatten one side, rotate, flatten the next, rotate, and flatten the third evenly into a triangle, not a round log. Slice immediately while firm, with all three colors visible in every cookie; if delayed or softened, rewrap the assembled triangle and refrigerate until firm. Cold prevents crushing and deformation.
+
+  Approximately 2 cm is an editorial working estimate for the user's “thumb-thick” cue, NOT a measured thumb or an established source measurement. King Arthur Baking's thinner example is approximately 1.3 cm (converted from its 1/2-inch instruction, exactly 1.27 cm): https://www.kingarthurbaking.com/recipes/polvorones-recipe . It does not establish 2 cm; none of its flavor ingredients, egg-white assembly, oven temperature, or two-hour chill is imported here.
+
+  Conservative BASE-35 geometry example only: approximately 35 slices × approximately 2 cm = approximately 70 cm TOTAL CUTTABLE LENGTH, not one observed giant log. Three assembled tricolor logs of approximately 24/24/22 cm could give roughly 12/12/11 cookies. That requires nine colored segments (3 colors × 3 finished logs), not three single-color logs mistaken for three finished logs. Segment before chilling to fit refrigerator and trays. End trimming and cutting losses are not accounted for; actual yields change. Scale total cuttable length (selected servings × approximate thickness) and the number of manageable logs with selected servings, not a fixed 70 cm directive. Do not require exact slice weights, dimensions, and counts simultaneously.
 
   Cocoa was not recorded in the original preparation. A later recollection described a small, unweighed spoonful and explicitly expressed uncertainty; for the BASE batch of 35 servings, the authorized conversion is approx. 1.7 g for the chocolate third only, not a measured or recorded gram amount. For selected servings, use the approximate grams displayed in the ingredient and step chip, not this historical base amount. The Hershey SmartLabel reference gives a 5 g labeled serving; one third is 5 ÷ 3 = 1.666… g, rounded to 1.7 g. This is a generic conversion reference, NOT a claim that Hershey cocoa was used; the actual brand and weight are unknown. Conversion source: https://smartlabel.hersheys.com/034000052134/nutrition . Pink and yellow colorings were unweighed, as needed; their “to taste” entries do not assert any gram weight.
 
@@ -208,23 +235,62 @@ storyEn: |
 
   Unquantified colorings are excluded from nutrition, not assumed calorie-free. Sugar and sodium are not estimated; salt's zero values for these five metrics do not mean sodium-free. Brands, uncertain cocoa and egg weights, and actual cookie size affect the estimate. The serving control scales the recipe linearly, not the observed dough weights or a guaranteed baked weight.
 pubDate: 2026-10-29
+updatedDate: 2026-10-29
 author: "Familia El Cerito"
 ---
 
-Tres colores alegran estos polvorones suaves y quebradizos: rosa, amarillo y
+Tres colores alegran estos polvorones triangulares suaves y quebradizos: rosa, amarillo y
 chocolate, con vainilla en la masa base. El rosa es un color, **no sabor a fresa**.
-Aquí conservamos la infografía compartida, sin inventar una procedencia familiar
-ni un origen en el rancho.
+El método posterior autorizado por el usuario sustituye el formado y el enfriado
+opcional de la infografía, sin inventar una procedencia familiar ni un origen en el rancho.
 
 ## Rendimiento y tiempos
 
 La fuente propone aproximadamente **35 galletas de unos 60 g**, cortadas en
 rebanadas de aproximadamente **45–60 g**. Son referencias aproximadas de
 rendimiento, no un peso horneado garantizado de 60 g. La nutrición y el control
-de porciones usan **1/35 de toda la receta**. Preparar toma 25–30 minutos, más
-15–20 minutos opcionales de refrigeración. Hornea 13–17 minutos a 177°C (350°F),
-revisando desde los 10–12 minutos para las más delgadas. La ficha usa
-30 + 17 = 47 minutos sin refrigeración; las tandas adicionales requieren más tiempo.
+de porciones usan **1/35 de toda la receta**. Este rendimiento histórico base es
+independiente de la estimación posterior de grosor. Preparar toma 25–30 minutos,
+más 20–30 minutos de refrigeración obligatoria hasta firme y 13–17 minutos de
+horneado de la fuente a 177°C (350°F): 58–77 minutos. La ficha usa
+30 + 30 + 17 = 77 minutos; excluye el enfriado final, refrigeración adicional y tandas extra.
+Al terminar el horneado, retira la charola del horno y deja enfriar las galletas
+COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas, para que
+la masa quebradiza se asiente; no se especifica una duración de enfriado.
+Revisa desde los 10–12 minutos las más delgadas. El rango de la fuente no está
+validado para rebanadas de aproximadamente 2 cm, que pueden necesitar más tiempo.
+
+## Formado triangular en frío y grosor estimado
+
+Forma un tubo separado con cada tercio igual de color usando papel para hornear
+y una raspa de panadería para tensarlo. Corta tubos largos en segmentos de igual
+longitud entre los tres colores que quepan en el refrigerador ANTES de enfriar.
+Envuelve cada segmento de color por separado en plástico apto para alimentos y
+refrigera 20–30 minutos hasta que esté FIRME; continúa si sigue blando.
+Desenvuelve rápidamente tres segmentos fríos correspondientes, uno de cada color,
+y júntalos, dos abajo y uno arriba. Aplana un lado, gira, aplana el siguiente,
+gira y aplana el tercero uniformemente para un perfil triangular, no redondo.
+Rebana inmediatamente mientras esté firme y deja visibles los tres colores en
+cada galleta. Si hay demora o se ablanda, vuelve a envolver el triángulo armado
+y refrigera hasta firme. El frío evita aplastar y deformar la masa.
+
+Aproximadamente 2 cm es una estimación editorial de trabajo para la indicación
+«grueso como un pulgar» del usuario, NO una medición del pulgar ni una medida
+establecida por la fuente. El ejemplo más delgado de
+[King Arthur Baking](https://www.kingarthurbaking.com/recipes/polvorones-recipe)
+equivale a aproximadamente 1.3 cm (conversión exacta: 1.27 cm), no establece 2 cm.
+No se importan sus sabores, clara para unir, temperatura de horno ni enfriado de dos horas.
+
+Ejemplo conservador solo para la BASE de 35: aproximadamente 35 rebanadas ×
+aproximadamente 2 cm = aproximadamente 70 cm de LONGITUD TOTAL CORTABLE, no un
+rollo gigante observado. Tres rollos tricolores armados de aproximadamente
+24/24/22 cm darían unas 12/12/11 galletas. Son nueve segmentos de color
+(3 colores × 3 rollos terminados), no tres tubos de un solo color confundidos con
+tres rollos terminados. Segmenta antes de enfriar para que quepan en refrigerador
+y charolas. No se contabilizan recortes de extremos ni pérdidas al cortar; el
+rendimiento real cambia. Escala la longitud total cortable (porciones seleccionadas ×
+grosor aproximado) y el número de rollos manejables según las porciones, no una
+orden fija de 70 cm. No exijas simultáneamente peso, dimensiones y conteo exactos.
 
 ## Cocoa estimada, no pesada
 

@@ -42,6 +42,29 @@ const amountCases = [
   [9.96, '10'], [10.4, '10'], [1000, '1000'],
 ];
 
+test('bilingual finish cools completely on the tray and excludes final cooling from unchanged timing', async () => {
+  const es = /retira la charola del horno.*enfriar las galletas COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas.*masa quebradiza se asiente/;
+  const en = /remove the baking tray from the oven.*cookies cool COMPLETELY on the same baking tray before handling or serving.*shortbread sets/;
+  for (const [step, flat, pattern, start] of [
+    [recipe.steps[8].text, recipe.instructions[8], es, 'Al terminar el horneado'],
+    [recipe.steps[8].textEn, recipe.instructionsEn[8], en, 'After baking'],
+  ]) {
+    assert.match(step, pattern);
+    assert.equal(flat, step);
+    assert.doesNotMatch(step.slice(step.indexOf(start)), /\d/);
+  }
+  assert.deepEqual([recipe.prepTime, recipe.cookTime, recipe.totalTime], [30, 17, 77]);
+  const doc = normalize(await readFile(join(root, 'docs', 'recipe-drafts', `${slug}.md`), 'utf8'));
+  for (const copy of [normalize(body), doc]) {
+    assert.match(copy, /77 min(?:utos)?; (?:excluye|Excluye) el enfriado final, refrigeración adicional y tandas/);
+    assert.match(copy, /COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas/);
+  }
+  for (const copy of [recipe.storyEn, doc]) {
+    assert.match(copy, /77 (?:minutes;|min;).*final cooling, extra rechilling and batches/);
+    assert.match(copy, /COMPLETELY on the same baking tray before handling or serving/);
+  }
+});
+
 test('ingredient precision preserves tiny nonzero amounts without changing macro or normal rounding', () => {
   for (const [amount, expected] of amountCases) {
     assert.equal(formatAmount(amount, 1), expected, `amount ${amount}`);
@@ -125,12 +148,19 @@ test('bilingual names, notes, story and step four retain converted, unweighed co
   }
 });
 
-test('six bilingual rich steps mirror flat arrays, with exact ingredient references and intermediates', () => {
-  assert.equal(recipe.steps.length, 6);
+test('bilingual rich steps mirror flat arrays, with exact ingredient references and intermediates', () => {
   assert.deepEqual(recipe.instructions, recipe.steps.map((step) => step.text));
   assert.deepEqual(recipe.instructionsEn, recipe.steps.map((step) => step.textEn));
   const refs = recipe.steps.map((step) => step.ingredients.filter(Number.isInteger));
-  assert.deepEqual(refs, [[1, 2], [3, 6], [0, 4, 5], [7, 8, 9], [], []]);
+  assert.deepEqual(refs.slice(0, 4), [[1, 2], [3, 6], [0, 4, 5], [7, 8, 9]]);
+  assert.ok(refs.slice(4).every((items) => items.length === 0));
+  assert.deepEqual(recipe.steps.slice(4).map((s) => s.ingredients), [
+    [{ label: 'masas rosa, amarilla y de chocolate', labelEn: 'pink, yellow, and chocolate doughs' }],
+    [{ label: 'segmentos separados de cada color', labelEn: 'separate segments of each color' }],
+    [{ label: 'segmentos firmes rosa, amarillo y chocolate', labelEn: 'firm pink, yellow, and chocolate segments' }],
+    [{ label: 'rollos triangulares firmes de tres colores', labelEn: 'firm three-color triangular logs' }],
+    [{ label: 'rebanadas triangulares de tres colores', labelEn: 'three-color triangular slices' }],
+  ]);
   assert.deepEqual(refs.flat().sort((a, b) => a - b), weights.map((_, i) => i));
   for (const step of recipe.steps) {
     for (const item of step.ingredients.filter((i) => typeof i === 'object')) {
@@ -153,7 +183,7 @@ test('source observations remain discrepant, yield approximate, and nutrition no
   assert.equal(2162 - 2138, 24);
   for (const copy of [body, recipe.storyEn]) {
     for (const n of ['2162 g', '2138 g', '713 g', '24 g', '2163.7 g',
-      '35', '60 g', '45–60 g', '25–30', '15–20', '13–17', '10–12',
+      '35', '60 g', '45–60 g', '25–30', '20–30', '13–17', '10–12',
       '177°C', '350°F', '195–200°F', '91–93°C', '0 g', '20 g', '40 g', '1/35']) {
       assert.ok(copy.includes(n), `Missing preserved observation ${n}`);
     }
@@ -162,15 +192,60 @@ test('source observations remain discrepant, yield approximate, and nutrition no
   assert.match(recipe.storyEn, /not treated as a measured loss or reconciled using cocoa/);
   assert.match(body, /no un peso horneado garantizado de 60 g/);
   assert.match(recipe.storyEn, /not a guaranteed 60 g baked weight/);
-  assert.deepEqual([recipe.prepTime, recipe.cookTime, recipe.totalTime], [30, 17, 47]);
+  assert.deepEqual([recipe.prepTime, recipe.cookTime, recipe.totalTime], [30, 17, 77]);
   assert.match(recipe.instructions[0], /pala/);
   assert.match(recipe.instructionsEn[0], /paddle/);
   assert.match(recipe.instructions[2], /otro recipiente.*batidor/);
   assert.match(recipe.instructionsEn[2], /separate bowl.*whisk/);
-  assert.match(recipe.instructions[5], /No voltees.*centros cocidos.*no una garantía de inocuidad.*No pruebes masa cruda/);
-  assert.match(recipe.instructionsEn[5], /Do not flip.*cooked centers.*not a safety guarantee.*Do not taste raw dough/);
+  const bake = recipe.steps.find((s) => s.titleEn === 'Bake until fully cooked');
+  assert.match(bake.text, /No voltees.*centros cocidos.*no una garantía de inocuidad.*No pruebes masa cruda/);
+  assert.match(bake.textEn, /Do not flip.*cooked centers.*not a safety guarantee.*Do not taste raw dough/);
   assert.doesNotMatch(recipe.instructions.join(' ') + recipe.instructionsEn.join(' '),
     /\b\d+(?:[.,]\d+)?\s*(?:tsp|tbsp|cups?|ml|kg|oz|cucharaditas?|cucharadas?)\b/i);
+});
+
+test('required separate chill precedes quick triangular assembly and immediate firm slicing in both languages', () => {
+  const tube = recipe.steps.findIndex((s) => s.titleEn === 'Roll separate tubes and segment');
+  const chill = recipe.steps.findIndex((s) => s.titleEn === 'Wrap separately and chill until firm');
+  const triangle = recipe.steps.findIndex((s) => s.titleEn === 'Quickly assemble the triangular profile');
+  const slice = recipe.steps.findIndex((s) => s.titleEn === 'Slice immediately while firm');
+  const bake = recipe.steps.findIndex((s) => s.titleEn === 'Bake until fully cooked');
+  assert.ok(tube >= 4 && tube < chill && chill < triangle && triangle < slice && slice < bake);
+  for (const [index, es, en] of [
+    [tube, /tubo separado.*papel para hornear.*raspa.*ANTES de refrigerar.*porciones seleccionadas/, /separate tube.*parchment.*bench scraper.*BEFORE chilling.*selected servings/],
+    [chill, /cada segmento.*por separado.*plástico apto para alimentos.*20–30.*FIRMES.*obligatorio.*aplaste.*deforme/, /each colored segment separately.*food-safe plastic.*20–30.*FIRM.*required.*crushing.*deformation/],
+    [triangle, /tres segmentos fríos de igual longitud.*rápidamente.*Aplana un lado, gira, aplana el siguiente, gira y aplana el tercero.*no redondo.*tres colores.*cada galleta/, /three matching cold segments.*Quickly.*Flatten one side, rotate, flatten the next, rotate, and flatten the third.*not a round.*three colors.*every cookie/],
+    [slice, /inmediatamente.*firme.*demora.*ablanda.*envolver.*triángulo armado.*refrigera hasta.*firme.*2 cm.*estimación editorial.*no.*medición/, /immediately.*firm.*delayed.*softened.*rewrap.*assembled triangle.*refrigerate until firm.*2 cm.*editorial working estimate.*not a measured/],
+    [bake, /177°C.*13–17.*no está validado.*2 cm.*más tiempo.*10–12/, /177°C.*13–17.*not validated.*2 cm.*need longer.*10–12/],
+  ]) {
+    assert.match(recipe.steps[index].text, es);
+    assert.match(recipe.steps[index].textEn, en);
+  }
+  const current = recipe.instructions.join(' ') + recipe.instructionsEn.join(' ') + body + recipe.storyEn;
+  assert.doesNotMatch(current, /15–20|47 minutos|47 minutes/);
+  for (const step of recipe.steps) assert.doesNotMatch(step.text + step.textEn, /70\s*cm/);
+  assert.equal(recipe.updatedDate.toISOString().slice(0, 10), '2026-10-29');
+});
+
+test('bilingual geometry separates editorial thickness from historical yield and scales manageable logs', () => {
+  for (const [copy, estimate, scaling, losses] of [
+    [body, /estimación editorial de trabajo.*«grueso como un pulgar»/, /porciones seleccionadas ×\s*grosor aproximado/, /No se contabilizan recortes de extremos ni pérdidas/],
+    [recipe.storyEn, /editorial working estimate.*thumb-thick/, /selected servings × approximate thickness/, /End trimming and cutting losses are not accounted for/],
+  ]) {
+    assert.match(normalize(copy), estimate);
+    assert.match(copy, scaling);
+    assert.match(copy, losses);
+    for (const value of ['2 cm', '1.3 cm', '1.27 cm', '24/24/22 cm', '12/12/11',
+      '58–77', '30 + 30 + 17 = 77', 'https://www.kingarthurbaking.com/recipes/polvorones-recipe']) {
+      assert.ok(copy.includes(value), `Missing geometry/timing disclosure ${value}`);
+    }
+  }
+  assert.match(body, /nueve segmentos de color/);
+  assert.match(recipe.storyEn, /nine colored segments/);
+  assert.match(body, /independiente de la estimación posterior de grosor/);
+  assert.match(recipe.storyEn, /historical base yield is independent of the later thickness estimate/);
+  assert.match(body, /no un\s*rollo gigante observado/);
+  assert.match(recipe.storyEn, /not one observed giant log/);
 });
 
 test('per-ingredient profiles and per-serving sums include cocoa once and exclude unknown colorings', () => {
@@ -206,14 +281,25 @@ test('editorial status resolves the old blocker while retaining the historical m
   assert.match(doc, /BASE batch of 35 servings/);
   for (const expected of ['0.049 g', '0.8 g', '2.4 g']) assert.ok(doc.includes(expected));
   assert.doesNotMatch(doc, /UNPUBLISHED \/ BLOCKED|publication is blocked|blocks publication|confirm grams before publication/);
+  assert.match(doc, /Historical source and cover, superseded/);
+  assert.match(doc, /NOT current instructions/);
+  assert.match(doc, /20–30-minute chill[\s\S]*mandatory/);
+  assert.match(doc, /not a measured thumb or source measurement/);
+  assert.ok(doc.includes('/images/recipes/polvorones-tres-colores-triangulares.jpg'));
 });
 
-test('existing cover stays a 1200×900 JPEG and is copied unchanged to the build', async () => {
-  const image = await readFile(join(root, 'public', 'images', 'recipes', `${slug}.jpg`));
+test('triangular three-color cover replaces the old round reference with bilingual alt', () => {
+  assert.equal(recipe.coverImage, '/images/recipes/polvorones-tres-colores-triangulares.jpg');
+  assert.match(recipe.coverImageAlt, /triangulares de tres colores.*rosa, amarillo y chocolate.*Triangular three-color.*pink, yellow, and chocolate/);
+  assert.doesNotMatch(source, /\/images\/recipes\/polvorones-tres-colores\.jpg/);
+});
+
+test('approved triangular cover is a 1200×900 JPEG copied unchanged to the build', async () => {
+  const image = await readFile(join(root, 'public', recipe.coverImage));
   const metadata = await sharp(image).metadata();
   assert.deepEqual([metadata.format, metadata.width, metadata.height], ['jpeg', 1200, 900]);
   assert.ok(image.length > 20000);
-  assert.ok(image.equals(await readFile(join(root, 'dist', 'client', 'images', 'recipes', `${slug}.jpg`))));
+  assert.ok(image.equals(await readFile(join(root, 'dist', 'client', recipe.coverImage))));
 });
 
 for (const lang of ['es', 'en']) {
@@ -232,7 +318,9 @@ for (const lang of ['es', 'en']) {
     assert.equal(structured.name, recipe[`title${suffix}`]);
     assert.equal(structured.inLanguage, lang === 'es' ? 'es-MX' : 'en-US');
     assert.equal(structured.recipeYield, `35 ${recipe[`servingLabel${suffix}`]}`);
-    assert.equal(structured.totalTime, 'PT47M');
+    assert.equal(structured.prepTime, 'PT30M');
+    assert.equal(structured.cookTime, 'PT17M');
+    assert.equal(structured.totalTime, 'PT77M');
     assert.equal(structured.nutrition.calories, `${recipe.macros.calories} kcal`);
     assert.deepEqual(structured.recipeInstructions.map((s) => s.text), recipe[`instructions${suffix}`]);
     assert.deepEqual(payload, {
@@ -246,6 +334,9 @@ for (const lang of ['es', 'en']) {
         : `${ing.amount} g ${ing[`name${suffix}`]}`);
     });
     assert.equal(structured.image, `https://el-cerito.vercel.app${recipe.coverImage}`);
+    assert.ok(elements(document, (n) => n.tagName === 'img')
+      .some((n) => attr(n, 'src') === recipe.coverImage && attr(n, 'alt') === recipe.coverImageAlt));
+    assert.doesNotMatch(html, /\/images\/recipes\/polvorones-tres-colores\.jpg/);
     for (const ing of recipe.ingredients) {
       assert.ok(content.includes(ing[`name${suffix}`]));
       assert.ok(content.includes(ing[`note${suffix}`]));
