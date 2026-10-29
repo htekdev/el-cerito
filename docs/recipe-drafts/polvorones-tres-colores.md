@@ -1,10 +1,18 @@
 # Polvorones de tres colores / Three-Color Polvorones
 
-**UNPUBLISHED / BLOCKED — NO PUBLICADO / BLOQUEADO**
+**PREPARADO PARA PUBLICACIÓN / PREPARED FOR PUBLICATION — cocoa estimada / estimated cocoa**
 
-Este es un borrador editorial, no una entrada de la colección de recetas. La cantidad de cocoa no quedó registrada; no publicar hasta confirmar sus gramos y calcular posteriormente la información nutricional. Los cálculos nutricionales futuros serán estimaciones, no valores exactos. No se incluyen macros ni cantidades numéricas de relleno.
+Este documento conserva la transcripción editorial y el historial de aclaración. La entrada publicable está en `src/content/recipes/polvorones-tres-colores.md`, con nutrición estimada y cocoa de aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados. No se inventan pesos de colorantes ni se cambia el esquema.
 
-This is an editorial draft, not a recipe collection entry. The cocoa quantity was not recorded; publication is blocked until its weight in grams is confirmed and nutrition is subsequently calculated. Future nutrition calculations will be estimates, not exact values. No macros or numeric stand-ins are supplied.
+This document preserves the editorial transcription and clarification history. The publishable entry is `src/content/recipes/polvorones-tres-colores.md`, with estimated nutrition and approx. 1.7 g cocoa converted from an unweighed recollection, not recorded grams. No coloring weights are invented and the schema is unchanged.
+
+## Aclaración posterior autorizada / Authorized later clarification
+
+- Hector: “I don't know, I just did like a teaspoon of the cocoa powder, but really I don't really know much cocoa powder.”
+- La cocoa original no fue pesada ni registrada. Se autorizó una conversión aproximada, sin otra aclaración: etiqueta Hershey `1 tbsp = 5 g`; un tercio es `5 ÷ 3 = 1.666… g`, redondeado a **aprox. 1.7 g solo en el tercio de chocolate**. La marca real es desconocida; Hershey es una referencia genérica, no identifica la marca utilizada.
+- The original cocoa was not weighed or recorded. An approximate conversion was authorized without further clarification: Hershey label `1 tbsp = 5 g`; one third is `5 ÷ 3 = 1.666… g`, rounded to **approx. 1.7 g for the chocolate third only**. The actual brand is unknown; Hershey is a generic reference, not a claim about the brand used.
+- Conversión / Conversion: https://smartlabel.hersheys.com/034000052134/nutrition . Direct text extraction returned only a page shell; independent search confirmed the manufacturer's 5 g serving.
+- Colorantes / Colorings: sin pesar, según sea necesario / unweighed, as needed. Las entradas usan / entries use `amount: 1, unit: "to taste"` como centinela del esquema, no un peso / as the schema sentinel, not a weight.
 
 ## Fuente y portada / Source and cover
 
@@ -39,13 +47,13 @@ Polvorones suaves y quebradizos de tres colores: rosa, amarillo y chocolate. Una
 | Harina de trigo de uso general | 1000 g | Pesar; mezclar con el polvo para hornear y la sal antes de incorporar a los húmedos. |
 | Manteca vegetal | 500 g | Pesar; acremar con el azúcar usando el accesorio de pala. |
 | Azúcar granulada | 400 g | Pesar; incorporar a la manteca para acremar. |
-| Huevos grandes | 4, aproximadamente 200 g | Cascar e incorporar con la vainilla; el peso indicado es aproximado. |
+| Huevos grandes | Aproximadamente 200 g (unos 4 grandes) | Cascar e incorporar con la vainilla; el peso indicado es aproximado. |
 | Polvo para hornear | 16 g | Pesar; mezclar con la harina y la sal. |
 | Sal | 6 g | Pesar; mezclar con la harina y el polvo para hornear. |
 | Extracto de vainilla | 40 g | Pesar e incorporar con los huevos. |
 | Colorante alimentario rosa | Según sea necesario | Incorporar en una de las tres porciones; aporta color, no sabor a fresa. |
 | Colorante alimentario amarillo | Según sea necesario | Incorporar en otra porción. |
-| Cocoa en polvo | Cantidad no registrada — bloquea publicación | Incorporar en la tercera porción para chocolate; confirmar los gramos antes de publicar. |
+| Cocoa en polvo | Original sin registrar; aclaración: aprox. 1.7 g convertidos, no pesados | Incorporar solo en el tercio de chocolate; estimación autorizada, no medición. |
 
 Leche: la fuente registra 0 g, no utilizada porque la masa ya estaba suficientemente suave. Es una observación del proceso, no un ingrediente activo ni una instrucción de añadir leche.
 
@@ -54,7 +62,7 @@ Leche: la fuente registra 0 g, no utilizada porque la masa ya estaba suficientem
 1. **Acremar manteca y azúcar.** En una batidora de pedestal con el accesorio de pala, mezclar la manteca vegetal y el azúcar hasta obtener una mezcla suave y cremosa.
 2. **Añadir huevos y vainilla.** Incorporar los huevos y los 40 g de extracto de vainilla. Mezclar hasta integrar bien.
 3. **Combinar los secos.** En otro recipiente, mezclar con batidor la harina, el polvo para hornear y la sal. Añadir a la mezcla húmeda y mezclar hasta formar una masa cohesiva.
-4. **Dividir y colorear.** La masa terminada pesó 2138 g según la observación de la fuente. Dividir en tres porciones iguales, aproximadamente 713 g cada una. Colorear una de rosa y otra de amarillo; incorporar cocoa a la tercera para la porción de chocolate. La cantidad de cocoa no quedó registrada: este paso no constituye una fórmula completa publicable.
+4. **Dividir y colorear.** La masa terminada pesó 2138 g según la observación de la fuente. Dividir en tres porciones iguales, aproximadamente 713 g cada una. Colorear una de rosa y otra de amarillo; incorporar cocoa solo a la tercera para chocolate. La cantidad original no quedó registrada; la aclaración posterior autoriza aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados.
 5. **Formar el rollo.** Acomodar juntas las tres masas de colores y formar un rollo. Refrigerar 15–20 minutos si hace falta que se afirme.
 6. **Rebanar y hornear.** Cortar rebanadas de aproximadamente 45–60 g, colocarlas sobre una charola y hornear a 350 °F (177 °C) durante 13–17 minutos. Empezar a revisar a los 10–12 minutos, especialmente las más delgadas. No voltear durante el horneado. Buscar superficies firmes y bases ligeramente doradas, no galletas muy tostadas.
 
@@ -89,13 +97,13 @@ Tender, crumbly polvorones in three colors: pink, yellow, and chocolate. A color
 | All-purpose flour | 1000 g | Weigh; whisk with the baking powder and salt before adding to the wet mixture. |
 | Vegetable shortening | 500 g | Weigh; cream with the sugar using the paddle attachment. |
 | Granulated sugar | 400 g | Weigh; add to the shortening for creaming. |
-| Large eggs | 4, about 200 g | Crack and incorporate with the vanilla; the stated weight is approximate. |
+| Large eggs | About 200 g (about 4 large eggs) | Crack and incorporate with the vanilla; the stated weight is approximate. |
 | Baking powder | 16 g | Weigh; whisk with the flour and salt. |
 | Salt | 6 g | Weigh; whisk with the flour and baking powder. |
 | Vanilla extract | 40 g | Weigh and incorporate with the eggs. |
 | Pink food coloring | As needed | Incorporate into one of the three portions; adds color, not strawberry flavor. |
 | Yellow food coloring | As needed | Incorporate into another portion. |
-| Cocoa powder | Amount not recorded — blocks publication | Incorporate into the third portion for chocolate; confirm grams before publication. |
+| Cocoa powder | Original unrecorded; clarification: approx. 1.7 g converted, not weighed | Incorporate into the chocolate third only; authorized estimate, not a measurement. |
 
 Milk: the source records 0 g, not used because the dough was already soft enough. This is a process observation, not an active ingredient or an instruction to add milk.
 
@@ -104,7 +112,7 @@ Milk: the source records 0 g, not used because the dough was already soft enough
 1. **Cream shortening and sugar.** Using a stand mixer fitted with the paddle attachment, mix the vegetable shortening and sugar until smooth and creamy.
 2. **Add eggs and vanilla.** Incorporate the eggs and 40 g vanilla extract. Mix until well combined.
 3. **Combine dry ingredients.** In a separate bowl, whisk together the flour, baking powder, and salt. Add to the wet mixture and mix until a cohesive dough forms.
-4. **Divide and color the dough.** The finished dough weighed 2138 g according to the source observation. Divide into three equal portions, about 713 g each. Color one portion pink and another yellow; incorporate cocoa into the third for the chocolate portion. The cocoa quantity was not recorded: this step is not a complete publishable formula.
+4. **Divide and color the dough.** The finished dough weighed 2138 g according to the source observation. Divide into three equal portions, about 713 g each. Color one portion pink and another yellow; incorporate cocoa into the chocolate third only. The original amount was not recorded; the later clarification authorizes approx. 1.7 g converted from an unweighed recollection, not recorded grams.
 5. **Assemble the log.** Arrange the three colored doughs together and roll into a log. Chill for 15–20 minutes if needed to firm up.
 6. **Slice and bake.** Cut slices weighing approximately 45–60 g, place on a baking sheet, and bake at 350 °F (177 °C) for 13–17 minutes. Begin checking at 10–12 minutes, especially for thinner cookies. Do not flip while baking. Look for set tops and lightly golden bottoms, not deeply browned cookies.
 
@@ -117,15 +125,15 @@ Milk: the source records 0 g, not used because the dough was already soft enough
 - Known ingredient weights total 2162 g, treating the eggs as approximately 200 g and excluding cocoa and coloring. Observed dough weight was 2138 g: a 24 g discrepancy with no recorded explanation. It is not corrected or interpreted as a measured loss.
 - The three portions of about 713 g are a rounded observation, not an exact weight reconciliation. Approximate yield and slicing weights are not converted into exact quantities either.
 
-## Mapa futuro de referencias / Future reference map
+## Mapa de referencias publicado / Authored reference map
 
-Plan editorial únicamente; no es frontmatter ni una entrada válida de colección. No cambiar el esquema para acomodar cantidades desconocidas. La colección exige cantidades numéricas y macros; aunque las rutas excluyen borradores, no se crea una receta en la colección.
+Este documento no es frontmatter. El mapa se implementó en la entrada publicable, sin modificar el esquema: cocoa estimada con incertidumbre explícita, colorantes sin peso mediante el centinela «al gusto» y macros calculados.
 
-Editorial plan only; not frontmatter or a valid collection entry. Do not change the schema to accommodate unknown quantities. The collection requires numeric ingredient amounts and macros; although routes exclude drafts, no collection recipe is being created.
+This document is not frontmatter. The map is implemented in the publishable entry without changing the schema: cocoa estimated with explicit uncertainty, unweighed colorings using the “to taste” sentinel, and calculated macros.
 
 ### Índices de ingredientes desde cero / Zero-based ingredient indices
 
-| Future index | Ingrediente / Ingredient |
+| Index | Ingrediente / Ingredient |
 | --- | --- |
 | 0 | Harina / Flour |
 | 1 | Manteca vegetal / Vegetable shortening |
@@ -136,13 +144,13 @@ Editorial plan only; not frontmatter or a valid collection entry. Do not change 
 | 6 | Vainilla / Vanilla |
 | 7 | Colorante rosa / Pink coloring |
 | 8 | Colorante amarillo / Yellow coloring |
-| 9 | Cocoa / Cocoa powder — cantidad sin registrar / amount unrecorded |
+| 9 | Cocoa / Cocoa powder — aprox. 1.7 g convertidos, no registrados / approx. 1.7 g converted, not recorded |
 
 La leche no se incluye en el mapa porque no se utilizó. / Milk is excluded from the map because it was not used.
 
-### Pasos y referencias futuras / Steps and future references
+### Pasos y referencias / Steps and references
 
-| Paso / Step | Future `ingredients` references or intermediate labels |
+| Paso / Step | `ingredients` references or intermediate labels |
 | --- | --- |
 | 1 — Acremar / Cream | `[1, 2]` |
 | 2 — Huevos y vainilla / Eggs and vanilla | `[3, 6]`; intermediate `label: "Manteca y azúcar acremados"`, `labelEn: "Creamed shortening and sugar"` |
@@ -151,9 +159,14 @@ La leche no se incluye en el mapa porque no se utilizó. / Milk is excluded from
 | 5 — Formar y refrigerar / Assemble and chill | Intermediate labels only: `label: "Masas rosa, amarilla y de chocolate"`, `labelEn: "Pink, yellow, and chocolate doughs"` |
 | 6 — Rebanar y hornear / Slice and bake | Intermediate labels only: `label: "Rollo de masa de tres colores"`, `labelEn: "Three-color dough log"` |
 
-## Bloqueos de publicación / Publication blockers
+## Resolución y nutrición / Resolution and nutrition
 
-1. Confirmar los gramos de cocoa utilizados en la porción de chocolate; no sustituir por cero, por una cantidad inventada ni por un valor numérico de relleno. / Confirm the cocoa grams used in the chocolate portion; do not substitute zero, an invented quantity, or a numeric stand-in.
-2. Después, calcular la nutrición por ingrediente y por porción con fuentes identificables y supuestos explícitos, indicando siempre que son estimaciones, no datos exactos. No se calculó nutrición en este borrador. / Then calculate per-ingredient and per-serving nutrition using identifiable sources and explicit assumptions, always labeling the results as estimates rather than exact values. Nutrition was not calculated in this draft.
+El bloqueo original solicitaba gramos medidos. Se resolvió con autorización de una **estimación transparente**, no con una confirmación ficticia de peso. La entrada pública incluye historia bilingüe, incertidumbre en ingrediente y paso 4, fuentes y cálculo por ingrediente. No se altera la observación de 2138 g ni sus tercios de aproximadamente 713 g; la base conocida sigue sumando 2162 g, con discrepancia inexplicada de 24 g. No se usa cocoa para conciliarla.
 
-**Clarification:** How many grams of cocoa powder did you add to the chocolate portion?
+The original blocker requested measured grams. It was resolved by authorization of a **transparent estimate**, not a fabricated weight confirmation. The public entry includes bilingual stories, ingredient and step 4 uncertainty, sources, and per-ingredient arithmetic. The observed 2138 g and roughly 713 g thirds are unchanged; the known base remains 2162 g with an unexplained 24 g discrepancy. Cocoa does not reconcile it.
+
+Perfiles genéricos / Generic profiles: USDA FoodData Central SR Legacy, https://fdc.nal.usda.gov/food-search/?type=SR+Legacy ; https://fdc.nal.usda.gov/data-documentation.html . La receta pública detalla todos los perfiles y aportes / the public recipe details every profile and contribution.
+
+Cada aporte / Each contribution = perfil / profile × gramos / grams ÷ 100. Totales de la receta / Batch totals: **10021.556 kcal; proteína / protein 128.7772 g; carbohidratos / carbs 1174.2163 g; grasa / fat 528.9269 g; fibra / fiber 27.629 g**. Incluyen una sola vez la cocoa estimada: **3.876 kcal; P 0.3332 g; C 0.9843 g; F 0.2329 g; fibra / fiber 0.629 g**. Colorantes sin cuantificar excluidos, no asumidos libres de calorías / unquantified colorings excluded, not assumed calorie-free.
+
+Por porción / Per serving = total ÷ 35: **286.3301714285714 kcal; P 3.679348571428571 g; C 33.549037142857145 g; F 15.112197142857145 g; fibra / fiber 0.7894 g**. Es 1/35 de la receta, no 60 g horneados garantizados / this is 1/35 of the batch, not a guaranteed 60 g baked cookie. No se estimaron azúcar ni sodio / sugar and sodium were not estimated.

@@ -84,7 +84,9 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     prepTime: `PT${d.prepTime}M`,
     cookTime: `PT${d.cookTime}M`,
     totalTime: `PT${time}M`,
-    recipeIngredient: d.ingredients.map((i) => `${i.amount} ${i.unit} ${rIngredientName(i, lang)}`),
+    recipeIngredient: d.ingredients.map((i) => i.unit === 'to taste'
+      ? `${rIngredientName(i, lang)} (${t('recipe.toTaste')})`
+      : `${i.amount} ${i.unit} ${rIngredientName(i, lang)}`),
     recipeInstructions: instructions.map((step, idx) => ({
       '@type': 'HowToStep', position: idx + 1, text: step,
     })),
