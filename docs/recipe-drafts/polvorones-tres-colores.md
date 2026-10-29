@@ -84,8 +84,14 @@ referencias aproximadas, no pesos exactos exigidos junto con dimensiones y conte
 weights required alongside dimensions and count.
 
 Tiempos vigentes / Current timing: 25–30 prep + 20–30 mandatory chill + 13–17
-source bake = 58–77 min; card prep 30, cook 17, total 77. Excluye refrigeración
-adicional y tandas / excludes extra rechilling and batches. El rango de la fuente
+source bake = 58–77 min; card prep 30, cook 17, total 77 min; Excluye el enfriado final,
+refrigeración adicional y tandas / excludes final cooling, extra rechilling and batches.
+Al terminar el horneado, retirar la charola del horno y dejar enfriar las galletas
+COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas para que
+la masa quebradiza se asiente; no se especifican minutos de enfriado.
+After baking, remove the baking tray from the oven and let the cookies cool
+COMPLETELY on the same baking tray before handling or serving so the shortbread
+sets; no cooling minutes are specified. El rango de la fuente
 13–17 min a 177°C no está validado para 2 cm; revisar las delgadas desde 10–12,
 las gruesas pueden tardar más; cocer completamente sin dorar demasiado /
 the source's 13–17 min at 177°C is not validated for 2 cm; check thinner cookies

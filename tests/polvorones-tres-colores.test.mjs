@@ -42,6 +42,29 @@ const amountCases = [
   [9.96, '10'], [10.4, '10'], [1000, '1000'],
 ];
 
+test('bilingual finish cools completely on the tray and excludes final cooling from unchanged timing', async () => {
+  const es = /retira la charola del horno.*enfriar las galletas COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas.*masa quebradiza se asiente/;
+  const en = /remove the baking tray from the oven.*cookies cool COMPLETELY on the same baking tray before handling or serving.*shortbread sets/;
+  for (const [step, flat, pattern, start] of [
+    [recipe.steps[8].text, recipe.instructions[8], es, 'Al terminar el horneado'],
+    [recipe.steps[8].textEn, recipe.instructionsEn[8], en, 'After baking'],
+  ]) {
+    assert.match(step, pattern);
+    assert.equal(flat, step);
+    assert.doesNotMatch(step.slice(step.indexOf(start)), /\d/);
+  }
+  assert.deepEqual([recipe.prepTime, recipe.cookTime, recipe.totalTime], [30, 17, 77]);
+  const doc = normalize(await readFile(join(root, 'docs', 'recipe-drafts', `${slug}.md`), 'utf8'));
+  for (const copy of [normalize(body), doc]) {
+    assert.match(copy, /77 min(?:utos)?; (?:excluye|Excluye) el enfriado final, refrigeración adicional y tandas/);
+    assert.match(copy, /COMPLETAMENTE sobre la misma charola antes de manipularlas o servirlas/);
+  }
+  for (const copy of [recipe.storyEn, doc]) {
+    assert.match(copy, /77 (?:minutes;|min;).*final cooling, extra rechilling and batches/);
+    assert.match(copy, /COMPLETELY on the same baking tray before handling or serving/);
+  }
+});
+
 test('ingredient precision preserves tiny nonzero amounts without changing macro or normal rounding', () => {
   for (const [amount, expected] of amountCases) {
     assert.equal(formatAmount(amount, 1), expected, `amount ${amount}`);
