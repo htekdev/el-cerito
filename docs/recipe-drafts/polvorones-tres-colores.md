@@ -22,7 +22,84 @@ Ingredient formatting retains two significant digits below 0.1 g without changin
 - Conversión / Conversion: https://smartlabel.hersheys.com/034000052134/nutrition . Direct text extraction returned only a page shell; independent search confirmed the manufacturer's 5 g serving.
 - Colorantes / Colorings: sin pesar, según sea necesario / unweighed, as needed. Las entradas usan / entries use `amount: 1, unit: "to taste"` como centinela del esquema, no un peso / as the schema sentinel, not a weight.
 
-## Fuente y portada / Source and cover
+## Método vigente autorizado — 2026-10-29 / Current authorized method
+
+Portada actual: fotografía ilustrativa generada con la herramienta aprobada
+`generate_image` (gpt-image-2), no una foto de la tanda real. Se rechazó una
+primera versión por mostrar un bloque rectangular en el fondo; la segunda
+muestra únicamente galletas triangulares tricolores. Conversión estándar a
+JPG 1200×900, sin recortar ni transformar las formas para simular triángulos.
+
+Current cover: illustrative food photograph generated with the approved
+`generate_image` tool (gpt-image-2), not a photo of the actual batch. A first
+version was rejected for a rectangular block in the background; the second
+shows only triangular tricolor cookies. Standard 1200×900 JPG encoding, without
+cropping or transforming shapes to simulate triangles.
+
+La instrucción posterior del usuario sustituye el método de la infografía:
+formar un tubo separado por tercio igual de color con papel para hornear y raspa
+de panadería para tensar. Cortar tubos largos ANTES de enfriar en segmentos
+correspondientes que quepan en refrigerador y charolas. Envolver cada segmento
+de color por separado en plástico apto para alimentos; refrigerar obligatoriamente
+20–30 minutos hasta FIRME, más si sigue blando. Desenvolver tres segmentos fríos
+de igual longitud (uno de cada color) y unir rápidamente dos abajo y uno arriba.
+Aplanar un lado, girar, aplanar el siguiente, girar y aplanar el tercero uniformemente:
+perfil triangular, no redondo, tres colores en cada galleta. Rebanar inmediatamente
+mientras firme; ante demora o ablandamiento, envolver otra vez el triángulo armado
+y refrigerar hasta firme. El frío evita aplastar y deformar.
+
+The user's later instruction supersedes the infographic method: roll each equal
+colored third separately with parchment and a bench scraper to tighten it.
+Cut long tubes BEFORE chilling into matching refrigerator- and tray-sized segments.
+Wrap each colored segment separately in food-safe plastic; the 20–30-minute chill
+until FIRM is mandatory, longer if still soft. Unwrap three matching cold segments,
+one of each color, and quickly assemble two below and one above. Flatten one side,
+rotate, flatten the next, rotate, and flatten the third evenly: triangular, not round,
+with all three colors in every cookie. Slice immediately while firm; if delayed
+or softened, rewrap the assembled triangle and refrigerate until firm.
+Cold prevents crushing and deformation.
+
+Aprox. 2 cm es una **estimación editorial de trabajo** para «grueso como un pulgar»,
+no una medición del pulgar ni de la fuente. Approximately 2 cm is an **editorial
+working estimate** for “thumb-thick,” not a measured thumb or source measurement.
+King Arthur Baking: https://www.kingarthurbaking.com/recipes/polvorones-recipe
+indica 1/2 inch = 1.27 cm (aprox. / approx. 1.3 cm), ejemplo más delgado / thinner
+example, NOT evidence for 2 cm. No se importan sabores, clara, temperatura ni
+enfriado de dos horas / no flavor ingredients, egg-white assembly, oven temperature,
+or two-hour chill are imported.
+
+Ejemplo conservador BASE-35 / Conservative BASE-35 example only:
+aprox. / approx. 35 slices × 2 cm ≈ 70 cm **TOTAL CUTTABLE LENGTH / LONGITUD TOTAL
+CORTABLE**, not one observed giant log. Tres rollos tricolores terminados /
+three finished tricolor logs ≈ 24/24/22 cm → 12/12/11 cookies; nueve segmentos
+de color / nine colored segments (3 colors × 3 logs), not three single-color
+logs confused with three finished logs. No se incluyen recortes ni pérdidas /
+end trimming and cutting losses are not accounted for; actual yields change.
+La longitud total y el número de rollos escalan con porciones seleccionadas /
+total length and log count scale with selected servings, not a fixed 70 cm instruction.
+El rendimiento histórico de 35 es independiente del grosor / historical yield 35
+is independent of thickness. Los 45–60 g por rebanada y unos 60 g por galleta son
+referencias aproximadas, no pesos exactos exigidos junto con dimensiones y conteo /
+45–60 g slices and roughly 60 g cookies remain approximate references, not exact
+weights required alongside dimensions and count.
+
+Tiempos vigentes / Current timing: 25–30 prep + 20–30 mandatory chill + 13–17
+source bake = 58–77 min; card prep 30, cook 17, total 77. Excluye refrigeración
+adicional y tandas / excludes extra rechilling and batches. El rango de la fuente
+13–17 min a 177°C no está validado para 2 cm; revisar las delgadas desde 10–12,
+las gruesas pueden tardar más; cocer completamente sin dorar demasiado /
+the source's 13–17 min at 177°C is not validated for 2 cm; check thinner cookies
+from 10–12, thicker ones may need longer; fully cook without deep browning.
+
+Portada vigente / Current cover target:
+`/images/recipes/polvorones-tres-colores-triangulares.jpg`.
+Alt ES: “Polvorones triangulares de tres colores: rosa, amarillo y chocolate visibles en cada galleta”.
+Alt EN: “Triangular three-color polvorones with pink, yellow, and chocolate visible in every cookie”.
+La foto redonda anterior no se usa en la receta vigente / the old round photo
+is not used in the current recipe. El padre integra el recurso aprobado por separado /
+the parent integrates the approved asset separately.
+
+## Fuente y portada históricas, sustituidas / Historical source and cover, superseded
 
 - Fuente / Source: infografía proporcionada por Telegram / supplied Telegram infographic, `1793289258415-AgACAgEAAxkBAAKnt2rja4MxXrHvjAKTTjZ6dx6ZkzXiAAJiDWsbIckYRxmRTAtgI-bDAQADAgADdwADPQQ.jpg`.
 - Transcripción editorial bilingüe de los ingredientes, procedimiento y notas visibles, con la corrección expresa de que rosa es un color, no sabor a fresa. No se atribuye esta preparación a una familia ni al rancho.
@@ -33,7 +110,11 @@ Ingredient formatting retains two significant digits below 0.1 g without changin
 - Alt ES: “Polvorones redondos con franjas rosa, amarilla y de chocolate sobre un plato decorado.”
 - Alt EN: “Round polvorones with pink, yellow, and chocolate stripes on a decorated plate.”
 
-## Español — transcripción editorial
+## Español — transcripción editorial histórica, método sustituido
+
+Lo que sigue conserva la infografía como historial, NO instrucciones vigentes.
+El enfriado opcional de 15–20 minutos y el rollo original quedan sustituidos por
+el método triangular con enfriado obligatorio anterior.
 
 ### Descripción
 
@@ -83,7 +164,11 @@ Leche: la fuente registra 0 g, no utilizada porque la masa ya estaba suficientem
 - Los ingredientes con peso conocido suman 2162 g, tomando los huevos como aproximadamente 200 g y sin incluir cocoa ni colorantes. La masa observada fue de 2138 g: hay una discrepancia de 24 g sin explicación registrada. No se corrige ni se interpreta como una pérdida medida.
 - Las tres porciones de aproximadamente 713 g son una observación redondeada; no una conciliación exacta de pesos. El rendimiento aproximado y los pesos de corte tampoco se convierten en cantidades exactas.
 
-## English — editorial transcription
+## English — historical editorial transcription, superseded method
+
+The following preserves the infographic as history, NOT current instructions.
+The optional 15–20-minute chill and original log are superseded by the mandatory
+chilled triangular method above.
 
 ### Description
 
@@ -164,8 +249,11 @@ La leche no se incluye en el mapa porque no se utilizó. / Milk is excluded from
 | 2 — Huevos y vainilla / Eggs and vanilla | `[3, 6]`; intermediate `label: "Manteca y azúcar acremados"`, `labelEn: "Creamed shortening and sugar"` |
 | 3 — Secos / Dry ingredients | `[0, 4, 5]`; intermediate `label: "Mezcla húmeda"`, `labelEn: "Wet mixture"` |
 | 4 — Dividir y colorear / Divide and color | `[7, 8, 9]`; intermediate `label: "Masa preparada, dividida en tres porciones"`, `labelEn: "Prepared dough, divided into three portions"` |
-| 5 — Formar y refrigerar / Assemble and chill | Intermediate labels only: `label: "Masas rosa, amarilla y de chocolate"`, `labelEn: "Pink, yellow, and chocolate doughs"` |
-| 6 — Rebanar y hornear / Slice and bake | Intermediate labels only: `label: "Rollo de masa de tres colores"`, `labelEn: "Three-color dough log"` |
+| 5 — Tubos y segmentos / Tubes and segments | Intermediate only: `masas rosa, amarilla y de chocolate` / `pink, yellow, and chocolate doughs` |
+| 6 — Enfriado obligatorio / Required chilling | Intermediate only: `segmentos separados de cada color` / `separate segments of each color` |
+| 7 — Perfil triangular / Triangular profile | Intermediate only: `segmentos firmes rosa, amarillo y chocolate` / `firm pink, yellow, and chocolate segments` |
+| 8 — Rebanar firme / Slice firm | Intermediate only: `rollos triangulares firmes de tres colores` / `firm three-color triangular logs` |
+| 9 — Hornear / Bake | Intermediate only: `rebanadas triangulares de tres colores` / `three-color triangular slices` |
 
 ## Resolución y nutrición / Resolution and nutrition
 
