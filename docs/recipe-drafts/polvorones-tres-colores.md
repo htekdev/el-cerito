@@ -2,9 +2,17 @@
 
 **PREPARADO PARA PUBLICACIÓN / PREPARED FOR PUBLICATION — cocoa estimada / estimated cocoa**
 
-Este documento conserva la transcripción editorial y el historial de aclaración. La entrada publicable está en `src/content/recipes/polvorones-tres-colores.md`, con nutrición estimada y cocoa de aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados. No se inventan pesos de colorantes ni se cambia el esquema.
+Este documento conserva la transcripción editorial y el historial de aclaración para la tanda BASE de 35 porciones. La entrada publicable está en `src/content/recipes/polvorones-tres-colores.md`, con nutrición estimada y cocoa de aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados. No se inventan pesos de colorantes ni se cambia el esquema.
 
-This document preserves the editorial transcription and clarification history. The publishable entry is `src/content/recipes/polvorones-tres-colores.md`, with estimated nutrition and approx. 1.7 g cocoa converted from an unweighed recollection, not recorded grams. No coloring weights are invented and the schema is unchanged.
+This document preserves the editorial transcription and clarification history for the BASE batch of 35 servings. The publishable entry is `src/content/recipes/polvorones-tres-colores.md`, with estimated nutrition and approx. 1.7 g cocoa converted from an unweighed recollection, not recorded grams. No coloring weights are invented and the schema is unchanged.
+
+Los nombres de cocoa no fijan gramos. Las notas y el paso 4 remiten a la cantidad aproximada mostrada para las porciones seleccionadas, solo para el tercio de chocolate; sigue siendo un recuerdo convertido sin pesar, no gramos registrados, y la marca es desconocida. Las cantidades históricas de esta transcripción corresponden a la BASE de 35 porciones, no a cualquier tanda seleccionada.
+
+Cocoa names do not hardcode grams. Notes and step 4 refer to the approximate amount displayed for the selected servings, for the chocolate third only; it remains a converted unweighed recollection, not recorded grams, and the brand is unknown. Historical quantities in this transcription describe the BASE of 35 servings, not every selected batch.
+
+El formato de ingredientes conserva dos cifras significativas por debajo de 0.1 g, sin cambiar el redondeo normal ni el de macros. Cocoa en compras, ingredientes y ficha del paso: 1 porción → aprox. 0.049 g; 17 → aprox. 0.8 g; 50 → aprox. 2.4 g. Los colorantes siguen «al gusto».
+
+Ingredient formatting retains two significant digits below 0.1 g without changing normal or macro rounding. Cocoa in shopping, ingredients, and the step chip: 1 serving → approx. 0.049 g; 17 → approx. 0.8 g; 50 → approx. 2.4 g. Colorings remain “to taste”.
 
 ## Aclaración posterior autorizada / Authorized later clarification
 
@@ -62,7 +70,7 @@ Leche: la fuente registra 0 g, no utilizada porque la masa ya estaba suficientem
 1. **Acremar manteca y azúcar.** En una batidora de pedestal con el accesorio de pala, mezclar la manteca vegetal y el azúcar hasta obtener una mezcla suave y cremosa.
 2. **Añadir huevos y vainilla.** Incorporar los huevos y los 40 g de extracto de vainilla. Mezclar hasta integrar bien.
 3. **Combinar los secos.** En otro recipiente, mezclar con batidor la harina, el polvo para hornear y la sal. Añadir a la mezcla húmeda y mezclar hasta formar una masa cohesiva.
-4. **Dividir y colorear.** La masa terminada pesó 2138 g según la observación de la fuente. Dividir en tres porciones iguales, aproximadamente 713 g cada una. Colorear una de rosa y otra de amarillo; incorporar cocoa solo a la tercera para chocolate. La cantidad original no quedó registrada; la aclaración posterior autoriza aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados.
+4. **Dividir y colorear.** La masa terminada pesó 2138 g según la observación de la fuente para la tanda base. Dividir en tres porciones iguales, aproximadamente 713 g cada una en esa observación. Colorear una de rosa y otra de amarillo; incorporar cocoa solo a la tercera para chocolate. Usar la cantidad aproximada en gramos mostrada en el ingrediente del paso para las porciones seleccionadas: conversión de un recuerdo sin pesar, no gramos registrados; marca desconocida.
 5. **Formar el rollo.** Acomodar juntas las tres masas de colores y formar un rollo. Refrigerar 15–20 minutos si hace falta que se afirme.
 6. **Rebanar y hornear.** Cortar rebanadas de aproximadamente 45–60 g, colocarlas sobre una charola y hornear a 350 °F (177 °C) durante 13–17 minutos. Empezar a revisar a los 10–12 minutos, especialmente las más delgadas. No voltear durante el horneado. Buscar superficies firmes y bases ligeramente doradas, no galletas muy tostadas.
 
@@ -112,7 +120,7 @@ Milk: the source records 0 g, not used because the dough was already soft enough
 1. **Cream shortening and sugar.** Using a stand mixer fitted with the paddle attachment, mix the vegetable shortening and sugar until smooth and creamy.
 2. **Add eggs and vanilla.** Incorporate the eggs and 40 g vanilla extract. Mix until well combined.
 3. **Combine dry ingredients.** In a separate bowl, whisk together the flour, baking powder, and salt. Add to the wet mixture and mix until a cohesive dough forms.
-4. **Divide and color the dough.** The finished dough weighed 2138 g according to the source observation. Divide into three equal portions, about 713 g each. Color one portion pink and another yellow; incorporate cocoa into the chocolate third only. The original amount was not recorded; the later clarification authorizes approx. 1.7 g converted from an unweighed recollection, not recorded grams.
+4. **Divide and color the dough.** The finished dough weighed 2138 g according to the source observation for the base batch. Divide into three equal portions, about 713 g each in that observation. Color one portion pink and another yellow; incorporate cocoa into the chocolate third only. Use the approximate gram amount displayed in the step ingredient for the selected servings: converted from an unweighed recollection, not recorded grams; brand unknown.
 5. **Assemble the log.** Arrange the three colored doughs together and roll into a log. Chill for 15–20 minutes if needed to firm up.
 6. **Slice and bake.** Cut slices weighing approximately 45–60 g, place on a baking sheet, and bake at 350 °F (177 °C) for 13–17 minutes. Begin checking at 10–12 minutes, especially for thinner cookies. Do not flip while baking. Look for set tops and lightly golden bottoms, not deeply browned cookies.
 

@@ -128,8 +128,8 @@ ingredients:
     note: "sin pesar, según sea necesario; solo en otro tercio; no se inventa un peso"
     noteEn: "unweighed, as needed; in another third only; no weight is invented"
     optional: false
-  - name: "cocoa en polvo sin azúcar — aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados"
-    nameEn: "unsweetened cocoa powder — approx. 1.7 g converted from an unweighed recollection, not recorded grams"
+  - name: "cocoa en polvo sin azúcar — estimación convertida, no pesada"
+    nameEn: "unsweetened cocoa powder — converted estimate, not weighed"
     amount: 1.7
     unit: g
     calories: 3.876
@@ -137,8 +137,8 @@ ingredients:
     carbs: 0.9843
     fat: 0.2329
     fiber: 0.629
-    note: "aprox. 1.7 g solo para el tercio de chocolate; conversión de un recuerdo sin pesar, no gramos registrados; Hershey es referencia genérica de conversión, no identifica la marca utilizada"
-    noteEn: "approx. 1.7 g for the chocolate third only; converted from an unweighed recollection, not recorded grams; Hershey is a generic conversion reference, not a claim about the brand used"
+    note: "usar los gramos aproximados mostrados para las porciones seleccionadas, solo para el tercio de chocolate; conversión de un recuerdo sin pesar, no gramos registrados; marca desconocida; Hershey es referencia genérica de conversión, no identifica la marca utilizada"
+    noteEn: "use the approximate grams displayed for the selected servings, for the chocolate third only; converted from an unweighed recollection, not recorded grams; brand unknown; Hershey is a generic conversion reference, not a claim about the brand used"
     optional: false
 steps:
   - title: "Acremar manteca y azúcar"
@@ -167,8 +167,8 @@ steps:
         labelEn: "wet mixture"
   - title: "Dividir y colorear"
     titleEn: "Divide and color"
-    text: &step4 "Divide la masa en tres porciones iguales. La fuente observó 2138 g de masa y aproximadamente 713 g por tercio; son observaciones, no pesos garantizados para esta tanda. Colorea una porción de rosa y otra de amarillo, según sea necesario y sin peso registrado. Añade la cocoa solo al tercio de chocolate: aprox. 1.7 g convertidos de un recuerdo sin pesar, no gramos registrados. La marca es desconocida; la referencia de conversión no identifica la cocoa utilizada."
-    textEn: &step4En "Divide the dough into three equal portions. The source observed 2138 g of dough and about 713 g per third; these are observations, not guaranteed weights for this batch. Color one portion pink and another yellow, as needed with no recorded weight. Add cocoa only to the chocolate third: approx. 1.7 g converted from an unweighed recollection, not recorded grams. The brand is unknown; the conversion reference does not identify the cocoa used."
+    text: &step4 "Divide la masa en tres porciones iguales. La fuente observó 2138 g de masa y aproximadamente 713 g por tercio; son observaciones, no pesos garantizados para esta tanda. Colorea una porción de rosa y otra de amarillo, según sea necesario y sin peso registrado. Añade la cocoa solo al tercio de chocolate: usa la cantidad aproximada en gramos mostrada en el ingrediente de este paso para las porciones seleccionadas, convertida de un recuerdo sin pesar, no gramos registrados. La marca es desconocida; la referencia de conversión no identifica la cocoa utilizada."
+    textEn: &step4En "Divide the dough into three equal portions. The source observed 2138 g of dough and about 713 g per third; these are observations, not guaranteed weights for this batch. Color one portion pink and another yellow, as needed with no recorded weight. Add cocoa only to the chocolate third: use the approximate gram amount displayed in this step's ingredient for the selected servings, converted from an unweighed recollection, not recorded grams. The brand is unknown; the conversion reference does not identify the cocoa used."
     ingredients:
       - 7
       - 8
@@ -196,7 +196,7 @@ storyEn: |
 
   The source suggests about 35 cookies of approximately 60 g, with slices of approximately 45–60 g. These are approximate yield references, not a guaranteed 60 g baked weight. Nutrition and the serving control use 1/35 of the whole batch. Preparation takes 25–30 minutes, plus an optional 15–20-minute chill. Bake for 13–17 minutes at 177°C (350°F), checking from 10–12 minutes for thinner cookies. The time card uses 30 + 17 = 47 minutes without chilling; extra batches take additional time.
 
-  Cocoa was not recorded in the original preparation. A later recollection described a small, unweighed spoonful and explicitly expressed uncertainty; the authorized conversion is approx. 1.7 g for the chocolate third only, not a measured or recorded gram amount. The Hershey SmartLabel reference gives a 5 g labeled serving; one third is 5 ÷ 3 = 1.666… g, rounded to 1.7 g. This is a generic conversion reference, NOT a claim that Hershey cocoa was used; the actual brand and weight are unknown. Conversion source: https://smartlabel.hersheys.com/034000052134/nutrition . Pink and yellow colorings were unweighed, as needed; their “to taste” entries do not assert any gram weight.
+  Cocoa was not recorded in the original preparation. A later recollection described a small, unweighed spoonful and explicitly expressed uncertainty; for the BASE batch of 35 servings, the authorized conversion is approx. 1.7 g for the chocolate third only, not a measured or recorded gram amount. For selected servings, use the approximate grams displayed in the ingredient and step chip, not this historical base amount. The Hershey SmartLabel reference gives a 5 g labeled serving; one third is 5 ÷ 3 = 1.666… g, rounded to 1.7 g. This is a generic conversion reference, NOT a claim that Hershey cocoa was used; the actual brand and weight are unknown. Conversion source: https://smartlabel.hersheys.com/034000052134/nutrition . Pink and yellow colorings were unweighed, as needed; their “to taste” entries do not assert any gram weight.
 
   Known base weights sum to 1000 + 500 + 400 + 200 + 16 + 6 + 40 = 2162 g, with the egg weight approximate (about 4 large eggs, without shells). The source observed 2138 g of finished dough and about 713 g per third. The unexplained 24 g discrepancy is preserved, not treated as a measured loss or reconciled using cocoa. Adding the cocoa estimate gives a bookkeeping sum of 2163.7 g before unquantified colorings, not a newly observed dough weight. Milk was 0 g, unused because the dough was already soft enough, and is not an active ingredient. Vanilla increased from the planned 20 g to 40 g used, with good results.
 
@@ -230,8 +230,10 @@ revisando desde los 10–12 minutos para las más delgadas. La ficha usa
 
 La cocoa no se registró en la preparación original. Después se recordó una
 pequeña cantidad añadida sin pesar y con incertidumbre explícita. La conversión
-autorizada es **aprox. 1.7 g solo para el tercio de chocolate**, no una medición
-ni gramos registrados. La etiqueta de referencia Hershey indica una porción de
+autorizada para la **tanda BASE de 35 porciones** es **aprox. 1.7 g solo para el tercio de chocolate**, no una medición
+ni gramos registrados. Para las porciones seleccionadas, usa los gramos aproximados
+mostrados en el ingrediente y en la ficha del paso, no esta cantidad histórica de la base.
+La etiqueta de referencia Hershey indica una porción de
 5 g; un tercio equivale a 5 ÷ 3 = 1.666… g, redondeado a 1.7 g.
 Es una referencia genérica de conversión, **NO una afirmación de que se usó
 cocoa Hershey**: se desconocen la marca y el peso reales.

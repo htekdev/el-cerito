@@ -34,6 +34,28 @@ const elements = (node, predicate) => [
   ...(node.childNodes ?? []).flatMap((child) => elements(child, predicate)),
 ];
 const hasClass = (node, name) => (attr(node, 'class') ?? '').split(/\s+/).includes(name);
+const cocoaDisplays = new Map([[1, '0.049'], [17, '0.8'], [35, '1.7'], [50, '2.4']]);
+const amountCases = [
+  [0, '0'], [-0, '0'], [-1.7, '-1.7'], [-0.049, '-0.049'],
+  [0.0999, '0.1'], [0.1, '0.1'], [0.000001, '0.000001'],
+  [Number.MIN_VALUE, '5e-324'], [1e-300, '1e-300'],
+  [9.96, '10'], [10.4, '10'], [1000, '1000'],
+];
+
+test('ingredient precision preserves tiny nonzero amounts without changing macro or normal rounding', () => {
+  for (const [amount, expected] of amountCases) {
+    assert.equal(formatAmount(amount, 1), expected, `amount ${amount}`);
+  }
+  for (const [servings, expected] of cocoaDisplays) {
+    assert.equal(formatAmount(1.7, servings / 35), expected, `cocoa for ${servings}`);
+  }
+  for (const amount of [NaN, Infinity, -Infinity]) {
+    assert.equal(formatAmount(amount, 1), '0');
+  }
+  assert.equal(formatAmount(1.7, 0), '0');
+  assert.equal(formatAmount(1.7, -1), '-1.7');
+  assert.equal(niceRound(1.7 / 35), 0, 'macro rounding remains unchanged');
+});
 
 test('source gram weights, egg approximation, unused milk, and unweighed coloring sentinels', () => {
   assert.equal(recipe.ingredients.length, 10);
@@ -62,18 +84,32 @@ test('source gram weights, egg approximation, unused milk, and unweighed colorin
 
 test('bilingual names, notes, story and step four retain converted, unweighed cocoa uncertainty', () => {
   const cocoa = recipe.ingredients[9];
-  for (const copy of [cocoa.name, cocoa.note, recipe.steps[3].text, body]) {
-    assert.match(copy, /aprox\. 1\.7 g/);
+  assert.equal(cocoa.name, 'cocoa en polvo sin azúcar — estimación convertida, no pesada');
+  assert.equal(cocoa.nameEn, 'unsweetened cocoa powder — converted estimate, not weighed');
+  for (const copy of [cocoa.name, cocoa.nameEn, cocoa.note, cocoa.noteEn,
+    recipe.steps[3].text, recipe.steps[3].textEn]) {
+    assert.doesNotMatch(copy, /1[.,]7\s*g/);
+  }
+  for (const copy of [cocoa.note, recipe.steps[3].text, body]) {
     assert.match(copy, /sin pesar/);
     assert.match(copy, /no (?:una medición\s+ni )?gramos registrados/);
   }
-  for (const copy of [cocoa.nameEn, cocoa.noteEn, recipe.steps[3].textEn, recipe.storyEn]) {
-    assert.match(copy, /approx\. 1\.7 g/);
+  for (const copy of [cocoa.noteEn, recipe.steps[3].textEn, recipe.storyEn]) {
     assert.match(copy, /unweighed/);
     assert.match(copy, /not (?:a measured or )?recorded gram/);
   }
+  assert.match(cocoa.note, /gramos aproximados mostrados para las porciones seleccionadas/);
+  assert.match(cocoa.note, /solo para el tercio de chocolate/);
+  assert.match(cocoa.note, /marca desconocida/);
+  assert.match(cocoa.noteEn, /approximate grams displayed for the selected servings/);
+  assert.match(cocoa.noteEn, /chocolate third only/);
+  assert.match(cocoa.noteEn, /brand unknown/);
   assert.match(recipe.steps[3].text, /solo al tercio de chocolate/);
+  assert.match(recipe.steps[3].text, /cantidad aproximada en gramos mostrada en el ingrediente de este paso para las porciones seleccionadas/);
   assert.match(recipe.steps[3].textEn, /only to the chocolate third/);
+  assert.match(recipe.steps[3].textEn, /approximate gram amount displayed in this step's ingredient for the selected servings/);
+  assert.match(body, /tanda BASE de 35 porciones\*\* es \*\*aprox\. 1\.7 g/);
+  assert.match(recipe.storyEn, /BASE batch of 35 servings,.*approx\. 1\.7 g/);
   assert.match(recipe.storyEn, /NOT a claim that Hershey cocoa was used/);
   assert.match(body, /NO una afirmación de que se usó\s+cocoa Hershey/);
   for (const copy of [body, recipe.storyEn]) {
@@ -166,6 +202,9 @@ test('editorial status resolves the old blocker while retaining the historical m
   assert.match(doc, /PREPARED FOR PUBLICATION/);
   assert.match(doc, /original cocoa was not weighed or recorded/);
   assert.match(doc, /I don't know, I just did like a teaspoon/);
+  assert.match(doc, /tanda BASE de 35 porciones/);
+  assert.match(doc, /BASE batch of 35 servings/);
+  for (const expected of ['0.049 g', '0.8 g', '2.4 g']) assert.ok(doc.includes(expected));
   assert.doesNotMatch(doc, /UNPUBLISHED \/ BLOCKED|publication is blocked|blocks publication|confirm grams before publication/);
 });
 
@@ -215,6 +254,12 @@ for (const lang of ['es', 'en']) {
       assert.ok(content.includes(step[`text${suffix}`]));
       assert.ok(content.includes(step[`title${suffix}`]));
     }
+    const cocoaAmounts = elements(document, (n) => hasClass(n, 'ing-amount') && attr(n, 'data-idx') === '9');
+    assert.equal(cocoaAmounts.length, 2, 'ingredient list and step chip both render cocoa');
+    cocoaAmounts.forEach((n) => assert.equal(text(n), '1.7'));
+    const cocoaShopping = elements(document, (n) => hasClass(n, 'grocery-amount') && attr(n, 'data-base') === '1.7');
+    assert.equal(cocoaShopping.length, 1);
+    assert.equal(text(cocoaShopping[0]), '1.7');
     assert.ok(content.includes('2162 g') && content.includes('2138 g'));
     assert.ok(content.includes('1/35') && content.includes('10021.556'));
     assert.ok(content.includes(lang === 'es' ? 'no gramos registrados' : 'not recorded grams'));
@@ -259,6 +304,13 @@ for (const lang of ['es', 'en']) {
       for (const node of groups.get('.grocery-amount')) {
         assert.equal(node.textContent, formatAmount(Number(node.dataset.base), target / 35));
       }
+      const cocoaNodes = groups.get('.ing-amount').filter((n) => n.dataset.idx === '9');
+      assert.equal(cocoaNodes.length, 2);
+      assert.equal(cocoaNodes[0].textContent, cocoaDisplays.get(target), 'independent ingredient-list expectation');
+      assert.equal(cocoaNodes[1].textContent, cocoaDisplays.get(target), 'independent step-chip expectation');
+      const cocoaGrocery = groups.get('.grocery-amount').filter((n) => n.dataset.base === '1.7');
+      assert.equal(cocoaGrocery.length, 1);
+      assert.equal(cocoaGrocery[0].textContent, cocoaDisplays.get(target), 'independent shopping expectation');
       for (const node of groups.get('.macro-total')) {
         assert.equal(Number(node.textContent), niceRound(recipe.macros[node.dataset.key] * target));
       }
@@ -271,5 +323,22 @@ for (const lang of ['es', 'en']) {
     assert.equal(ids.get('serv-count').textContent, '50');
     assert.equal(groups.get('.grocery-amount').length, 8);
     assert.equal(groups.get('.macro-total').length, 5);
+    for (const [amount, expected] of amountCases) {
+      const edgePayload = structuredClone(payload);
+      edgePayload.ingredients[0].amount = amount;
+      ids.get('recipe-data').textContent = JSON.stringify(edgePayload);
+      groups.get('.grocery-amount')[0].dataset.base = String(amount);
+      runInNewContext(text(scaling[0]), { document: {
+        getElementById: (id) => ids.get(id) ?? null,
+        querySelectorAll: (selector) => groups.get(selector) ?? [],
+      } }, { timeout: 1000 });
+      const flourNodes = groups.get('.ing-amount').filter((n) => n.dataset.idx === '0');
+      assert.equal(flourNodes.length, 2);
+      flourNodes.forEach((n) => assert.equal(n.textContent, expected, `client ingredient/chip ${amount}`));
+      assert.equal(groups.get('.grocery-amount')[0].textContent, expected, `client shopping ${amount}`);
+      for (const node of groups.get('.ing-amount').filter((n) => ['7', '8'].includes(n.dataset.idx))) {
+        assert.equal(node.textContent, '', 'coloring sentinel stays unscaled');
+      }
+    }
   });
 }
