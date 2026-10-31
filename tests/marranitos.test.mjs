@@ -25,7 +25,7 @@ const profiles = [
   [364, 10.33, 76.31, 0.98, 2.7],
   [387, 0, 99.8, 0, 0],
   [290, 0, 74.73, 0, 0],
-  [717, 0.85, 0.06, 81.11, 0],
+  [717, 0.16, 0.7, 80.71, 0], // FDC 172346, generic margarine estimate only.
   [143, 12.56, 0.72, 9.51, 0],
   [288, 0.06, 12.65, 0.06, 0],
   [247, 3.99, 80.59, 1.24, 53.1],
@@ -34,9 +34,9 @@ const profiles = [
   [143, 12.56, 0.72, 9.51, 0],
   [0, 0, 0, 0, 0],
 ];
-const batch = [7119.905, 124.14665, 1283.03745, 163.7832, 29.7405];
+const batch = [7119.905, 122.98745, 1284.11265, 163.1112, 29.7405];
 const names = [
-  /all-purpose wheat flour/, /granulated sugar/, /^molasses$/, /unsalted butter/,
+  /all-purpose wheat flour/, /granulated sugar/, /^molasses$/, /^margarine$/,
   /shell-free egg for the dough/, /vanilla extract/, /ground cinnamon/,
   /baking soda/, /^salt$/, /beaten egg.*wash/, /water.*wash/,
 ];
@@ -63,13 +63,43 @@ test('source quantities are exact grams, in order, and only the paired wash is o
   });
   assert.match(recipe.ingredients[4].noteEn, /without shells/);
   assert.match(recipe.ingredients[9].noteEn, /without shells/);
-  assert.match(recipe.ingredients[3].noteEn, /instead of butter, never both/);
-  assert.ok(!recipe.ingredients.some((ingredient) => /ginger|cloves|margarine/.test(ingredient.nameEn)));
+  assert.ok(!recipe.ingredients.some((ingredient) => /ginger|cloves|butter|lard|shortening/.test(ingredient.nameEn)));
   assert.equal(recipe.servings, 30);
   assert.equal(recipe.ranchOriginal, false);
   assert.equal(recipe.draft, false);
   assert.deepEqual(recipe.healthierAlternatives, []);
   assert.deepEqual(recipe.healthLabels, []);
+  assert.equal(recipe.pubDate.toISOString(), '2026-10-29T00:00:00.000Z');
+  assert.equal(recipe.updatedDate.toISOString(), '2026-10-30T00:00:00.000Z');
+});
+
+test('168 g margarine is the only default fat in bilingual ingredients, notes, descriptions, and prep', () => {
+  const fat = recipe.ingredients[3];
+  assert.equal(fat.name, 'margarina');
+  assert.equal(fat.nameEn, 'margarine');
+  assert.equal(fat.amount, 168);
+  assert.equal(fat.unit, 'g');
+  assert.equal(fat.optional, false);
+  assert.equal(recipe.ingredients[1].note, 'para acremar con la margarina');
+  assert.equal(recipe.ingredients[1].noteEn, 'for creaming with the margarine');
+  assert.match(fat.note, /grasa base para acremar con el azúcar; marca desconocida/);
+  assert.match(fat.noteEn, /default fat for creaming with the sugar; brand unknown/);
+  assert.match(fat.note, /nutrición estimada con un perfil genérico; puede contener lácteos, revisa la etiqueta/);
+  assert.match(fat.noteEn, /nutrition estimated from a generic profile; may contain dairy, check the label/);
+  assert.match(recipe.description, /con margarina/);
+  assert.match(recipe.descriptionEn, /made with margarine/);
+  assert.equal(recipe.steps[0].title, 'Acremar la margarina y el azúcar');
+  assert.equal(recipe.steps[0].titleEn, 'Cream the margarine and sugar');
+  assert.equal(recipe.steps[0].text, 'Precalienta el horno a 177°C (350°F). Con una batidora de pedestal y el aditamento de pala, bate la margarina con el azúcar hasta que la mezcla esté ligera y cremosa.');
+  assert.equal(recipe.steps[0].textEn, 'Preheat the oven to 177°C (350°F). Using a stand mixer fitted with the paddle attachment, beat the margarine and sugar until light and creamy.');
+  const prep = [
+    recipe.description, recipe.descriptionEn,
+    ...recipe.ingredients.flatMap((ingredient) => [ingredient.name, ingredient.nameEn, ingredient.note, ingredient.noteEn]),
+    ...recipe.steps.flatMap((step) => [step.title, step.titleEn, step.text, step.textEn]),
+    ...recipe.instructions, ...recipe.instructionsEn,
+  ].join(' ');
+  assert.doesNotMatch(prep, /\b(?:butter|mantequilla|manteca|lard|shortening)\b/i);
+  assert.doesNotMatch(source, /\b(?:manteca|lard|shortening|dairy[- ]free|sin lácteos|sin lactosa|vegan[oa]?)\b/i);
 });
 
 test('all authored copy has full natural English and Spanish counterparts', () => {
@@ -165,11 +195,22 @@ test('texture temperature is never a safety guarantee or permission to serve raw
   assert.match(en, /rising.*settling slightly/);
 });
 
-test('both stories preserve the margarine preference and undated refrigerated make-ahead option', () => {
-  assert.match(body, /tandas anteriores se\s+prefirió la textura con margarina/);
-  assert.match(recipe.storyEn, /Earlier margarine batches had the preferred texture/);
+test('both stories report only Hector’s observed batches, not a cause or interchangeable butter variation', () => {
+  const esObservation = 'Hector observó que su tanda con mantequilla se aplanó y su tanda con margarina se esponjó.';
+  const enObservation = 'Hector observed that his butter batch flattened and his margarine batch puffed up.';
+  assert.ok(normalize(body).includes(esObservation));
+  assert.ok(recipe.storyEn.includes(enObservation));
+  assert.match(body, /Son solo observaciones de esas tandas; la causa no se ha probado/);
+  assert.match(recipe.storyEn, /These are batch observations only; the cause has not been tested/);
+  assert.match(body, /La margarina es la grasa base y conserva los mismos/);
+  assert.match(recipe.storyEn, /Margarine is the default fat, keeping the same/);
+  assert.doesNotMatch(normalize(body).replace(esObservation, ''), /mantequilla/i);
+  assert.doesNotMatch(recipe.storyEn.replace(enObservation, ''), /butter/i);
+  assert.doesNotMatch(body + recipe.storyEn, /\b(?:moisture|chew(?:y|iness)?|humedad|masticabilidad|emulsifiers?|emulsionantes?)\b/i);
   assert.match(body, /168 g/);
   assert.match(recipe.storyEn, /168 g/);
+  assert.match(body, /puede contener lácteos; revisa la etiqueta/);
+  assert.match(recipe.storyEn, /may contain dairy; check the label/);
   assert.match(body, /no especifica una duración de almacenamiento/);
   assert.match(recipe.storyEn, /specifies no storage duration/);
   assert.doesNotMatch(body + recipe.storyEn, /\b\d+\s*(?:días|days|semanas|weeks|horas|hours)\b/i);
@@ -189,6 +230,30 @@ test('every ingredient estimate matches its documented generic profile at the ex
   }
 });
 
+test('generic margarine provenance is an estimate, never an actual brand, fat percentage, or salt claim', () => {
+  for (const copy of [normalize(body), recipe.storyEn]) {
+    for (const value of [
+      'FDC 172346', 'Margarine, regular, 80% fat, composite, stick, with salt',
+      'https://fdc.nal.usda.gov/food-details/172346/nutrients',
+      'https://batchbase.com.au/usda-foods/172346',
+      'https://fooddata.the50.store/ingredients/4610-margarine-regular-80-fat-composite-stick-with-salt',
+      '80.71 g', '80.70 g',
+    ]) {
+      assert.ok(copy.includes(value), `Missing provenance ${value}`);
+    }
+    assert.doesNotMatch(copy, /variante con margarina|margarine variation|butter-based/);
+  }
+  assert.match(normalize(body), /Solo para el cálculo.*Es solo una estimación, no identifica ni recomienda un producto ni afirma el porcentaje de grasa o contenido de sal realmente usados; la marca es desconocida/);
+  assert.match(recipe.storyEn, /For calculation only.*estimate only, not an identification or recommendation of a product, nor a claim about the fat percentage or salt content actually used; the brand is unknown/);
+  assert.match(body, /Los decimales conservan el cálculo, no son precisión nutricional medida/);
+  assert.match(recipe.storyEn, /Decimals preserve the calculation, not measured nutritional precision/);
+  const comments = frontmatter[1].split(/\r?\n/).filter((line) => line.startsWith('#')).join('\n');
+  assert.match(comments, /# 717, 0\.16, 0\.7, 80\.71, 0 — GENERIC ESTIMATE ONLY; brand\/product unknown/);
+  assert.match(comments, /Batch totals: 7119\.905 kcal; P 122\.98745; C 1284\.11265; F 163\.1112; fiber 29\.7405 g/);
+  assert.match(comments, /Margarine is the recipe's default fat at 168 g/);
+  assert.doesNotMatch(comments, /butter|substitution|not included|124\.14665|1283\.03745|163\.7832/i);
+});
+
 test('per-serving nutrition reconciles to the full batch, including all optional wash', () => {
   metrics.forEach((metric, i) => {
     const sum = recipe.ingredients.reduce((value, ingredient) => value + ingredient[metric], 0);
@@ -203,10 +268,8 @@ test('per-serving nutrition reconciles to the full batch, including all optional
   }
   assert.match(body, /no descuenta automáticamente/);
   assert.match(recipe.storyEn, /does not automatically remove wash nutrition/);
-  assert.match(body, /variante con margarina no está incluida/);
-  assert.match(recipe.storyEn, /margarine variation is not included/);
   const withoutWash = recipe.ingredients.filter((ingredient) => !ingredient.optional);
-  const noWashPerServing = [235.4235, 3.970755, 42.758315, 5.33264, 0.99135];
+  const noWashPerServing = [235.4235, 3.932115, 42.794155, 5.31024, 0.99135];
   metrics.forEach((metric, i) => {
     close(withoutWash.reduce((sum, ingredient) => sum + ingredient[metric], 0) / 30,
       noWashPerServing[i], `${metric}: wash omitted`);
@@ -283,6 +346,7 @@ for (const lang of ['es', 'en']) {
     });
     assert.equal(structured.inLanguage, lang === 'es' ? 'es-MX' : 'en-US');
     assert.equal(structured.name, recipe[`title${suffix}`]);
+    assert.equal(structured.description, recipe[`description${suffix}`]);
     assert.equal(structured.recipeYield, `30 ${recipe[`servingLabel${suffix}`]}`);
     assert.equal(structured.totalTime, 'PT42M');
     assert.deepEqual(structured.recipeInstructions.map((step) => step.text), recipe[`instructions${suffix}`]);
@@ -290,7 +354,14 @@ for (const lang of ['es', 'en']) {
     structured.recipeIngredient.forEach((ingredient, i) => {
       assert.equal(ingredient, `${grams[i]} g ${recipe.ingredients[i][`name${suffix}`]}`);
     });
-    assert.equal(structured.nutrition.calories, `${recipe.macros.calories} kcal`);
+    assert.deepEqual(structured.nutrition, {
+      '@type': 'NutritionInformation',
+      calories: `${recipe.macros.calories} kcal`,
+      proteinContent: `${recipe.macros.protein} g`,
+      carbohydrateContent: `${recipe.macros.carbs} g`,
+      fatContent: `${recipe.macros.fat} g`,
+      fiberContent: `${recipe.macros.fiber} g`,
+    });
     assert.equal(structured.image, `https://el-cerito.vercel.app${recipe.coverImage}`);
     assert.ok(elements(document, (node) => node.tagName === 'img' && attr(node, 'src') === recipe.coverImage).length);
     for (const ingredient of recipe.ingredients) {
@@ -304,6 +375,7 @@ for (const lang of ['es', 'en']) {
     assert.ok(content.includes('30–35'));
     assert.ok(content.includes('190–192°F'));
     assert.ok(content.includes('SR Legacy'));
+    assert.ok(content.includes('FDC 172346'));
     assert.ok(content.includes('57.2'));
     assert.ok(content.includes(lang === 'es' ? 'no descuenta automáticamente' : 'does not automatically remove wash nutrition'));
     if (lang === 'en') {
@@ -314,6 +386,46 @@ for (const lang of ['es', 'en']) {
     } else {
       assert.ok(content.includes('No se estimaron azúcar ni sodio.'));
     }
+  });
+
+  test(`${lang}: rendered shopping and prep use only margarine with label-check and observation disclaimers`, () => {
+    const fatName = lang === 'es' ? 'margarina' : 'margarine';
+    const fatChips = elements(document, (node) => hasClass(node, 'ing-amount') && attr(node, 'data-idx') === '3');
+    assert.equal(fatChips.length, 2, 'The main ingredient and creaming step must both reference margarine');
+    for (const chip of fatChips) {
+      let row = chip.parentNode;
+      while (row && row.tagName !== 'li') row = row.parentNode;
+      assert.ok(row);
+      const copy = normalize(text(row));
+      assert.ok(copy.includes(`168 g ${fatName}`));
+      assert.doesNotMatch(copy, /\b(?:butter|mantequilla|manteca|lard|shortening)\b/i);
+    }
+    assert.ok(content.includes(recipe.ingredients[3][`note${suffix}`]));
+    const grocery = elements(document, (node) => attr(node, 'id') === 'grocery-list')[0];
+    assert.ok(grocery);
+    const items = elements(grocery, (node) => hasClass(node, 'grocery-name')).map((node) => normalize(text(node)));
+    assert.deepEqual(items.filter((copy) => copy.includes(fatName)), [`168 g ${fatName}`]);
+    assert.doesNotMatch(text(grocery), /\b(?:butter|mantequilla|manteca|lard|shortening)\b/i);
+    assert.equal(structured.recipeIngredient[3], `168 g ${fatName}`);
+    assert.match(structured.recipeInstructions[0].text, lang === 'es' ? /bate la margarina con el azúcar/ : /beat the margarine and sugar/);
+    assert.doesNotMatch(JSON.stringify(structured), /\b(?:butter|mantequilla|manteca|lard|shortening|dairy[- ]free|sin lácteos)\b/i);
+    assert.ok(content.includes(lang === 'es' ? 'la causa no se ha probado' : 'the cause has not been tested'));
+    assert.ok(content.includes(lang === 'es' ? 'puede contener lácteos' : 'may contain dairy'));
+    assert.ok(content.includes(lang === 'es' ? 'la marca es desconocida' : 'the brand is unknown'));
+    assert.doesNotMatch(content, /\b(?:dairy[- ]free|sin lácteos|sin lactosa)\b/i);
+  });
+
+  test(`${lang}: recipe listing carries the margarine description and recalculated nutrition`, async () => {
+    const listing = parse(await readFile(join(root, 'dist', 'client', ...route.slice(0, -1), 'index.html'), 'utf8'));
+    const cards = elements(listing, (node) => node.tagName === 'a'
+      && attr(node, 'href') === `/${route.join('/')}`);
+    assert.equal(cards.length, 1);
+    const copy = normalize(text(cards[0]));
+    assert.ok(copy.includes(recipe[`title${suffix}`]));
+    assert.ok(copy.includes(recipe[`description${suffix}`]));
+    assert.ok(copy.includes(`${recipe.macros.calories} kcal`));
+    assert.ok(copy.includes(`${recipe.macros.protein} g`));
+    assert.doesNotMatch(copy, /\b(?:butter|mantequilla|manteca|lard|shortening|dairy[- ]free|sin lácteos)\b/i);
   });
 
   test(`${lang}: built client script scales ingredient chips, grocery quantities, and totals at both limits`, () => {
@@ -334,6 +446,9 @@ for (const lang of ['es', 'en']) {
     for (const name of ['ing-amount', 'macro-total', 'grocery-amount']) {
       groups.set(`.${name}`, elements(document, (node) => hasClass(node, name)).map(adapt));
     }
+    const margarineGrocery = groups.get('.grocery-amount').filter((node) => Number(node.dataset.base) === 168);
+    assert.equal(margarineGrocery.length, 1);
+    const margarineAmounts = new Map([[30, '168'], [15, '84'], [1, '5.6'], [50, '280']]);
     assert.equal(groups.get('.macro-total').length, metrics.length);
     grams.forEach((_, i) => {
       assert.equal(groups.get('.ing-amount').filter((node) => Number(node.dataset.idx) === i).length, 2);
@@ -357,6 +472,10 @@ for (const lang of ['es', 'en']) {
       }
       for (const node of groups.get('.grocery-amount')) {
         assert.equal(node.textContent, formatAmount(Number(node.dataset.base), target / 30));
+      }
+      assert.equal(margarineGrocery[0].textContent, margarineAmounts.get(target));
+      for (const node of groups.get('.ing-amount').filter((node) => Number(node.dataset.idx) === 3)) {
+        assert.equal(node.textContent, margarineAmounts.get(target));
       }
       for (const node of groups.get('.macro-total')) {
         assert.equal(Number(node.textContent), niceRound(recipe.macros[node.dataset.key] * target));
