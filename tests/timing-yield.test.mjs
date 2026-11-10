@@ -94,23 +94,34 @@ for (const lang of ['es', 'en']) {
     }
   });
 
-  test(`${lang}: Angelina detail and card show unknown time, real taquito yield and no fabricated JSON-LD`, async () => {
+  test(`${lang}: Angelina detail and card show unknown time, two trays and no fabricated JSON-LD`, async () => {
     const data = await recipe(slug);
     for (const key of ['prepTime', 'cookTime', 'totalTime']) assert.equal(data[key], undefined);
-    assert.equal(data.servings, 72);
-    assert.equal(data.servingLabel, 'taquitos');
+    assert.equal(data.servings, 2);
+    assert.equal(data.servingLabel, 'charolas');
+    const singular = lang === 'es' ? 'charola' : 'tray';
+    const plural = lang === 'es' ? 'charolas' : 'trays';
     const page = await built(slug, lang);
     for (const key of ['prepTime', 'cookTime', 'totalTime']) assert.ok(!Object.hasOwn(page.structured, key), key);
-    assert.equal(page.structured.recipeYield, '72 taquitos');
+    assert.equal(page.structured.recipeYield, `2 ${plural}`);
+    assert.equal(page.structured.nutrition.servingSize, `1 ${singular}`);
+    assert.equal(page.structured.nutrition.calories, `${data.macros.calories} kcal`);
     const label = formatMinutes(undefined, lang);
     assert.equal((text(page.doc).match(new RegExp(label, 'g')) ?? []).length, 3);
     assert.doesNotMatch(text(page.doc), /NaN|undefined|PT0M/);
-    assert.equal(text(page.byId('serv-count')), '72');
-    assert.equal(text(page.byId('macro-serv')), '72');
+    assert.equal(text(page.byId('serv-count')), '2');
+    assert.equal(text(page.byId('macro-serv')), '2');
+    assert.equal(text(page.byId('serv-unit')), plural);
+    assert.equal(text(page.byId('grocery-yield')), `2 ${plural}`);
+    assert.ok(text(page.doc).includes(`${lang === 'es' ? 'Por' : 'Per'} ${singular}`));
+    assert.equal(attr(page.byId('serv-plus'), 'aria-label'), `${lang === 'es' ? 'Más' : 'More'} ${plural}`);
+    assert.equal(attr(page.byId('serv-minus'), 'aria-label'), `${lang === 'es' ? 'Menos' : 'Fewer'} ${plural}`);
     const listing = parse(await read(`dist/client/${lang === 'es' ? 'recetas' : 'en/recipes'}/index.html`));
     const card = find(listing, (n) => n.tagName === 'a' && attr(n, 'href') === `/${lang === 'es' ? 'recetas' : 'en/recipes'}/${slug}`)[0];
     assert.ok(card);
     assert.ok(text(card).includes(label));
+    assert.ok(text(card).includes(`2 ${plural}`));
+    assert.ok(text(card).includes(`${lang === 'es' ? 'Nutrición por' : 'Nutrition per'} ${singular}`));
     assert.doesNotMatch(text(card), /NaN|undefined|0 min/);
   });
 
@@ -164,6 +175,12 @@ for (const lang of ['es', 'en']) {
       const verify = (count) => {
         assert.equal(ids.get('serv-count').textContent, String(count));
         assert.equal(ids.get('macro-serv').textContent, String(count));
+        if (page.payload.yieldLabels) {
+          const unit = page.payload.yieldLabels[count === 1 ? 'singular' : 'plural'];
+          assert.equal(ids.get('serv-unit').textContent, unit);
+          assert.equal(ids.get('macro-unit').textContent, ` ${unit}`);
+          assert.equal(ids.get('grocery-yield').textContent, `${count} ${unit}`);
+        }
         for (const node of groups.get('.ing-amount')) {
           const ing = page.payload.ingredients[Number(node.dataset.idx)];
           if (ing.unit !== 'to taste') assert.equal(node.textContent, formatAmount(ing.amount, count / def));
@@ -171,7 +188,7 @@ for (const lang of ['es', 'en']) {
         for (const node of groups.get('.grocery-amount')) assert.equal(node.textContent, formatAmount(Number(node.dataset.base), count / def));
         for (const node of groups.get('.macro-total')) assert.equal(node.textContent, String(niceRound((page.payload.macros[node.dataset.key] ?? 0) * count)));
       };
-      for (const target of [def, def - 1, def, 1, max]) {
+      for (const target of id === slug ? [2, 3, 2, 1, 2, 3, 4, 2, 1, max] : [def, def - 1, def, 1, max]) {
         // Bounded loops fail rather than hang if the original 50-cap returns.
         for (let i = 0; i < max + 1 && Number(ids.get('serv-count').textContent) !== target; i++) {
           click(Number(ids.get('serv-count').textContent) > target ? 'serv-minus' : 'serv-plus');

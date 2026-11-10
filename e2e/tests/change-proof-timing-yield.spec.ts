@@ -32,45 +32,64 @@ async function verifyScaled(page: Page, servings: number) {
 }
 
 for (const lang of ['es', 'en']) {
-  test(`${lang}: unknown timing and 72-taquito scaling`, async ({ page }) => {
+  test(`${lang}: unknown timing and two-tray scaling`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     const base = lang === 'es' ? '/recetas' : '/en/recipes';
     const unknown = lang === 'es' ? 'No especificado' : 'Not specified';
     await page.goto(`${base}/${slug}`);
-    await showPhase(page, 'Unknown timing and original 72-taquito yield');
+    await showPhase(page, 'Two-tray base; unknown time remains honest');
     await expect(page.locator('h1')).toContainText(/Angelina/);
     await expect(page.getByText(unknown, { exact: true })).toHaveCount(3);
     await expect(page.locator('article')).not.toContainText(/NaN|undefined|PT0M/);
     const jsonld = await page.locator('script[type="application/ld+json"]').evaluate((node) => JSON.parse(node.textContent!));
     for (const key of ['prepTime', 'cookTime', 'totalTime']) expect(jsonld).not.toHaveProperty(key);
-    expect(jsonld.recipeYield).toBe('72 taquitos');
-    await expect(page.locator('#serv-count').locator('..')).toContainText('taquitos');
-    await verifyScaled(page, 72);
-    await page.locator('#serv-minus').click();
-    await verifyScaled(page, 71);
-    await page.locator('#serv-plus').click();
-    await verifyScaled(page, 72);
-    await page.locator('#serv-plus').click();
-    await verifyScaled(page, 72);
-
-    await showPhase(page, 'Lower boundary and restored full-batch measurements');
-    // Actual browser click handlers, in one task to avoid 71 auto-scroll roundtrips.
-    await page.locator('#serv-minus').evaluate((button: HTMLButtonElement) => {
-      for (let i = 0; i < 72; i++) button.click();
-    });
-    await verifyScaled(page, 1);
-    await page.locator('#serv-plus').evaluate((button: HTMLButtonElement) => {
-      for (let i = 0; i < 72; i++) button.click();
-    });
-    await verifyScaled(page, 72);
+    const singular = lang === 'es' ? 'charola' : 'tray';
+    const plural = lang === 'es' ? 'charolas' : 'trays';
+    expect(jsonld.recipeYield).toBe(`2 ${plural}`);
+    expect(jsonld.nutrition.servingSize).toBe(`1 ${singular}`);
+    expect(Number.parseFloat(jsonld.nutrition.calories)).toBeCloseTo(3544.2339561332255, 8);
+    const data = await page.locator('#recipe-data').evaluate((node) => JSON.parse(node.textContent!));
+    expect(data.defaultServings).toBe(2);
+    expect(data.ingredients[0].amount).toBe(1000);
+    expect(data.ingredients[6].amount).toBe(907);
+    let current = 2;
+    for (const target of [2, 3, 2, 1, 2, 3, 4, 3, 2]) {
+      await showPhase(page, `${target} ${target === 1 ? singular : plural}: quantities, shopping and partial totals`);
+      while (current !== target) {
+        await page.locator(current < target ? '#serv-plus' : '#serv-minus').click();
+        current += current < target ? 1 : -1;
+      }
+      await verifyScaled(page, target);
+      await assertText(page, page.locator('#serv-unit'), target === 1 ? singular : plural);
+      await expect(page.locator('#macro-unit')).toHaveText(target === 1 ? singular : plural);
+      await expect(page.locator('#grocery-yield')).toHaveText(`${target} ${target === 1 ? singular : plural}`);
+      if (target === 1) {
+        await page.locator('#serv-minus').click();
+        await verifyScaled(page, 1);
+        await page.emulateMedia({ media: 'print' });
+        await expect(page.locator('#serv-unit')).toHaveText(singular);
+        await expect(page.locator('#grocery-yield')).toHaveText(`1 ${singular}`);
+        await page.emulateMedia({ media: 'screen' });
+      }
+    }
+    await page.emulateMedia({ media: 'print' });
+    await expect(page.locator('#serv-count')).toHaveText('2');
+    await expect(page.locator('#serv-unit')).toHaveText(plural);
+    await page.emulateMedia({ media: 'screen' });
+    await expect(page.locator('article')).toContainText('9 × 13');
+    await expect(page.locator('article')).toContainText('11 × 9');
+    await expect(page.locator('article')).toContainText('EXPERIMENTAL');
+    await expect(page.locator('article')).toContainText(lang === 'es' ? 'no un conteo' : 'not a required count');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 
     await page.goto(base);
     await showPhase(page, 'Localized unknown time on the recipe card');
     await expect(page.locator(`a[href="${base}/${slug}"]`)).toContainText(unknown);
+    await expect(page.locator(`a[href="${base}/${slug}"]`)).toContainText(`2 ${plural}`);
+    await expect(page.locator(`a[href="${base}/${slug}"]`)).toContainText(`${lang === 'es' ? 'Nutrición por' : 'Nutrition per'} ${singular}`);
     await page.locator(`a[href="${base}/${slug}"]`).click();
-    await verifyScaled(page, 72);
+    await verifyScaled(page, 2);
     expect(errors).toEqual([]);
   });
 

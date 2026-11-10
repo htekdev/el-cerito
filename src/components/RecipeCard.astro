@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { CATEGORIES, HEALTH_LABELS, categoryLabel, healthLabel, formatMinutes, totalTime } from '../lib/nutrition';
-import { useTranslations, recipePath, rTitle, rDescription } from '../i18n/utils';
+import { CATEGORIES, HEALTH_LABELS, categoryLabel, healthLabel, formatMinutes, totalTime, niceRound } from '../lib/nutrition';
+import { useTranslations, recipePath, rTitle, rDescription, rServingLabel } from '../i18n/utils';
 import type { Lang } from '../i18n/ui';
 
 interface Props {
@@ -46,6 +46,9 @@ const primaryCat = d.categories[0];
       {title}
     </h3>
     <p class="mt-1.5 text-sm text-earth-soft line-clamp-2 flex-1">{description}</p>
+    {d.servingLabelSingular && <p class="mt-2 text-xs text-earth-soft">
+      {d.servings} {rServingLabel(d, lang)} · {lang === 'es' ? 'Nutrición por' : 'Nutrition per'} {rServingLabel(d, lang, 1)}
+    </p>}
 
     {d.healthLabels.length > 0 && (
       <div class="mt-3 flex flex-wrap gap-1.5">
@@ -59,8 +62,8 @@ const primaryCat = d.categories[0];
 
     <div class="mt-4 flex items-center justify-between text-xs text-earth-soft border-t border-clay/70 pt-3">
       <span class="inline-flex items-center gap-1">⏱️ {formatMinutes(time, lang)}</span>
-      <span class="inline-flex items-center gap-1">🔥 {d.macros.calories} kcal</span>
-      <span class="inline-flex items-center gap-1">💪 {d.macros.protein} g</span>
+      <span class="inline-flex items-center gap-1">🔥 {d.servingLabelSingular ? niceRound(d.macros.calories) : d.macros.calories} kcal</span>
+      <span class="inline-flex items-center gap-1">💪 {d.servingLabelSingular ? niceRound(d.macros.protein) : d.macros.protein} g</span>
     </div>
   </div>
 </a>

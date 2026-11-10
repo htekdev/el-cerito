@@ -63,6 +63,8 @@ type RecipeDataLike = {
   descriptionEn?: string;
   servingLabel: string;
   servingLabelEn?: string;
+  servingLabelSingular?: string;
+  servingLabelSingularEn?: string;
   instructions: string[];
   instructionsEn?: string[];
   storyEn?: string;
@@ -77,7 +79,12 @@ export function rDescription(d: RecipeDataLike, lang: Lang): string {
   return lang === 'en' && d.descriptionEn ? d.descriptionEn : d.description;
 }
 
-export function rServingLabel(d: RecipeDataLike, lang: Lang): string {
+/** Localized yield unit; singular is opt-in, never guessed from a plural word. */
+export function rServingLabel(d: RecipeDataLike, lang: Lang, count = d.servings): string {
+  if (count === 1 && d.servingLabelSingular) {
+    return lang === 'en' && d.servingLabelSingularEn
+      ? d.servingLabelSingularEn : d.servingLabelSingular;
+  }
   return lang === 'en' && d.servingLabelEn ? d.servingLabelEn : d.servingLabel;
 }
 

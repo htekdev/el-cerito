@@ -24,9 +24,11 @@ test('Angelina 2.1 preserves full preparation quantities and honest count/unspec
   for (const i of d.ingredients) {
     assert.ok(i.name && i.nameEn && i.note && i.noteEn);
   }
-  assert.equal(d.servings, 72);
-  assert.equal(d.servingLabel, 'taquitos');
-  assert.equal(d.servingLabelEn, 'taquitos');
+  assert.equal(d.servings, 2);
+  assert.equal(d.servingLabel, 'charolas');
+  assert.equal(d.servingLabelEn, 'trays');
+  assert.equal(d.servingLabelSingular, 'charola');
+  assert.equal(d.servingLabelSingularEn, 'tray');
   assert.match(d.title, /Tía Angelina.*2\.1/);
   assert.match(d.titleEn, /Aunt Angelina.*2\.1/);
   assert.match(d.author, /Tía Angelina/);
@@ -45,7 +47,7 @@ test('seven complete bilingual stages mirror structured instructions and referen
   assert.match(d.steps[1].textEn, /Velveeta goes directly into the chicken filling, NOT the sauce/);
   assert.match(d.steps[2].textEn, /WITHOUT squeezing.*SMALL BATCHES.*2462 g.*9-cup/s);
   assert.match(d.steps[4].textEn, /BOTH sides.*Do not fry it crisp.*seam-side down/s);
-  assert.match(d.steps[5].textEn, /11 × 9-inch.*262 g.*18 taquitos.*nine.*523 g.*another 18.*262 g.*36 taquitos/s);
+  assert.match(d.steps[5].textEn, /TWO trays.*November 10, 2026.*9 × 13-inch.*NO change.*262 g.*523 g.*262 g.*11 × 9-inch.*36 taquitos.*18 per layer.*nine.*NOT a required count.*no new cooking trial/s);
   assert.match(d.steps[6].textEn, /177 °C.*350 °F.*Tightly cover.*sturdy baking sheets.*90 minutes.*74 °C.*165 °F/s);
   assert.match(d.steps[6].textEn, /EXPERIMENTAL.*5–10 minutes.*NOT been tested.*10–15 minutes/s);
 });
@@ -58,7 +60,7 @@ test('family rounding and all revision/proven-versus-experimental observations s
   }
   assert.match(spanish, /de 8 a 10 g.*de 35 a 50 g/s);
   assert.match(english, /from 8 to 10 g.*from 35 to 50 g/s);
-  assert.match(english, /NOT an adult meal/);
+  assert.match(english, /TWO TRAYS, not two adult meal portions/);
   assert.match(english, /NO[T]* a validated improvement|NOT a validated improvement/);
   assert.match(english, /approximately 85%/);
 });
@@ -88,7 +90,7 @@ test('partial nutrition uses cooked yield once, label counts and only allocated 
   }
   for (const key of keys) {
     const sum = d.ingredients.reduce((total, ing) => total + (ing[key] ?? 0), 0);
-    assert.ok(Math.abs(sum / 72 - d.macros[key]) < 1e-8, key);
+    assert.ok(Math.abs(sum / 2 - d.macros[key]) < 1e-8, key);
   }
   assert.equal(d.macros.sodium, undefined);
   assert.equal(d.macros.sugar, undefined);
@@ -97,6 +99,25 @@ test('partial nutrition uses cooked yield once, label counts and only allocated 
   assert.match(english, /NOT assumed calorie-free/);
   assert.match(english, /not a complete food-log value/);
   assert.match(english, /reserved sauce is excluded/);
+});
+
+test('one/two/three/four trays preserve original preparation and consumed-only totals', () => {
+  const keys = ['calories', 'protein', 'carbs', 'fat', 'fiber'];
+  const originalTotals = [7088.467912266451, 444.4812604154579,
+    540.5928460020889, 321.3957218289428, 51.11257514216084];
+  for (const [trays, factor] of [[1, 0.5], [2, 1], [3, 1.5], [4, 2], [2, 1]]) {
+    assert.equal(trays / d.servings, factor);
+    assert.deepEqual([0, 6, 7, 8, 9, 11, 12, 13, 14, 15].map((i) => d.ingredients[i].amount * factor),
+      [1000, 907, 50, 28, 30, 560, 1192, 460, 240, 10].map((v) => v * factor));
+    keys.forEach((key, i) => assert.ok(
+      Math.abs(d.macros[key] * trays - originalTotals[i] * factor) < 1e-8, key));
+    assert.equal((560 + 1192 + 460 + 240 + 10) * factor, 2462 * factor);
+    assert.equal(2094 * factor + 368 * factor, 2462 * factor);
+  }
+  assert.match(d.ingredients[16].name, /aproximada/);
+  assert.match(d.ingredients[16].nameEn, /approximate/);
+  assert.match(d.ingredients[16].noteEn, /not a required count/);
+  assert.doesNotMatch(english, /per reference taquito|taquito control|original yield is 72/);
 });
 
 test('cover is generated illustration, not supplied photograph or untested cooking proof', async () => {
