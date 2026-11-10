@@ -55,8 +55,14 @@ Allocation:
 All allocated ingredient estimates sum to:
 7088.467912266451 kcal / P444.4812604154579 / C540.5928460020889 /
 F321.3957218289428 / fiber51.11257514216084.
-Divide by72 TAQUITOS:
-98.45094322592293 kcal / P6.173350839103581 / C7.508233972251235 /
-F4.463829469846427 / fiber0.7098968769744561.
+November 10, 2026 correction from Hector: divide the UNCHANGED consumed full
+batch by TWO TRAYS, not by72 taquitos or two adult meal portions:
+3544.2339561332255 kcal / P222.24063020772895 / C270.29642300104445 /
+F160.6978609144714 / fiber25.55628757108042 per tray.
+Ingredient nutrient contributions and full preparation amounts are unchanged.
+72 tortillas remains only an approximate historical nutrition/assembly proxy,
+not a requirement to count an exact finished yield. Actual use can vary.
+One tray=half the base batch, two=original, three=1.5x, four=double.
+No new cooking trial, measured mass or nutrient analysis is implied.
 Unrounded storage ensures reconciliation; displayed precision is not measurement
 accuracy. Partial estimate is not a complete food-log value.

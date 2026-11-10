@@ -24,6 +24,9 @@ const { Content } = await render(entry);
 const title = rTitle(d, lang);
 const description = rDescription(d, lang);
 const servingLabel = rServingLabel(d, lang);
+const customYield = !!d.servingLabelSingular;
+const singularYield = rServingLabel(d, lang, 1);
+const pluralYield = rServingLabel(d, lang, 2);
 const instructions = rInstructions(d, lang);
 // Rich step-grouped instructions (null → fall back to flat `instructions`)
 const steps = rSteps(d, d.ingredients, lang);
@@ -53,6 +56,7 @@ const recipeData = {
   defaultServings: d.servings,
   macros: d.macros,
   ingredients: d.ingredients.map((i) => ({ amount: i.amount, unit: i.unit })),
+  ...(customYield ? { yieldLabels: { singular: singularYield, plural: pluralYield } } : {}),
 };
 
 const macroRows = [
@@ -90,6 +94,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     })),
     nutrition: {
       '@type': 'NutritionInformation',
+      ...(customYield ? { servingSize: `1 ${singularYield}` } : {}),
       calories: `${d.macros.calories} kcal`,
       proteinContent: `${d.macros.protein} g`,
       carbohydrateContent: `${d.macros.carbs} g`,
@@ -181,6 +186,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
         <span class="text-2xl leading-none">🛒</span>
         <div class="min-w-0">
           <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.groceryList')}</h2>
+          {customYield && <p id="grocery-yield" class="text-sm font-semibold text-earth">{d.servings} {servingLabel}</p>}
           <p class="text-sm text-earth-soft">{t('recipe.grocerySubtitle')} · {t('recipe.groceryHint')}</p>
         </div>
       </div>
@@ -217,12 +223,12 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
         <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.ingredients')}</h2>
         <!-- Serving stepper -->
         <div class="inline-flex items-center gap-2 rounded-full bg-white border border-clay p-1 shadow-sm">
-          <button id="serv-minus" class="grid place-items-center h-9 w-9 rounded-full bg-cream-dark hover:bg-terracotta hover:text-cream text-earth font-bold text-lg transition-colors" aria-label={t('recipe.servMinus')}>−</button>
+          <button id="serv-minus" class="grid place-items-center h-9 w-9 rounded-full bg-cream-dark hover:bg-terracotta hover:text-cream text-earth font-bold text-lg transition-colors" aria-label={customYield ? `${lang === 'es' ? 'Menos' : 'Fewer'} ${pluralYield}` : t('recipe.servMinus')}>−</button>
           <div class="px-2 text-center min-w-[5.5rem]">
             <span id="serv-count" class="font-heading text-xl font-bold text-terracotta-dark">{d.servings}</span>
-            <span class="text-sm text-earth-soft block leading-none">{servingLabel}</span>
+            <span id="serv-unit" class="text-sm text-earth-soft block leading-none">{servingLabel}</span>
           </div>
-          <button id="serv-plus" class="grid place-items-center h-9 w-9 rounded-full bg-cream-dark hover:bg-terracotta hover:text-cream text-earth font-bold text-lg transition-colors" aria-label={t('recipe.servPlus')}>+</button>
+          <button id="serv-plus" class="grid place-items-center h-9 w-9 rounded-full bg-cream-dark hover:bg-terracotta hover:text-cream text-earth font-bold text-lg transition-colors" aria-label={customYield ? `${lang === 'es' ? 'Más' : 'More'} ${pluralYield}` : t('recipe.servPlus')}>+</button>
         </div>
       </div>
 
@@ -251,8 +257,8 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
       <h2 class="font-heading text-2xl font-bold text-earth">{t('recipe.nutrition')}</h2>
       <div class="mt-4 rounded-2xl bg-white border border-clay overflow-hidden">
         <div class="grid grid-cols-2 text-center text-xs font-semibold text-earth-soft bg-cream-dark">
-          <div class="py-2 border-r border-clay">{t('recipe.perServing')}</div>
-          <div class="py-2">{t('recipe.totalCol')} (<span id="macro-serv">{d.servings}</span>)</div>
+          <div class="py-2 border-r border-clay">{customYield ? `${lang === 'es' ? 'Por' : 'Per'} ${singularYield}` : t('recipe.perServing')}</div>
+          <div class="py-2">{t('recipe.totalCol')} (<span id="macro-serv">{d.servings}</span>{customYield && <span id="macro-unit"> {servingLabel}</span>})</div>
         </div>
         <ul>
           {macroRows.map((row) => (
@@ -271,7 +277,9 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
           ))}
         </ul>
         <p class="px-4 py-3 text-xs text-earth-soft bg-cream-dark border-t border-clay">
-          {t('recipe.macroNote')}
+          {customYield
+            ? lang === 'es' ? `Cantidades y totales ajustados por ${singularYield}, no por persona.` : `Quantities and totals scale by ${singularYield}, not by person.`
+            : t('recipe.macroNote')}
         </p>
       </div>
     </div>
@@ -366,6 +374,9 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
 
     const countEl = document.getElementById('serv-count');
     const macroServEl = document.getElementById('macro-serv');
+    const unitEl = document.getElementById('serv-unit');
+    const macroUnitEl = document.getElementById('macro-unit');
+    const groceryYieldEl = document.getElementById('grocery-yield');
     const amounts = Array.from(document.querySelectorAll('.ing-amount'));
     const totals = Array.from(document.querySelectorAll('.macro-total'));
     const groceryAmounts = Array.from(document.querySelectorAll('.grocery-amount'));
@@ -384,6 +395,12 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
       const factor = servings / def;
       if (countEl) countEl.textContent = String(servings);
       if (macroServEl) macroServEl.textContent = String(servings);
+      if (data.yieldLabels) {
+        const unit = servings === 1 ? data.yieldLabels.singular : data.yieldLabels.plural;
+        if (unitEl) unitEl.textContent = unit;
+        if (macroUnitEl) macroUnitEl.textContent = ` ${unit}`;
+        if (groceryYieldEl) groceryYieldEl.textContent = `${servings} ${unit}`;
+      }
 
       amounts.forEach((node) => {
         const idx = Number((node as HTMLElement).dataset.idx);

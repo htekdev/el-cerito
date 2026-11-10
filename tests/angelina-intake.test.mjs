@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import test from 'node:test';
 
 const root = new URL('../', import.meta.url);
@@ -8,6 +9,9 @@ const source = intake.split('## Complete combined user recipe source — preserv
 
 test('complete source preserves attribution, version and all seven stages', () => {
   assert.ok(source);
+  assert.equal(createHash('sha256').update(source).digest('hex'),
+    '5493544f34ab8c98d9851613641caa7817423ef34e0bd9e09fdc76ee1a1d7a74',
+    'Original combined source remains verbatim after the dated tray correction');
   assert.match(source, /^Tía Angelina's Enchiladas de Espinaca\. Family Recipe Version 2\.1\./);
   for (const stage of [
     '1 BOILED CHICKEN:', '2 CHICKEN VELVEETA FILL:', '3 CREAMY SPINACH SALSA DOUBLE BATCH:',

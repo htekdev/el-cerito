@@ -2,6 +2,28 @@
 
 ## Estado de recepción / Intake status
 
+## Authoritative yield correction — November 10, 2026, 10:17 CT
+
+Hector clarified in TWO consecutive messages: “I don't think the serving size
+should be number of taquitos ... take my recipe as face value ... two charolas
+or two nine by 13 casserole ... trays. And then when you increment, you add more
+trays, which would tell you how much of the ingredients to add ... can't be
+nitpicky about the number of tortillas ... align more to the charola”; then
+“Because remember what I gave you makes two charolas”.
+
+**Invariant for this recipe: default TWO charolas/trays = ALL original supplied
+batch quantities.** Whole-tray increments, minimum1; factor=targetTrays/2.
+1=half,2=original,3=1.5x,4=double; restoring2 restores the original amounts.
+Spanish charola/charolas; English tray/trays. Neither people nor taquitos are
+the primary scaling unit. Per-tray partial macros=UNCHANGED consumed batch/2.
+Full raw shopping1000g versus cooked750g remains distinct; reserved sauce stays
+excluded. Historical tortilla counts are approximate guides, not exact targets.
+
+Current target vessel:9×13in, per latest instruction, SAME two-tray ingredient
+batch. Earlier11×9in and18/layer remain historical source, not a validated
+9×13trial or guaranteed geometry. The complete original source below remains
+verbatim; historical status notes below do not override this dated correction.
+
 Received from Hector on 2026-11-09 at approximately 23:15 CT, as two consecutive
 messages constituting ONE COMPLETE recipe. No missing-method clarification is
 needed. Family provenance and all quantities, approximations, trials and notes

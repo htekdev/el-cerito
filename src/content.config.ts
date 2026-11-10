@@ -153,6 +153,9 @@ const recipes = defineCollection({
     servingLabel: z.string().default('porciones'),
     /** Optional English serving label, e.g. "tacos", "servings", "glasses" */
     servingLabelEn: z.string().optional(),
+    /** Opt-in count-unit grammar; absent fields preserve existing recipe wording. */
+    servingLabelSingular: z.string().optional(),
+    servingLabelSingularEn: z.string().optional(),
 
     /** Ingredients with per-ingredient macros (scale with servings) */
     ingredients: z.array(ingredientSchema),
