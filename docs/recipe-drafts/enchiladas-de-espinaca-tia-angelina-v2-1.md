@@ -19,7 +19,30 @@ de 24–25 g de relleno, usar aproximadamente el 85 % de la salsa en proporción
 Two pans, 72 rolled taquitos, not 72 adult meal portions. The original source
 below is authoritative; this synopsis does not replace it.
 
-## Exact delivery blockers — checked against current main
+## Continuation status — source preserved, implementation complete locally
+
+Hector explicitly authorized the two narrowly necessary fixes on 2026-11-09.
+Both are implemented: optional unmeasured times render localized unknown labels
+and omit unknown JSON-LD durations; the stepper supports1..max(50,base), restoring72.
+Existing numeric durations and real zero remain unchanged. The clarification
+does not require a guessed time. Source below remains verbatim.
+
+The public bilingual recipe is now authored at
+`src/content/recipes/enchiladas-de-espinaca-tia-angelina.md`.
+Cover is an approved generated illustration, explicitly NOT a family photo.
+`docs/nutrition/enchiladas-de-espinaca-tia-angelina.md` records researched PARTIAL
+estimates, omitted unknowns, cooked-chicken single-count and reserved-salsa
+allocation. No lighter sibling invented or linked.
+
+Local validation: build passed;71 Node24 tests passed;nutrition.ts100% lines,
+branches and functions (helper-only scope);8 recorded Playwright tests passed
+across Spanish/English desktop/mobile, including original72→71→72,1and72
+boundaries, real ingredient/grocery/nutrient restoration and an unchanged known
+recipe. Artifacts: `coverage/lcov.info`, `playwright-report/`, `test-results/`.
+No PR/review/merge/production success is implied by these LOCAL checks; release
+status must be read from the actual PR and current deployment.
+
+## Historical delivery blockers — checked against original main
 
 Main inspected: `cc7c48ce6d773d9579002dcbec1cd87c6158a4c3`.
 
@@ -45,7 +68,7 @@ was created with fabricated measurements, nutrition or timing.
 Clarification task: `may-el-cerito-display-prep-time-not-measured-for-t-a-angelin`.
 This asks about honest site representation, not missing recipe instructions.
 
-## Validation and release state
+## Historical initial-intake validation and release state
 
 - Locked dependencies installed with `npm ci`; existing Astro build passed.
 - All 53 Node tests passed: 49 existing regressions plus 4 intake-preservation

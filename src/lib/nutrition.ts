@@ -7,6 +7,8 @@
  * server-rendered numbers and JS-updated numbers always agree.
  */
 
+import { ui } from '../i18n/ui.ts';
+
 export type Macros = {
   calories: number;
   protein: number;
@@ -40,13 +42,27 @@ export function formatAmount(amount: number, factor: number): string {
   return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
 }
 
-/** Total time helper. */
-export function totalTime(prep: number, cook: number, explicit?: number): number {
-  return typeof explicit === 'number' ? explicit : prep + cook;
+/** A real explicit total wins, including zero; partial durations cannot be summed. */
+export function totalTime(prep?: number, cook?: number, explicit?: number): number | undefined {
+  if (explicit !== undefined) return explicit;
+  return prep !== undefined && cook !== undefined ? prep + cook : undefined;
 }
 
-/** Human-friendly minutes -> "1 h 20 min" */
-export function formatMinutes(mins: number): string {
+/** Schema.org durations: omit unknown properties rather than inventing PT0M. */
+export function recipeTimeProperties(prep?: number, cook?: number, explicit?: number): {
+  prepTime?: string; cookTime?: string; totalTime?: string;
+} {
+  const total = totalTime(prep, cook, explicit);
+  return {
+    ...(prep !== undefined && { prepTime: `PT${prep}M` }),
+    ...(cook !== undefined && { cookTime: `PT${cook}M` }),
+    ...(total !== undefined && { totalTime: `PT${total}M` }),
+  };
+}
+
+/** Human-friendly minutes; unknown durations have a localized, nonnumeric label. */
+export function formatMinutes(mins: number | undefined, lang: Lang = 'es'): string {
+  if (mins === undefined) return ui[lang]['recipe.timeUnknown'];
   if (mins < 60) return `${mins} min`;
   const h = Math.floor(mins / 60);
   const m = mins % 60;

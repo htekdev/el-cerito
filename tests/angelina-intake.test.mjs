@@ -58,13 +58,14 @@ test('method, count yield, unknown quantities and experiments are retained', () 
   assert.match(intake, /No lighter sibling invented or linked/);
 });
 
-test('blocked intake accurately identifies current schema and 72-count UI constraints', async () => {
+test('historical timing and 72-count blockers are resolved without inventing source durations', async () => {
   const schema = await readFile(new URL('src/content.config.ts', root), 'utf8');
   const detail = await readFile(new URL('src/components/sections/RecipeDetail.astro', root), 'utf8');
-  assert.match(schema, /prepTime: z\.number\(\)\.int\(\)\.nonnegative\(\)/);
-  assert.match(detail, /prepTime: `PT\$\{d\.prepTime\}M`/);
-  assert.match(detail, /formatMinutes\(d\.prepTime\)/);
-  assert.match(detail, /if \(servings < 50\)/);
+  assert.match(schema, /prepTime: z\.number\(\)\.int\(\)\.nonnegative\(\)\.optional\(\)/);
+  assert.match(schema, /cookTime: z\.number\(\)\.int\(\)\.nonnegative\(\)\.optional\(\)/);
+  assert.match(detail, /recipeTimeProperties\(d\.prepTime, d\.cookTime, d\.totalTime\)/);
+  assert.match(detail, /formatMinutes\(d\.prepTime, lang\)/);
+  assert.match(detail, /if \(servings < Math\.max\(50, def\)\)/);
   assert.match(intake, /NO active preparation duration/);
   assert.match(intake, /No zero, estimate, or invented total/);
 });
