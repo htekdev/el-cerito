@@ -14,6 +14,10 @@ Node24 (matching Vercel runtime):
   boundaries, ingredient/grocery/nutrient restoration and existing numeric recipe.
   Reports/videos/screenshots: `playwright-report/`, `test-results/`.
   CI uploads these with coverage as `recipe-test-evidence`, retention7days.
+  Initial PR CI ran unit/build successfully but browser installation failed on
+  ubuntu-latest26.04 unsupported by pinned Playwright1.58.2. Runner now pinned
+  to supported ubuntu24.04 with a regression assertion; no runner/version drift.
+  Final local suite after that assertion:72/72 PASS.
 
 ## Public-content checks
 

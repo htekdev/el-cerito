@@ -18,6 +18,14 @@ const find = (node, predicate) => [
 ];
 const hasClass = (node, name) => (attr(node, 'class') ?? '').split(/\s+/).includes(name);
 const read = (path) => readFile(new URL(path, root), 'utf8');
+test('recorded regression CI pins the supported browser OS and retains evidence', async () => {
+  const workflow = await read('.github/workflows/recipe-regressions.yml');
+  assert.match(workflow, /runs-on: ubuntu-24\.04/);
+  assert.match(workflow, /run: npm run test:coverage/);
+  assert.match(workflow, /run: npm run test:e2e/);
+  assert.match(workflow, /retention-days: 7/);
+  assert.match(workflow, /test-results\//);
+});
 const recipe = async (id) => load((await read(`src/content/recipes/${id}.md`)).split(/---\r?\n/)[1]);
 async function built(id, lang) {
   const route = lang === 'es' ? 'recetas' : 'en/recipes';
