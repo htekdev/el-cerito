@@ -25,3 +25,8 @@ yarn-error.log*
 # editor
 .vscode/
 .idea/
+
+# local test artifacts (CI uploads these with seven-day retention)
+coverage/
+test-results/
+playwright-report/

@@ -3,7 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getEntry, render } from 'astro:content';
 import {
   CATEGORIES, HEALTH_LABELS, categoryLabel, healthLabel, difficultyLabel,
-  formatMinutes, totalTime, formatAmount, niceRound,
+  formatMinutes, totalTime, recipeTimeProperties, formatAmount, niceRound,
 } from '../../lib/nutrition';
 import {
   useTranslations, recipePath,
@@ -81,9 +81,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     recipeCategory: d.categories.map((c) => categoryLabel(c, lang)).filter(Boolean),
     keywords: d.tags.join(', '),
     recipeYield: `${d.servings} ${servingLabel}`,
-    prepTime: `PT${d.prepTime}M`,
-    cookTime: `PT${d.cookTime}M`,
-    totalTime: `PT${time}M`,
+    ...recipeTimeProperties(d.prepTime, d.cookTime, d.totalTime),
     recipeIngredient: d.ingredients.map((i) => i.unit === 'to taste'
       ? `${rIngredientName(i, lang)} (${t('recipe.toTaste')})`
       : `${i.amount} ${i.unit} ${rIngredientName(i, lang)}`),
@@ -129,15 +127,15 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
     <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
       <div class="rounded-xl bg-white border border-clay p-4 text-center">
         <div class="text-xs text-earth-soft uppercase tracking-wide">{t('recipe.prep')}</div>
-        <div class="font-heading text-lg font-bold text-earth mt-0.5">{formatMinutes(d.prepTime)}</div>
+        <div class="font-heading text-lg font-bold text-earth mt-0.5">{formatMinutes(d.prepTime, lang)}</div>
       </div>
       <div class="rounded-xl bg-white border border-clay p-4 text-center">
         <div class="text-xs text-earth-soft uppercase tracking-wide">{t('recipe.cook')}</div>
-        <div class="font-heading text-lg font-bold text-earth mt-0.5">{formatMinutes(d.cookTime)}</div>
+        <div class="font-heading text-lg font-bold text-earth mt-0.5">{formatMinutes(d.cookTime, lang)}</div>
       </div>
       <div class="rounded-xl bg-white border border-clay p-4 text-center">
         <div class="text-xs text-earth-soft uppercase tracking-wide">{t('recipe.total')}</div>
-        <div class="font-heading text-lg font-bold text-terracotta-dark mt-0.5">{formatMinutes(time)}</div>
+        <div class="font-heading text-lg font-bold text-terracotta-dark mt-0.5">{formatMinutes(time, lang)}</div>
       </div>
       <div class="rounded-xl bg-white border border-clay p-4 text-center">
         <div class="text-xs text-earth-soft uppercase tracking-wide">{t('recipe.difficulty')}</div>
@@ -411,7 +409,7 @@ const storyParagraphs = story ? story.split(/\n\s*\n/).map((p) => p.trim()).filt
       if (servings > 1) { servings -= 1; render(); }
     });
     document.getElementById('serv-plus')?.addEventListener('click', () => {
-      if (servings < 50) { servings += 1; render(); }
+      if (servings < Math.max(50, def)) { servings += 1; render(); }
     });
 
     render();

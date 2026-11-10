@@ -1,0 +1,33 @@
+name: Recipe regressions
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  test:
+    # Playwright1.58.2 does not support ubuntu-latest's26.04 image.
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # Native coverage measures nutrition.ts only. Astro HTML and the actual
+      # bundled browser script are behavior-tested, not claimed as V8 coverage.
+      - run: npm run test:coverage
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4.6.2
+        if: always()
+        with:
+          name: recipe-test-evidence
+          retention-days: 7
+          path: |
+            coverage/
+            playwright-report/
+            test-results/

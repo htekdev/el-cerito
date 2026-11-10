@@ -175,10 +175,10 @@ const recipes = defineCollection({
     /** Optional English story paragraph (mirrors the Spanish markdown body) */
     storyEn: z.string().optional(),
 
-    /** Times in minutes */
-    prepTime: z.number().int().nonnegative(),
-    cookTime: z.number().int().nonnegative(),
-    /** Optional explicit total; otherwise prep + cook */
+    /** Times in minutes. Omission means unknown, not zero. */
+    prepTime: z.number().int().nonnegative().optional(),
+    cookTime: z.number().int().nonnegative().optional(),
+    /** Explicit total; otherwise sum only when both component times are known. */
     totalTime: z.number().int().nonnegative().optional(),
 
     /** Primary category + free-form tags */
