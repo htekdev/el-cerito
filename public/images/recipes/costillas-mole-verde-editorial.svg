@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Mole verde — diagrama editorial de ingredientes</title>
+  <desc id="desc">Hierbas frescas, semillas y costillas se unen en el mole. Diagrama, no fotografía ni resultado de una prueba.</desc>
+  <rect width="1200" height="900" fill="#FBF6EC"/>
+  <rect x="80" y="190" width="1040" height="440" rx="48" fill="#E8D9C0"/>
+  <g stroke="#7C8B5E" stroke-width="10" fill="none" stroke-linecap="round">
+    <path d="M290 420v90m0-60c-85-5-80-85-80-85 80-5 80 85 80 85m0-25c85-5 80-85 80-85-80-5-80 85-80 85"/>
+    <path d="M600 375c-90 35-90 110 0 135 90-25 90-100 0-135z"/>
+    <path d="M570 442h60m-30-35v70"/>
+  </g>
+  <g stroke="#C56B4A" stroke-width="12" fill="none" stroke-linecap="round">
+    <path d="M835 390c-25-45 35-70 55-30l45 55c45 15 20 70-25 50z"/>
+    <path d="M865 420l45-35m-20 60l40-30"/>
+  </g>
+  <g fill="#3A2E23" font-family="serif" font-size="38" text-anchor="middle">
+    <text x="290" y="570">Hierbas / Greens</text>
+    <text x="600" y="570">Semillas / Seeds</text>
+    <text x="900" y="570">Costillas / Ribs</text>
+  </g>
+  <text x="600" y="295" fill="#3A2E23" font-family="serif" font-size="62" text-anchor="middle">Mole verde</text>
+  <text x="600" y="680" fill="#7C8B5E" font-family="sans-serif" font-size="26" text-anchor="middle">Diagrama editorial · Not a photograph</text>
+</svg>

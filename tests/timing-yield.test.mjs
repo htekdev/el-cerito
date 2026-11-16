@@ -78,19 +78,24 @@ test('localized unknown labels cannot become NaN, undefined or a zero duration',
 });
 
 for (const lang of ['es', 'en']) {
-  test(`${lang}: all pre-existing numeric recipes retain their authored timing UI/JSON-LD`, async () => {
+  test(`${lang}: recipes retain authored numeric timing and omit unknown timing in UI/JSON-LD`, async () => {
     const files = await readdir(new URL('src/content/recipes/', root));
     for (const filename of files.filter((n) => n.endsWith('.md') && n !== `${slug}.md`)) {
       const id = filename.slice(0, -3);
       const data = await recipe(id);
       if (data.draft) continue;
       const page = await built(id, lang);
-      const total = data.totalTime ?? data.prepTime + data.cookTime;
+      const total = data.totalTime ?? (data.prepTime !== undefined && data.cookTime !== undefined
+        ? data.prepTime + data.cookTime : undefined);
       for (const [key, minutes] of [['prepTime', data.prepTime], ['cookTime', data.cookTime], ['totalTime', total]]) {
-        assert.equal(page.structured[key], `PT${minutes}M`, `${id} ${key}`);
+        if (minutes === undefined) assert.ok(!Object.hasOwn(page.structured, key), `${id} ${key}`);
+        else assert.equal(page.structured[key], `PT${minutes}M`, `${id} ${key}`);
         assert.ok(text(page.doc).includes(formatMinutes(minutes, lang)), `${id} visible ${key}`);
       }
-      assert.equal(page.structured.recipeYield, `${data.servings} ${lang === 'en' ? data.servingLabelEn || data.servingLabel : data.servingLabel}`);
+      const unit = data.servings === 1 && data.servingLabelSingular
+        ? lang === 'en' ? data.servingLabelSingularEn || data.servingLabelSingular : data.servingLabelSingular
+        : lang === 'en' ? data.servingLabelEn || data.servingLabel : data.servingLabel;
+      assert.equal(page.structured.recipeYield, `${data.servings} ${unit}`);
     }
   });
 
