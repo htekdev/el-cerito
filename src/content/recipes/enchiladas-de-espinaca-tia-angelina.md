@@ -261,8 +261,36 @@ storyEn: >-
   Official references (USDA search links identify each FDC record; nutrient values were retrieved from the official USDA API): https://fdc.nal.usda.gov/food-search/?query=171477 ; https://fdc.nal.usda.gov/food-search/?query=170005 ; https://fdc.nal.usda.gov/food-search/?query=169287 ; https://fdc.nal.usda.gov/food-search/?query=171257 ; https://fdc.nal.usda.gov/food-search/?query=174536 ; https://www.kraftheinz.com/velveeta/products/00021000081844-original-cheese ; https://www.campbells.com/products/condensed/cream-of-chicken-soup/ ; https://guerrerotortillas.com/products/low-calorie-white-corn-tortillas/ . Poultry and casserole thermometer endpoint: 74 °C (165 °F), https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures .
 
   Cover: generated food illustration, NOT a photograph supplied by the family or evidence of a cooking trial. It depicts the covered-method style, not proof of the untested browned finish.
+
+  ORIGINAL INFOGRAPHIC — SEPARATE SOURCE VERSION, resupplied November 15, 2026. This complete source transcription does NOT replace the Version 2.1 ingredients, tray control, partial nutrition or November 10 two-tray correction above. All quantities below describe the original TWO-pan batch and do not live-scale with the control. Its 72-enchilada yield is a source assertion, not 72 adult meals or the control's scaling unit. The image's 'family-approved' badge is an IMAGE ASSERTION ONLY, not new owner approval, a review signature or evidence of another cooking trial.
+
+  ORIGINAL INGREDIENTS — CHICKEN AND FILLING PANEL. Four chicken breasts (about 3 lb RAW; about 750 g COOKED, separate source assertions, no raw gram mass supplied); one whole 907 g Velveeta Original block (source 2 lb), cubed in the method; one whole 454 g sour cream container (source 1 lb / 16 oz); four cream-of-chicken soup cans, 10.5 oz each, with no gram quantity in this source. Sour cream and soup are shown in the filling panel but step 3 puts BOTH into the sauce.
+
+  ORIGINAL INGREDIENTS — SPINACH SAUCE PANEL. Frozen chopped spinach 560 g (about 1¼–1½ bags, depending on bag size); chicken broth 240 g (source about 1 cup); Knorr Suiza chicken bouillon 10 g (source about 2 tsp); green onions 50 g (about 4 scallions); mild diced green chilies 28 g, drained (source about 2 Tbsp). The panel places scallions and chilies under sauce, but step 2 puts BOTH into the filling. Original non-gram equivalents here are source wording, not new conversions.
+
+  ORIGINAL TORTILLAS, STEP-ONLY INPUTS AND EQUIPMENT. Two packages of corn tortillas called 'Güero's' in the text, with Guerrero pictured, 58 each = 116 tortillas; the pictured package says 25 calories each, not independently validated recipe nutrition. The source explicitly fries ALL 116 but assembles 72 enchiladas, leaving 44 extras by arithmetic. No tortilla gram mass or intended use for those 44 is supplied. Chicken-cooking water, a pinch of cooking salt and a light layer of frying oil are step-only ingredients with unspecified masses; oil type is not supplied. Equipment: TWO 11 × 9-inch aluminum pans, foil and an immersion blender. Oven 350°F; 90 minutes covered plus 5 uncovered. The source's approximately 95-minute 'total' is OVEN TIME ONLY; prep, assembly and full elapsed time are unspecified.
+
+  ORIGINAL STEP 1 — COOK THE CHICKEN. Put the four breasts (about 3 lb raw) in a pot with water and a pinch of salt. Bring to a boil, then simmer 15–20 minutes until fully cooked (165°F internal, as written in the image). Remove, shred and set aside. The approximately 750 g cooked yield is a separate source assertion, not an equal raw weight.
+
+  ORIGINAL STEP 2 — MAKE THE FILLING. In a large bowl combine shredded chicken, the whole 907 g Velveeta block CUBED, 50 g green onions and 28 g diced, drained green chilies. Mix until well combined and creamy; set aside. The source does not specify a separate melting method or a scallion cutting size. No additional broth, onion, garlic, bay leaf or cilantro is added to this original version.
+
+  ORIGINAL STEP 3 — IMMERSION-BLENDER SPINACH SAUCE. Put 560 g FROZEN spinach, all four soup cans, all 454 g sour cream, 240 g broth and 10 g Knorr Suiza in a large, deep pot. Blend directly in the pot with an immersion blender until completely smooth and creamy. Keep warm on low heat during assembly. The source does NOT instruct thawing or draining the spinach first, nor reserving 15% of the sauce.
+
+  ORIGINAL STEP 4 — PREPARE ALL 116 TORTILLAS. Heat a skillet with a light layer of oil over medium heat. Fry each tortilla only a few seconds per side until pliable and soft, NOT crisp. Transfer to a paper-towel-lined plate. Fry ALL 116 from both packages, as the source explicitly instructs, even though the assembled yield is 72.
+
+  ORIGINAL STEP 5 — ROLL. Add a generous amount of filling to each tortilla, roll tightly and place seam-side down. Make 36 enchiladas per pan: 18 per layer × two layers, 72 across both pans. No measured filling weight per roll is supplied by this infographic.
+
+  ORIGINAL STEP 6 — ASSEMBLE TWO LAYERS. Spread a thin layer of spinach sauce on each pan's bottom. Arrange 18 rolls as the first layer, pour a generous sauce layer over them, add the remaining 18 as the second layer and pour the rest of the sauce on top. Fully cover the enchiladas with sauce, with NO shredded cheese on top. These are the original 11 × 9-inch pan instructions, not a newly tested 9 × 13-inch fit or the Version 2.1 85% allocation.
+
+  ORIGINAL STEP 7 — BAKE. Cover both pans TIGHTLY with aluminum foil. Bake at 350°F for 90 minutes. Remove foil and bake 5 additional minutes at 350°F. This source's five-minute uncovered instruction remains separate from the current recipe's proven 90-minute covered method and explicitly UNTESTED optional 5–10-minute finish; it establishes no new trial.
+
+  ORIGINAL SIDE-PANEL TIPS AND FLEXIBILITY. Use an immersion blender for a smooth, creamy sauce. Brief frying keeps tortillas flexible and prevents tearing. No shredded cheese on top: creamy spinach sauce is the traditional topping described by the source. Stand-mixer tip: shred cooked chicken with the paddle on Speed 2 for about 30 seconds. Spinach 560 g (about 1¼–1½ bags), scallions 50 g (about 4) and drained chilies 28 g (about 2 Tbsp) are source references; scallions can vary slightly and a little more or less chile is allowed by the image. These are source statements, not new measurements.
+
+  ORIGINAL MAKE-AHEAD AND STORAGE PANEL — SOURCE TRANSCRIPTION, not a new tested storage protocol. Assemble, cover and refrigerate up to 24 hours; refrigerate leftovers up to 3–4 days; freeze well covered up to 2 months and thaw in the refrigerator before reheating. The source supplies no reheating temperature or method.
+
+  VERSION DISAGREEMENTS REMAIN VISIBLE. Original sour cream 454 g is NOT the current curated 460 g; original approximately 3 lb raw chicken is NOT the current 1000 g raw entry; original soup has only can/ounce quantities, not this record's curated 1192 g. Original has no added cooking aromatics or filling broth/cilantro, uses frozen-spinach immersion blending, fries 116, uses all sauce, specifies 11 × 9-inch pans and instructs 90+5 oven minutes. None silently rolls back the newer owner directions. Missing gram masses, the intended use of 44 extra tortillas, panel/method grouping conflicts and the distinction between source badges and actual approval remain unresolved. No new nutrition, serving count, cooking-test result or approval is inferred from this resupplied source.
 pubDate: 2026-11-09
-updatedDate: 2026-11-10
+updatedDate: 2026-11-15
 author: "Tía Angelina · receta familiar"
 ---
 
@@ -279,3 +307,41 @@ Referencias genéricas USDA (enlaces de búsqueda por ID FDC; valores obtenidos 
 Seguridad: medir el pollo y el centro de la charola con termómetro hasta 74 °C (165 °F), según la [tabla oficial de FoodSafety.gov](https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures). Los minutos familiares no garantizan por sí solos la temperatura.
 
 **Portada:** ilustración de comida generada, NO fotografía aportada por la familia ni prueba de otra tanda cocinada. No demuestra el acabado dorado aún sin probar.
+
+## Infografía original — versión de fuente separada
+
+Fuente reenviada el **15 de noviembre de 2026**. Esta transcripción completa **NO reemplaza los ingredientes de la versión 2.1, la nutrición parcial ni la corrección del 10 de noviembre: la tanda base sigue siendo DOS CHAROLAS**. Todas las cifras de esta sección corresponden a las **dos charolas originales** y **no se recalculan con el selector**. El rendimiento de 72 enchiladas es una afirmación de esta fuente, no 72 comidas para adultos ni la unidad de escala.
+
+El distintivo «final, aprobada por la familia» pertenece **solo a la imagen**: no constituye nueva autorización del dueño, firma de revisión ni evidencia de otra prueba. La imagen privada no se republica.
+
+### Ingredientes completos de la infografía
+
+- **Panel de pollo y relleno:** 4 pechugas, aproximadamente **3 lb crudas** y **750 g cocidas**, afirmaciones separadas; la fuente no da gramos crudos. **Velveeta Original 907 g**, bloque entero de 2 lb, en cubos según el método. **Crema agria 454 g**, envase entero de 1 lb / 16 oz. **4 latas de crema de pollo de 10.5 oz cada una**, sin gramos en esta fuente. Aunque crema y sopa aparecen bajo relleno, **el paso 3 las usa en la salsa**.
+- **Panel de salsa:** **espinaca congelada picada 560 g**, aproximadamente 1¼–1½ bolsas según el tamaño; **caldo de pollo 240 g**, equivalente aproximado de 1 taza según la fuente; **Knorr Suiza 10 g**, aproximadamente 2 cucharaditas en la fuente; **cebollines 50 g**, aproximadamente 4; **chiles verdes suaves picados y escurridos 28 g**, aproximadamente 2 cucharadas en la fuente. Cebollines y chiles aparecen bajo salsa, pero **el paso 2 los usa en el relleno**. Los equivalentes no métricos son palabras originales, no conversiones nuevas.
+- **Tortillas:** 2 paquetes de 58, **116 en total**, llamados «Güero's» en el texto con empaque Guerrero ilustrado. «25 calorías cada una» es texto del empaque en la imagen, no nutrición verificada de la receta. La instrucción es **freír las 116**, pero armar **72**, por lo que quedan **44 extras** por aritmética; su destino y el peso de las tortillas no se indican.
+- **Ingredientes presentes solo en los pasos:** agua para el pollo, una pizca de sal y capa ligera de aceite para las tortillas; no se dan masas ni tipo de aceite.
+- **Equipo:** dos charolas de aluminio de **11 × 9 pulgadas**, papel aluminio y licuadora de inmersión. Horno **350 °F**; **90 minutos tapado + 5 destapado**. El «total ≈ 95 minutos» de la imagen es **solo tiempo de horno**; faltan preparación, armado y tiempo completo.
+
+### Los siete pasos originales, sin mezclarlos con la versión 2.1
+
+1. **Cocer el pollo.** Colocar las 4 pechugas (aproximadamente 3 lb crudas) en una olla con agua y una pizca de sal. Llevar a hervor y después hervir suavemente **15–20 minutos**, hasta cocer (**165 °F internos**, como dice la imagen). Retirar, deshebrar y reservar. Los aproximadamente 750 g cocidos no son el peso crudo.
+2. **Preparar el relleno.** En un tazón grande combinar pollo deshebrado, el bloque completo de **907 g de Velveeta en cubos**, **50 g de cebollines** y **28 g de chiles picados y escurridos**. Mezclar hasta combinar y quedar cremoso; reservar. No se indica un método separado para fundir el queso ni tamaño de corte del cebollín. No se agregan caldo al relleno, cebolla, ajo, laurel ni cilantro de versiones posteriores.
+3. **Salsa con licuadora de inmersión.** En una olla grande y profunda colocar **560 g de espinaca CONGELADA**, las **4 latas de sopa**, toda la **crema agria de 454 g**, **240 g de caldo** y **10 g de Knorr**. Licuar directamente en la olla hasta quedar completamente tersa y cremosa. Mantener tibia a fuego bajo mientras se arma. La fuente **no indica descongelar ni escurrir primero**, ni reservar 15 % de salsa.
+4. **Freír TODAS las 116 tortillas.** Calentar una sartén a fuego medio con capa ligera de aceite. Freír solo unos segundos por lado, hasta quedar suaves y flexibles, **no crujientes**. Pasar a un plato con toallas de papel. La fuente indica **freír las 116 de ambos paquetes**, aunque el rendimiento armado es 72.
+5. **Enrollar.** Poner una cantidad generosa de relleno en cada tortilla, enrollar apretado y colocar con la **unión hacia abajo**. Hacer **36 por charola: 18 por capa × 2 capas**, 72 entre ambas. La infografía no especifica gramos de relleno por rollo.
+6. **Armar dos capas.** Extender una capa delgada de salsa en el fondo de cada charola; acomodar 18 rollos, poner una capa generosa de salsa, añadir los otros 18 y cubrir con el resto de salsa. Deben quedar totalmente cubiertos, **sin queso rallado encima**. Es el armado original de **11 × 9**, no otra prueba de acomodo en 9 × 13 ni el reparto de 85 % de la versión 2.1.
+7. **Hornear.** Tapar **herméticamente** ambas charolas con aluminio. Hornear a **350 °F durante 90 minutos**; quitar el aluminio y hornear **5 minutos adicionales** a la misma temperatura. Esta instrucción original permanece separada del método actual probado de 90 minutos tapado y del acabado opcional de 5–10 minutos **no probado**; no demuestra otra prueba.
+
+### Consejos, flexibilidad y almacenamiento de los paneles
+
+Licuadora de inmersión para salsa tersa; fritura breve para flexibilidad y evitar roturas; **sin queso rallado arriba**, pues la salsa cremosa es el acabado tradicional descrito por la imagen. Consejo de batidora: deshebrar pollo cocido con paleta en **velocidad 2, aproximadamente 30 segundos**.
+
+La fuente permite variación ligera: espinaca **560 g / ≈ 1¼–1½ bolsas**, cebollines **50 g / ≈ 4**, chiles escurridos **28 g / ≈ 2 cucharadas**, un poco más o menos chile. Son referencias de la imagen, no mediciones nuevas.
+
+**Transcripción del panel de almacenamiento, no protocolo nuevamente probado:** armar, tapar y refrigerar hasta **24 horas**; sobras refrigeradas hasta **3–4 días**; congelar bien cubierto hasta **2 meses** y descongelar en refrigerador antes de recalentar. La fuente no especifica temperatura ni método de recalentado.
+
+### Diferencias que no se resuelven en silencio
+
+Crema original **454 g**, no los **460 g** curados arriba; pollo crudo original **≈ 3 lb**, no la entrada posterior de **1000 g**; sopa original solo en latas/onzas, no los **1192 g** curados. Sin aromáticos añadidos ni caldo/cilantro en relleno; espinaca congelada con inmersión; freír **116**; usar toda la salsa; charolas **11 × 9** y horno **90 + 5**.
+
+**Se conserva la versión 2.1 y la corrección del dueño, sin retrocederlas.** Siguen visibles las masas faltantes, el destino de las **44 tortillas extras**, los paneles con agrupación contradictoria y la diferencia entre un distintivo de imagen y una autorización real. No se infieren nutrición, porciones de adulto, resultados de prueba ni aprobación de esta fuente reenviada.

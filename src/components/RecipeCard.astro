@@ -47,7 +47,7 @@ const primaryCat = d.categories[0];
     </h3>
     <p class="mt-1.5 text-sm text-earth-soft line-clamp-2 flex-1">{description}</p>
     {d.servingLabelSingular && <p class="mt-2 text-xs text-earth-soft">
-      {d.servings} {rServingLabel(d, lang)} · {lang === 'es' ? 'Nutrición por' : 'Nutrition per'} {rServingLabel(d, lang, 1)}
+      {d.servings} {rServingLabel(d, lang)}{d.macros && ` · ${lang === 'es' ? 'Nutrición por' : 'Nutrition per'} ${rServingLabel(d, lang, 1)}`}
     </p>}
 
     {d.healthLabels.length > 0 && (
@@ -62,8 +62,10 @@ const primaryCat = d.categories[0];
 
     <div class="mt-4 flex items-center justify-between text-xs text-earth-soft border-t border-clay/70 pt-3">
       <span class="inline-flex items-center gap-1">⏱️ {formatMinutes(time, lang)}</span>
-      <span class="inline-flex items-center gap-1">🔥 {d.servingLabelSingular ? niceRound(d.macros.calories) : d.macros.calories} kcal</span>
-      <span class="inline-flex items-center gap-1">💪 {d.servingLabelSingular ? niceRound(d.macros.protein) : d.macros.protein} g</span>
+      {d.macros ? <>
+        <span class="inline-flex items-center gap-1">🔥 {d.servingLabelSingular ? niceRound(d.macros.calories) : d.macros.calories} kcal</span>
+        <span class="inline-flex items-center gap-1">💪 {d.servingLabelSingular ? niceRound(d.macros.protein) : d.macros.protein} g</span>
+      </> : <span>{t('recipe.nutritionUnknown')}</span>}
     </div>
   </div>
 </a>

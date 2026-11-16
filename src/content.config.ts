@@ -160,8 +160,8 @@ const recipes = defineCollection({
     /** Ingredients with per-ingredient macros (scale with servings) */
     ingredients: z.array(ingredientSchema),
 
-    /** Per-serving macro summary */
-    macros: macrosSchema,
+    /** Per-serving macro summary; omission means unknown, never zero nutrition. */
+    macros: macrosSchema.optional(),
 
     /** Step-by-step instructions (Spanish primary) */
     instructions: z.array(z.string()),

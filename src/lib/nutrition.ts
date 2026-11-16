@@ -19,6 +19,28 @@ export type Macros = {
   sodium?: number;
 };
 
+/** Omit unknown recipe nutrition from JSON-LD; preserve authored values, even zero. */
+export function recipeNutritionProperties(macros?: Macros, servingSize?: string): {
+  nutrition?: {
+    '@type': string; servingSize?: string; calories: string;
+    proteinContent: string; carbohydrateContent: string; fatContent: string;
+    fiberContent: string;
+  };
+} {
+  if (!macros) return {};
+  return {
+    nutrition: {
+      '@type': 'NutritionInformation',
+      ...(servingSize !== undefined && { servingSize }),
+      calories: `${macros.calories} kcal`,
+      proteinContent: `${macros.protein} g`,
+      carbohydrateContent: `${macros.carbs} g`,
+      fatContent: `${macros.fat} g`,
+      fiberContent: `${macros.fiber ?? 0} g`,
+    },
+  };
+}
+
 /** Scale factor for a target serving count against the recipe default. */
 export function scaleFactor(defaultServings: number, targetServings: number): number {
   if (!defaultServings || defaultServings <= 0) return 1;
